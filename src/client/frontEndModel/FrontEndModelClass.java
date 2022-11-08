@@ -5,8 +5,7 @@ import shared.sharedObjects.TrainingSession;
 
 import java.util.List;
 
-public class BackEndModel implements BackEndModelManager {
-
+public class FrontEndModelClass implements FrontEndModel{
     private List<TrainingSession> listOfSessions;
     private List<Account> listOfAccount;
 
