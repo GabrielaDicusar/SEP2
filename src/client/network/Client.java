@@ -4,4 +4,6 @@ import shared.sharedObjects.Account;
 
 public interface Client {
     boolean login(Account account);
+
+    void startClient();
 }
