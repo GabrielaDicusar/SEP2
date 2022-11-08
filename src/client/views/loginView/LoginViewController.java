@@ -7,11 +7,11 @@ import client.views.ViewController;
 public class LoginViewController implements ViewController {
 
     private ViewHandler viewHandler;
-    private ViewModelFactory viewModelFactory;
+    private LoginViewModel loginViewModel;
 
 
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
         this.viewHandler = viewHandler;
-        this.viewModelFactory = viewModelFactory;
+        loginViewModel = viewModelFactory.getLoginViewModel();
     }
 }

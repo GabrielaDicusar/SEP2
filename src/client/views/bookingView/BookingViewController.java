@@ -10,8 +10,8 @@ public class BookingViewController implements ViewController {
     private BookingViewModel bookingViewModel;
 
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
-        this.bookingViewModel = bookingViewModel;
         this.viewHandler = viewHandler;
+        bookingViewModel = viewModelFactory.getBookingViewModel();
     }
 
 }

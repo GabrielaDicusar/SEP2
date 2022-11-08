@@ -16,9 +16,13 @@ public class ViewModelFactory {
     }
 
     public BookingViewModel getBookingViewModel() {
-        return bookingViewModel;
+        return (bookingViewModel = bookingViewModel == null ?
+                new BookingViewModel(modelFactory.getClientFactory().getClient()) :
+                bookingViewModel);
     }
     public LoginViewModel getLoginViewModel() {
+        if (loginViewModel == null)
+            loginViewModel = new LoginViewModel();
         return loginViewModel;
     }
 }
