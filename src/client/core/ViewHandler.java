@@ -1,7 +1,10 @@
 package client.core;
 
+import javafx.scene.Scene;
+
 public class ViewHandler {
 
+    private final Scene LoginScene;
     private Scene loginScene;
     private Scene bookingScene;
     private ViewModelFactory viewModelFactory;
@@ -18,6 +21,6 @@ public class ViewHandler {
 
     public void openBookingView(){}
 
-    public void openMainView(){}
+    public void openLoginView(){}
 
 }
