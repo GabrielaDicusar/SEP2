@@ -1,7 +1,9 @@
 package server.backEndModel;
 
 import shared.sharedObjects.Account;
+import shared.sharedObjects.AccountList;
 import shared.sharedObjects.TrainingSession;
+import shared.sharedObjects.TrainingSessionList;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -11,34 +13,34 @@ import java.util.List;
 public class BackEndModel implements BackEndModelManager
 {
     private PropertyChangeSupport support;
-    private List<TrainingSession> listOfSessions;
-    private List<Account> listOfAccount;
+    private TrainingSessionList listOfSessions;
+    private AccountList listOfAccount;
 
     public BackEndModel()
     {
         support = new PropertyChangeSupport(this);
-        listOfSessions = new ArrayList<>();
-        listOfAccount = new ArrayList<>();
+        this.listOfSessions=listOfSessions;
+        this.listOfAccount=listOfAccount;
     }
 
     @Override public void addSession(TrainingSession session)
     {
-        listOfSessions.add(session);
+        listOfSessions.addSession(session);
     }
 
     @Override public void removeSession(TrainingSession session)
     {
-        listOfSessions.remove(session);
+        listOfSessions.removeTrainingSession(session);
     }
 
     @Override public void addAccount(Account account)
     {
-        listOfAccount.add(account);
+        listOfAccount.addAccount(account);
     }
 
     @Override public void removeAccount(Account account)
     {
-        listOfAccount.remove(account);
+        listOfAccount.removeAccount(account);
     }
 
     @Override public boolean verifyLogin(Account account)
@@ -48,7 +50,7 @@ public class BackEndModel implements BackEndModelManager
 
     public Account getAccount(Account account)
     {
-        for (int i = 0; i < listOfAccount.size(); i++)
+        for (int i = 0; i < listOfAccount.getAccounts().size(); i++)
         {
             if (account.equals(i))
             {
@@ -60,7 +62,7 @@ public class BackEndModel implements BackEndModelManager
 
     public TrainingSession getSession(TrainingSession session)
     {
-        for (int i = 0; i < listOfSessions.size(); i++)
+        for (int i = 0; i < listOfSessions.getTrainingSessions().size(); i++)
         {
             if (session.equals(i))
             {
