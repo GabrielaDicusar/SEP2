@@ -55,7 +55,7 @@ public class ServerImpl implements RMIServer
    modelManager.addSession(trainingSession);
   }
 
-  @Override public void addUser(Account account)
+  @Override public void addUser(Account account) throws RemoteException
   {
   modelManager.addAccount(account);
   }
