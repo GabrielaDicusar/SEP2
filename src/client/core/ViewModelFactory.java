@@ -11,18 +11,16 @@ public class ViewModelFactory {
 
     public ViewModelFactory(ModelFactory modelFactory){
         this.modelFactory = modelFactory;
-        this.bookingViewModel = bookingViewModel;
-        this.loginViewModel = loginViewModel;
     }
 
-    public BookingViewModel getBookingViewModel() {
-        return (bookingViewModel = bookingViewModel == null ?
-                new BookingViewModel(modelFactory.getClientFactory().getClient()) :
-                bookingViewModel);
-    }
-    public LoginViewModel getLoginViewModel() {
-        if (loginViewModel == null)
-            loginViewModel = new LoginViewModel();
-        return loginViewModel;
-    }
+//    public BookingViewModel getBookingViewModel() {
+//        if(bookingViewModel== null){
+////            bookingViewModel = new BookingViewModel(modelFactory.getFrontEndModelManager())
+//        }
+//
+//    public LoginViewModel getLoginViewModel() {
+//        if (loginViewModel == null)
+////            loginViewModel = new LoginViewModel(modelFactory.getFrontEndModelManager());
+//        return loginViewModel;
+//    }
 }

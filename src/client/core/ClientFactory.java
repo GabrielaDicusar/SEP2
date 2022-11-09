@@ -1,13 +1,13 @@
 package client.core;
 
-import client.network.Client;
+import client.network.RMIClient;
 import client.network.Member;
 
 public class ClientFactory {
 
-    private Client client;
+    private RMIClient client;
 
-    public Client getClient() {
+    public RMIClient getClient() {
        if(client == null){
            client = new Member();
            client.startClient();

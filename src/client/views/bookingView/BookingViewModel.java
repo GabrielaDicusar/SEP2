@@ -1,12 +1,12 @@
 package client.views.bookingView;
 
-import client.network.Client;
+import client.network.RMIClient;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class BookingViewModel implements PropertyChangeListener {
-    public BookingViewModel(Client client) {
+    public BookingViewModel(RMIClient client) {
     }
 
     @Override
