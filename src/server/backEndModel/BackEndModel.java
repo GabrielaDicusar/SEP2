@@ -7,8 +7,7 @@ import shared.sharedObjects.TrainingSessionList;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class BackEndModel implements BackEndModelManager
 {
@@ -19,8 +18,8 @@ public class BackEndModel implements BackEndModelManager
     public BackEndModel()
     {
         support = new PropertyChangeSupport(this);
-        this.listOfSessions=listOfSessions;
-        this.listOfAccount=listOfAccount;
+        listOfAccount = new AccountList();
+        listOfSessions = new TrainingSessionList();
     }
 
     @Override public void addSession(TrainingSession session)
@@ -75,13 +74,13 @@ public class BackEndModel implements BackEndModelManager
     @Override public void addListener(String eventName,
         PropertyChangeListener listener)
     {
-
+        support.addPropertyChangeListener(eventName, listener);
     }
 
     @Override public void removeListener(String eventName,
         PropertyChangeListener listener)
     {
-
+        support.removePropertyChangeListener(eventName, listener);
     }
 }
 

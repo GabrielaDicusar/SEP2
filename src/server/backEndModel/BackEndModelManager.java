@@ -4,7 +4,7 @@ import shared.sharedObjects.Account;
 import shared.sharedObjects.TrainingSession;
 import shared.utils.Subject;
 
-import java.util.List;
+
 
 public interface BackEndModelManager extends Subject
 {

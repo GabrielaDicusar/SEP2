@@ -13,6 +13,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 public class ServerImpl implements RMIServer
+
 {
   private BackEndModel modelManager;
 
@@ -35,32 +36,31 @@ public class ServerImpl implements RMIServer
       e.printStackTrace();
     }
   }
-
-//  public void registerCallback(ClientCallback clientCallback) throws RemoteException {
-//    modelManager.addListener("NewLogEntry", evt -> {
-//      try {
-//        clientCallback.update((Account) evt.getNewValue());
-//      } catch (RemoteException e) {
-//        e.printStackTrace();
-//      }
-//    });
-//  }
-
-  public Account getAccount(Account account) {
-    return modelManager.getAccount(account);
-  }
-  public TrainingSession getSession(TrainingSession session) {
-    return modelManager.getSession(session);
-  }
-
+  public void registerCallback(ClientCallBack clientCallBack) throws RemoteException {
+    modelManager.addListener("NewAccount", evt -> {
+      try {
+        clientCallBack.updateLogIn((Account) evt.getNewValue());
+      } catch (RemoteException e) {
+        e.printStackTrace();
+      }
+    }); }
   @Override public boolean verifyLogin(Account account) throws RemoteException
   {
     return false;
   }
 
-  @Override public void registerCallback(ClientCallBack clientCallBack)
+  @Override public void bookATrainingSession(TrainingSession trainingSession)
       throws RemoteException
   {
+   modelManager.addSession(trainingSession);
+  }
+
+  @Override public void addUser(Account account)
+  {
+  modelManager.addAccount(account);
+  }
+public void cancelTrainingSession(TrainingSession trainingSession) {
+    modelManager.removeSession(trainingSession);
+}
 
   }
-}
