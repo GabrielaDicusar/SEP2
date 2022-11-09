@@ -30,9 +30,11 @@ public class ServerImpl implements RMIServer
     {
       registry = LocateRegistry.createRegistry(1099);
       registry.bind("Server", this);
+      System.out.println("The server has started.");
     }
     catch (RemoteException | AlreadyBoundException e)
     {
+      System.out.println("Something went wrong..");
       e.printStackTrace();
     }
   }
