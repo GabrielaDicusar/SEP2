@@ -53,26 +53,12 @@ public class BackEndModel implements BackEndModelManager
 
     public Account getAccount(Account account)
     {
-        for (int i = 0; i < listOfAccount.getAccounts().size(); i++)
-        {
-            if (account.equals(i))
-            {
-                return account;
-            }
-        }
-        return null;
+        return listOfAccount.getAccount(account);
     }
 
     public TrainingSession getSession(TrainingSession session)
     {
-        for (int i = 0; i < listOfSessions.getTrainingSessions().size(); i++)
-        {
-            if (session.equals(i))
-            {
-                return session;
-            }
-        }
-        return null;
+        return listOfSessions.getTrainingSession(session);
     }
 
     @Override public void addListener(String eventName,
