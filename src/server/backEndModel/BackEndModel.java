@@ -44,6 +44,10 @@ public class BackEndModel implements BackEndModelManager
 
     @Override public boolean verifyLogin(Account account)
     {
+        if (getAccount(account) != null)
+        {
+            return true;
+        }
         return false;
     }
 
