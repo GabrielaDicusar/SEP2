@@ -46,8 +46,10 @@ public class BackEndModel implements BackEndModelManager
     {
         if (getAccount(account) != null)
         {
+            support.firePropertyChange("VerifyLogin", null, true);
             return true;
         }
+        support.firePropertyChange("VerifyLogin", null, false);
         return false;
     }
 

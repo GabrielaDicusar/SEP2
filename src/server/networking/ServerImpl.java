@@ -48,7 +48,7 @@ public class ServerImpl implements RMIServer
     }); }
   @Override public boolean verifyLogin(Account account) throws RemoteException
   {
-    return false;
+    return modelManager.verifyLogin(account);
   }
 
   @Override public void bookATrainingSession(TrainingSession trainingSession)
