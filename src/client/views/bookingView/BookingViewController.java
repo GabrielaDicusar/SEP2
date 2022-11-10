@@ -17,10 +17,9 @@ public class BookingViewController implements ViewController {
     private ViewHandler viewHandler;
     private BookingViewModel bookingViewModel;
 
-   /* public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
+   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
         this.viewHandler = viewHandler;
-//        bookingViewModel = viewModelFactory.getBookingViewModel();
+       bookingViewModel = viewModelFactory.getBookingViewModel();
     }
 
-    */
 }

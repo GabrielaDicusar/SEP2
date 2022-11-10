@@ -25,7 +25,7 @@ public class LoginViewController implements ViewController {
 
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory){
         this.viewHandler = viewHandler;
-//        loginViewModel = viewModelFactory.getLoginViewModel();
+    loginViewModel = viewModelFactory.getLoginViewModel();
     }
     public void onbtnLogin(){
         Account account = new Account(txtUsername.getText(), txtPassword.getText());

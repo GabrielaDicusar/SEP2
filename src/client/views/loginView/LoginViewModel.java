@@ -1,5 +1,7 @@
 package client.views.loginView;
 
+import client.core.ModelFactory;
+import client.frontEndModel.FrontEndModelManager;
 import client.network.RMIClient;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -14,11 +16,11 @@ import java.util.List;
 public class LoginViewModel implements PropertyChangeListener {
 
     private List<Account> accounts;
-    private RMIClient rmiClient;
+    private FrontEndModelManager frontEndModelManager;
     private StringProperty checkLogin;
 
-    public LoginViewModel(RMIClient rmiClient) {
-        this.rmiClient = rmiClient;
+    public LoginViewModel(ModelFactory modelFactory) {
+        frontEndModelManager = modelFactory.getFrontEndModelManager();
         checkLogin = new SimpleStringProperty();
 
     }
