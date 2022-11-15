@@ -28,7 +28,7 @@ public class ServerImpl implements RMIServer
     Registry registry = null;
     try
     {
-      registry = LocateRegistry.createRegistry(1099);
+      registry = LocateRegistry.createRegistry(1234);
       registry.bind("Server", this);
       System.out.println("The server has started.");
     }
@@ -38,16 +38,22 @@ public class ServerImpl implements RMIServer
       e.printStackTrace();
     }
   }
-  public void registerCallback(ClientCallBack clientCallBack) throws RemoteException {
-    modelManager.addListener("NewAccount", evt -> {
-      try {
-        clientCallBack.updateLogIn((Account) evt.getNewValue());
-      } catch (RemoteException e) {
-        e.printStackTrace();
-      }
-    }); }
-  @Override public boolean verifyLogin(Account account) throws RemoteException
+
+//  public void registerCallback(ClientCallBack clientCallBack) throws RemoteException {
+//    modelManager.addListener("VerifyLogin", evt -> {
+//      try {
+//        clientCallBack.updateLogIn((boolean) evt.getNewValue());
+//        System.out.println("Client connected");
+//      } catch (RemoteException e) {
+//        e.printStackTrace();
+//      }
+//    });
+//  }
+
+  @Override
+  public boolean verifyLogin(Account account) throws RemoteException
   {
+    System.out.println("5 Got account from member, passing it to back model " + account.toString());
     return modelManager.verifyLogin(account);
   }
 

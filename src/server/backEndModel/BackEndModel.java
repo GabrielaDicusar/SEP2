@@ -20,6 +20,7 @@ public class BackEndModel implements BackEndModelManager
         support = new PropertyChangeSupport(this);
         listOfAccount = new AccountList();
         listOfSessions = new TrainingSessionList();
+        addAccount(new Account("lol", "lol"));
     }
 
     @Override public void addSession(TrainingSession session)
@@ -44,13 +45,14 @@ public class BackEndModel implements BackEndModelManager
 
     @Override public boolean verifyLogin(Account account)
     {
-        if (getAccount(account) != null)
+
+        if (listOfAccount.getAccount(account) == null)
         {
-            support.firePropertyChange("VerifyLogin", null, true);
+            System.out.println("6 Back model verified account false " + account.toString()) ;
+            return false;
+        }else
+            System.out.println("6 Back model verified account true " + account.toString());
             return true;
-        }
-        support.firePropertyChange("VerifyLogin", null, false);
-        return false;
     }
 
     public Account getAccount(Account account)

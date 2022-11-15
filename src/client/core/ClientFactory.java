@@ -10,7 +10,6 @@ public class ClientFactory {
     public RMIClient getClient() {
        if(client == null){
            client = new Member();
-           client.startClient();
        }
        return client;
     }

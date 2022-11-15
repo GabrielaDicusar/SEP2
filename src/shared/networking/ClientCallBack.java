@@ -6,5 +6,5 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface ClientCallBack extends Remote {
-    void updateLogIn(Account account) throws RemoteException;
+//    void updateLogIn(boolean verifiedValue) throws RemoteException;
 }
