@@ -10,28 +10,25 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: beige;"
-            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="client.views.bookingView.BookingViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: beige;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.bookingView.BookingViewController">
     <effect>
-        <DropShadow/>
+        <DropShadow />
     </effect>
-    <ListView layoutX="189.0" layoutY="83.0" prefHeight="270.0" prefWidth="384.0"/>
-    <DatePicker fx:id="datePicker" layoutX="14.0" layoutY="83.0" prefHeight="26.0" prefWidth="151.0"
-                promptText="Pick a date"/>
+    <ListView layoutX="189.0" layoutY="83.0" prefHeight="270.0" prefWidth="384.0" />
+    <DatePicker fx:id="datePicker" layoutX="14.0" layoutY="83.0" prefHeight="26.0" prefWidth="151.0" promptText="Pick a date" />
     <TableView fx:id="Timetable" layoutX="189.0" layoutY="83.0" prefHeight="270.0" prefWidth="384.0">
       <columns>
-          <TableColumn prefWidth="75.0" text="Time"/>
-          <TableColumn prefWidth="100.0" text="Session Type"/>
-          <TableColumn prefWidth="75.0" text="Trainer"/>
-          <TableColumn prefWidth="133.0" text="No. of Participants"/>
+          <TableColumn prefWidth="75.0" text="Time" />
+          <TableColumn prefWidth="100.0" text="Session Type" />
+          <TableColumn prefWidth="75.0" text="Trainer" />
+          <TableColumn prefWidth="133.0" text="No. of Participants" />
       </columns>
     </TableView>
-    <Label layoutX="181.0" layoutY="27.0" text="Session Timetble">
+    <Label layoutX="181.0" layoutY="27.0" text="Session Timetable">
         <font>
-          <Font size="36.0"/>
+          <Font size="36.0" />
         </font>
     </Label>
-    <Button fx:id="btnBookSession" layoutX="14.0" layoutY="128.0" mnemonicParsing="false" text="Book Session"/>
-    <Button fx:id="btnRemoveBooking" layoutX="14.0" layoutY="174.0" mnemonicParsing="false" text="Remove Booking"/>
+    <Button fx:id="btnBookSession" layoutX="14.0" layoutY="128.0" mnemonicParsing="false" text="Book Session" />
+    <Button fx:id="btnRemoveBooking" layoutX="14.0" layoutY="174.0" mnemonicParsing="false" text="Remove Booking" />
 </AnchorPane>
