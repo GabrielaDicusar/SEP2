@@ -34,12 +34,13 @@ public class Account implements Serializable {
 
     public boolean equals(Object obj)
     {
-        if (!(obj instanceof Account other))
+        if (!(obj instanceof Account))
         {
             return false;
         }
         else
         {
+            Account other = (Account) obj;
             return other.userName.equals(userName) && other.password.equals(password);
         }
     }
