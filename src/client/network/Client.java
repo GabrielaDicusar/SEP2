@@ -12,11 +12,11 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class Member implements RMIClient, ClientCallBack {
+public class Client implements RMIClient, ClientCallBack {
     private RMIServer server;
     private PropertyChangeSupport support;
 
-    public Member(){
+    public Client(){
         support = new PropertyChangeSupport(this);
     }
 
@@ -27,7 +27,6 @@ public class Member implements RMIClient, ClientCallBack {
             UnicastRemoteObject.exportObject(this,0);
             registry = LocateRegistry.getRegistry("localhost",1234);
             server = (RMIServer) registry.lookup("Server");
-//            server.registerCallback(this);
             System.out.println("Client started");
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
@@ -43,12 +42,6 @@ public class Member implements RMIClient, ClientCallBack {
             throw new RuntimeException("Could not connect to the server :(");
         }
     }
-
-//    @Override
-//    public void updateLogIn(boolean verifiedValue) throws RemoteException
-//    {
-//        support.firePropertyChange("VerifyLogin",null, verifiedValue);
-//    }
 
     @Override
     public void addListener(String eventName, PropertyChangeListener listener) {

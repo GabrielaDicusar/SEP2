@@ -19,4 +19,9 @@ public class ModelFactory {
         }
         return (FrontEndModel) frontEndModelManager;
     }
+
+    public ClientFactory getClientFactory()
+    {
+        return clientFactory;
+    }
 }

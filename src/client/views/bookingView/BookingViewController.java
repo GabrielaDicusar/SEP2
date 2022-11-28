@@ -2,7 +2,6 @@ package client.views.bookingView;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
-import client.frontEndModel.Session;
 import client.views.ViewController;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;

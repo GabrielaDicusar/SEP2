@@ -65,4 +65,7 @@ public class ViewHandler {
         stage.show();
     }
 
+    public ViewModelFactory getViewModelFactory() {
+        return viewModelFactory;
+    }
 }

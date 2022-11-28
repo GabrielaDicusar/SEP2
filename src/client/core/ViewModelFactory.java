@@ -26,4 +26,8 @@ public class ViewModelFactory {
         }
         return loginViewModel;
         }
+
+    public ModelFactory getModelFactory() {
+        return modelFactory;
+    }
 }

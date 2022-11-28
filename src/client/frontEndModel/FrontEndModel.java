@@ -16,14 +16,8 @@ public class FrontEndModel implements FrontEndModelManager {
 
     public FrontEndModel(ClientFactory clientFactory) {
         client = clientFactory.getClient();
-        client.startClient();
         support = new PropertyChangeSupport(this);
-//        client.addListener("VerifyLogin", this::onVerifiedAccount);
     }
-
-//    private void onVerifiedAccount(PropertyChangeEvent evt) {
-//        support.firePropertyChange(evt);
-//    }
 
     public boolean verifyLogin(Account account){
         System.out.println("3 Front model got account from view model, passing it to member " + account.toString());
