@@ -34,7 +34,7 @@ public class Client implements RMIClient, ClientCallBack {
     }
 
     @Override
-    public boolean login(LoginCredentials loginCredentials) {
+    public int login(LoginCredentials loginCredentials) {
         try {
             System.out.println("4 Member got loginCredentials from front model, using server to verify " + loginCredentials.toString());
             return server.verifyLogin(loginCredentials);

@@ -14,8 +14,5 @@ import java.rmi.RemoteException;
  */
 
 public interface RMIServer extends Remote {
-    boolean verifyLogin(LoginCredentials loginCredentials) throws RemoteException;
-    void bookATrainingSession(TrainingSession trainingSession) throws RemoteException;
-    void addUser(LoginCredentials loginCredentials) throws RemoteException;
-//    void registerCallback(ClientCallBack clientCallBack) throws RemoteException;
+    int verifyLogin(LoginCredentials loginCredentials) throws RemoteException;
 }

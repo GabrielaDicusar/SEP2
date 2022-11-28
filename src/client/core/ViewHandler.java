@@ -13,6 +13,7 @@ public class ViewHandler {
     private Stage stage;
     private Scene loginScene;
     private Scene bookingScene;
+    private Scene managerScene;
     private ViewModelFactory viewModelFactory;
 
     public ViewHandler(ViewModelFactory viewModelFactory){
@@ -62,6 +63,21 @@ public class ViewHandler {
             }
         }
         stage.setScene(loginScene);
+        stage.show();
+    }
+    public void openManagerView(){
+        if (managerScene == null) {
+            try {
+                Parent root = loadFXML("../views/managerView/ManagerView.fxml");
+
+                managerScene = new Scene(root);
+                stage.setTitle("Manager Account");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        stage.setScene(managerScene);
         stage.show();
     }
 

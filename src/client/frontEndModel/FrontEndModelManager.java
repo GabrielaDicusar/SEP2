@@ -9,5 +9,5 @@ public interface FrontEndModelManager extends Subject {
     void removeSession(TrainingSession session);
     void addAccount(LoginCredentials loginCredentials);
     void removeAccount(LoginCredentials loginCredentials);
-    boolean verifyLogin(LoginCredentials loginCredentials);
+    int verifyLogin(LoginCredentials loginCredentials);
 }

@@ -17,7 +17,7 @@ public class FrontEndModel implements FrontEndModelManager {
         support = new PropertyChangeSupport(this);
     }
 
-    public boolean verifyLogin(LoginCredentials loginCredentials){
+    public int verifyLogin(LoginCredentials loginCredentials){
         System.out.println("3 Front model got loginCredentials from view model, passing it to member " + loginCredentials.toString());
         return client.login(loginCredentials);
     }

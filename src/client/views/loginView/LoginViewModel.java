@@ -14,7 +14,7 @@ public class LoginViewModel implements PropertyChangeListener
     public LoginViewModel(ModelFactory modelFactory) {
         frontEndModelManager = modelFactory.getFrontEndModelManager();
     }
-    public boolean verifyLogin(LoginCredentials loginCredentials) {
+    public int verifyLogin(LoginCredentials loginCredentials) {
         System.out.println("2 Log In View Model got loginCredentials from controller, passing it to front model " + loginCredentials.toString());
         return frontEndModelManager.verifyLogin(loginCredentials);
     }

@@ -32,13 +32,19 @@ public class LoginViewController implements ViewController {
         loginViewModel = viewModelFactory.getLoginViewModel();
     }
 
-    public void onbtnLogin(){
+    public void onbtnLogin() {
         LoginCredentials loginCredentials = new LoginCredentials(txtUsername.getText(), txtPassword.getText());
         System.out.println("1 Login controller created loginCredentials to pass to login view model " + loginCredentials);
-        if(loginViewModel.verifyLogin(loginCredentials)){
+        if (loginViewModel.verifyLogin(loginCredentials) == 1) {
             System.out.println(loginViewModel.verifyLogin(loginCredentials));
             viewHandler.openBookingView();
-        }else{
-            errorLabel.setText("Invalid username or password");}
+        }
+        else if (loginViewModel.verifyLogin(loginCredentials) == 2) {
+            System.out.println(loginViewModel.verifyLogin(loginCredentials));
+            viewHandler.openManagerView();
+        }
+        else {
+            errorLabel.setText("Invalid username or password");
+        }
     }
 }

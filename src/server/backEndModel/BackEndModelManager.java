@@ -12,11 +12,7 @@ import shared.utils.Subject;
 
 public interface BackEndModelManager extends Subject
 {
-    void addSession(TrainingSession session);
-    void removeSession(TrainingSession session);
-    void addAccount(LoginCredentials loginCredentials);
-    void removeAccount(LoginCredentials loginCredentials);
-    boolean verifyLogin(LoginCredentials loginCredentials);
+    int verifyLogin(LoginCredentials loginCredentials);
 
 
 }

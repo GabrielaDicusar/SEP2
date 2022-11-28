@@ -1,8 +1,6 @@
 package server.backEndModel;
 
-import shared.sharedObjects.LoginCredentials;
-import shared.sharedObjects.TrainingSession;
-import shared.sharedObjects.TrainingSessionList;
+import shared.sharedObjects.*;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -16,7 +14,7 @@ public class BackEndModel implements BackEndModelManager
 {
     private PropertyChangeSupport support;
     private TrainingSessionList listOfSessions;
-    private LoginCredentialList listOfAccount;
+    private AccountList listOfAccount;
 
     /**
      * BackEndModel constructor to instantiate support, listofAccount, listOfSessions.
@@ -24,44 +22,16 @@ public class BackEndModel implements BackEndModelManager
     public BackEndModel()
     {
         support = new PropertyChangeSupport(this);
-        listOfAccount = new LoginCredentialList();
+        listOfAccount = new AccountList();
         listOfSessions = new TrainingSessionList();
-        addAccount(new LoginCredentials("lol", "lol"));
+        listOfAccount.addAccount(new Account(new LoginCredentials("lol", "lol"), 1, "Lukasz", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
+        listOfAccount.addAccount(new Account(new LoginCredentials("manager", "manager"), 2, "Lukasz", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
     }
 
-    @Override public void addSession(TrainingSession session)
-    {
-        listOfSessions.addSession(session);
-    }
-
-    @Override public void removeSession(TrainingSession session)
-    {
-        listOfSessions.removeTrainingSession(session);
-    }
-
-    @Override public void addAccount(LoginCredentials loginCredentials)
-    {
-        listOfAccount.addLoginCredentials(loginCredentials);
-    }
-
-    @Override public void removeAccount(LoginCredentials loginCredentials)
-    {
-        listOfAccount.removeLoginCredentials(loginCredentials);
-    }
 
     @Override public int verifyLogin(LoginCredentials loginCredentials)
     {
-        return  listOfAccount.getAccountType(loginCredentials);
-    }
-
-    public LoginCredentials getAccount(LoginCredentials loginCredentials)
-    {
-        return listOfAccount.getLoginCredential(loginCredentials);
-    }
-
-    public TrainingSession getSession(TrainingSession session)
-    {
-        return listOfSessions.getTrainingSession(session);
+        return listOfAccount.getAccountType(loginCredentials);
     }
 
     @Override public void addListener(String eventName,
