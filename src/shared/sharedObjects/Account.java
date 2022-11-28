@@ -2,6 +2,11 @@ package shared.sharedObjects;
 
 import java.io.Serializable;
 
+/**
+ * A class containing the methods for creating objects for an Account implementing Serializable.
+ * @author
+ */
+
 public class Account implements Serializable {
 
     private String userName;
@@ -12,9 +17,19 @@ public class Account implements Serializable {
         this.password = password;
     }
 
+    /**
+     * Returns an object of title.
+     * @return userName
+     */
+
     public String getUserName() {
         return userName;
     }
+
+    /**
+     * Sets the object of title.
+     * @param userName
+     */
 
     public void setUserName(String userName) {
         this.userName = userName;
@@ -31,6 +46,12 @@ public class Account implements Serializable {
     public String toString(){
         return userName + " "  + password;
     }
+
+    /**
+     * Checks if the account element is an object of Account and returns the specific username and password.
+     * @param obj
+     * @return
+     */
 
     public boolean equals(Object obj)
     {
