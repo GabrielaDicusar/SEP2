@@ -43,6 +43,12 @@ public class LoginViewController implements ViewController {
             System.out.println(loginViewModel.verifyLogin(loginCredentials));
             viewHandler.openManagerView();
         }
+        else if (loginViewModel.verifyLogin(loginCredentials) == 3)
+        {
+            System.out.println(loginViewModel.verifyLogin(loginCredentials));
+            viewHandler.openTrainerView();
+
+        }
         else {
             errorLabel.setText("Invalid username or password");
         }

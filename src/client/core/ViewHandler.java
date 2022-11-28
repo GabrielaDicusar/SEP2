@@ -40,7 +40,7 @@ public class ViewHandler {
             Parent root = loadFXML("../views/bookingView/BookingView.fxml");
 
             bookingScene = new Scene(root);
-            stage.setTitle("Booking");
+            stage.setTitle("Member Account");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,6 +72,21 @@ public class ViewHandler {
 
                 managerScene = new Scene(root);
                 stage.setTitle("Manager Account");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        stage.setScene(managerScene);
+        stage.show();
+    }
+    public void openTrainerView(){
+        if (managerScene == null) {
+            try {
+                Parent root = loadFXML("../views/trainerView/TrainerView.fxml");
+
+                managerScene = new Scene(root);
+                stage.setTitle("Trainer Account");
 
             } catch (IOException e) {
                 e.printStackTrace();

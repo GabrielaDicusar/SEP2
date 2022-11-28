@@ -24,8 +24,9 @@ public class BackEndModel implements BackEndModelManager
         support = new PropertyChangeSupport(this);
         listOfAccount = new AccountList();
         listOfSessions = new TrainingSessionList();
-        listOfAccount.addAccount(new Account(new LoginCredentials("lol", "lol"), 1, "Lukasz", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
+        listOfAccount.addAccount(new Account(new LoginCredentials("member", "member"), 1, "Lukasz", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
         listOfAccount.addAccount(new Account(new LoginCredentials("manager", "manager"), 2, "Lukasz", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
+        listOfAccount.addAccount(new Account(new LoginCredentials("trainer", "trainer"), 3, "Lukasz", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
     }
 
 
