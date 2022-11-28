@@ -2,7 +2,7 @@ package client.network;
 
 import shared.networking.ClientCallBack;
 import shared.networking.RMIServer;
-import shared.sharedObjects.Account;
+import shared.sharedObjects.LoginCredentials;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -34,10 +34,10 @@ public class Client implements RMIClient, ClientCallBack {
     }
 
     @Override
-    public boolean login(Account account) {
+    public boolean login(LoginCredentials loginCredentials) {
         try {
-            System.out.println("4 Member got account from front model, using server to verify " + account.toString());
-            return server.verifyLogin(account);
+            System.out.println("4 Member got loginCredentials from front model, using server to verify " + loginCredentials.toString());
+            return server.verifyLogin(loginCredentials);
         } catch (RemoteException e) {
             throw new RuntimeException("Could not connect to the server :(");
         }

@@ -2,7 +2,7 @@ package client.views.loginView;
 
 import client.core.ModelFactory;
 import client.frontEndModel.FrontEndModelManager;
-import shared.sharedObjects.Account;
+import shared.sharedObjects.LoginCredentials;
 
 public class LoginViewModel {
     private FrontEndModelManager frontEndModelManager;
@@ -10,9 +10,9 @@ public class LoginViewModel {
     public LoginViewModel(ModelFactory modelFactory) {
         frontEndModelManager = modelFactory.getFrontEndModelManager();
     }
-    public boolean verifyLogin(Account account) {
-        System.out.println("2 Log In View Model got account from controller, passing it to front model " + account.toString());
-        return frontEndModelManager.verifyLogin(account);
+    public boolean verifyLogin(LoginCredentials loginCredentials) {
+        System.out.println("2 Log In View Model got loginCredentials from controller, passing it to front model " + loginCredentials.toString());
+        return frontEndModelManager.verifyLogin(loginCredentials);
     }
 
 }

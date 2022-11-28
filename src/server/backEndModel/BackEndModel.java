@@ -1,7 +1,6 @@
 package server.backEndModel;
 
-import shared.sharedObjects.Account;
-import shared.sharedObjects.AccountList;
+import shared.sharedObjects.LoginCredentials;
 import shared.sharedObjects.TrainingSession;
 import shared.sharedObjects.TrainingSessionList;
 
@@ -17,7 +16,7 @@ public class BackEndModel implements BackEndModelManager
 {
     private PropertyChangeSupport support;
     private TrainingSessionList listOfSessions;
-    private AccountList listOfAccount;
+    private LoginCredentialList listOfAccount;
 
     /**
      * BackEndModel constructor to instantiate support, listofAccount, listOfSessions.
@@ -25,9 +24,9 @@ public class BackEndModel implements BackEndModelManager
     public BackEndModel()
     {
         support = new PropertyChangeSupport(this);
-        listOfAccount = new AccountList();
+        listOfAccount = new LoginCredentialList();
         listOfSessions = new TrainingSessionList();
-        addAccount(new Account("lol", "lol"));
+        addAccount(new LoginCredentials("lol", "lol"));
     }
 
     @Override public void addSession(TrainingSession session)
@@ -40,31 +39,33 @@ public class BackEndModel implements BackEndModelManager
         listOfSessions.removeTrainingSession(session);
     }
 
-    @Override public void addAccount(Account account)
+    @Override public void addAccount(LoginCredentials loginCredentials)
     {
-        listOfAccount.addAccount(account);
+        listOfAccount.addLoginCredentials(loginCredentials);
     }
 
-    @Override public void removeAccount(Account account)
+    @Override public void removeAccount(LoginCredentials loginCredentials)
     {
-        listOfAccount.removeAccount(account);
+        listOfAccount.removeLoginCredentials(loginCredentials);
     }
 
-    @Override public boolean verifyLogin(Account account)
+    @Override public boolean verifyLogin(LoginCredentials loginCredentials)
     {
 
-        if (listOfAccount.getAccount(account) == null)
+        if (listOfAccount.getLoginCredential(loginCredentials) == null)
         {
-            System.out.println("6 Back model verified account false " + account.toString()) ;
+            System.out.println("6 Back model verified loginCredentials false " + loginCredentials.toString()) ;
             return false;
-        }else
-            System.out.println("6 Back model verified account true " + account.toString());
+        }
+        else {
+            System.out.println("6 Back model verified loginCredentials true " + loginCredentials.toString());
             return true;
+        }
     }
 
-    public Account getAccount(Account account)
+    public LoginCredentials getAccount(LoginCredentials loginCredentials)
     {
-        return listOfAccount.getAccount(account);
+        return listOfAccount.getLoginCredential(loginCredentials);
     }
 
     public TrainingSession getSession(TrainingSession session)

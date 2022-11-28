@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import shared.sharedObjects.Account;
+import shared.sharedObjects.LoginCredentials;
 
 public class LoginViewController implements ViewController {
 
@@ -33,10 +33,10 @@ public class LoginViewController implements ViewController {
     }
 
     public void onbtnLogin(){
-        Account account = new Account(txtUsername.getText(), txtPassword.getText());
-        System.out.println("1 Login controller created account to pass to login view model " + account);
-        if(loginViewModel.verifyLogin(account)){
-            System.out.println(loginViewModel.verifyLogin(account));
+        LoginCredentials loginCredentials = new LoginCredentials(txtUsername.getText(), txtPassword.getText());
+        System.out.println("1 Login controller created loginCredentials to pass to login view model " + loginCredentials);
+        if(loginViewModel.verifyLogin(loginCredentials)){
+            System.out.println(loginViewModel.verifyLogin(loginCredentials));
             viewHandler.openBookingView();
         }else{
             errorLabel.setText("Invalid username or password");}

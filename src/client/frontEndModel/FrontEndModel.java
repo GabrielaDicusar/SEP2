@@ -2,13 +2,11 @@ package client.frontEndModel;
 
 import client.core.ClientFactory;
 import client.network.RMIClient;
-import shared.sharedObjects.Account;
+import shared.sharedObjects.LoginCredentials;
 import shared.sharedObjects.TrainingSession;
 
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.List;
 
 public class FrontEndModel implements FrontEndModelManager {
     private RMIClient client;
@@ -19,9 +17,9 @@ public class FrontEndModel implements FrontEndModelManager {
         support = new PropertyChangeSupport(this);
     }
 
-    public boolean verifyLogin(Account account){
-        System.out.println("3 Front model got account from view model, passing it to member " + account.toString());
-        return client.login(account);
+    public boolean verifyLogin(LoginCredentials loginCredentials){
+        System.out.println("3 Front model got loginCredentials from view model, passing it to member " + loginCredentials.toString());
+        return client.login(loginCredentials);
     }
 
     @Override
@@ -35,12 +33,12 @@ public class FrontEndModel implements FrontEndModelManager {
     }
 
     @Override
-    public void addAccount(Account account) {
+    public void addAccount(LoginCredentials loginCredentials) {
 
     }
 
     @Override
-    public void removeAccount(Account account) {
+    public void removeAccount(LoginCredentials loginCredentials) {
 
     }
 

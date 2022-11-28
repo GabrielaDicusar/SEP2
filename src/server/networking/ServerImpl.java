@@ -1,9 +1,8 @@
 package server.networking;
 
 import server.backEndModel.BackEndModel;
-import shared.networking.ClientCallBack;
 import shared.networking.RMIServer;
-import shared.sharedObjects.Account;
+import shared.sharedObjects.LoginCredentials;
 import shared.sharedObjects.TrainingSession;
 
 import java.rmi.AlreadyBoundException;
@@ -58,16 +57,16 @@ public class ServerImpl implements RMIServer
 //  }
 
   /**
-   * Returns the verified login account via a boolean method.
-   * @param account
-   * @return account
+   * Returns the verified login loginCredentials via a boolean method.
+   * @param loginCredentials
+   * @return loginCredentials
    * @throws RemoteException
    */
   @Override
-  public boolean verifyLogin(Account account) throws RemoteException
+  public boolean verifyLogin(LoginCredentials loginCredentials) throws RemoteException
   {
-    System.out.println("5 Got account from member, passing it to back model " + account.toString());
-    return modelManager.verifyLogin(account);
+    System.out.println("5 Got loginCredentials from member, passing it to back model " + loginCredentials.toString());
+    return modelManager.verifyLogin(loginCredentials);
   }
 
   /**
@@ -84,13 +83,13 @@ public class ServerImpl implements RMIServer
 
   /**
    * Adds a user and their credentials to the listOfAccounts.
-   * @param account
+   * @param loginCredentials
    * @throws RemoteException
    */
 
-  @Override public void addUser(Account account) throws RemoteException
+  @Override public void addUser(LoginCredentials loginCredentials) throws RemoteException
   {
-  modelManager.addAccount(account);
+  modelManager.addAccount(loginCredentials);
   }
 
   /**
