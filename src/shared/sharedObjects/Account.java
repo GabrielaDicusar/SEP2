@@ -35,13 +35,27 @@ public class Account implements Serializable {
         this.userName = userName;
     }
 
+    /**
+     * Returns an object of title.
+     * @return password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Sets the object of title.
+     * @param password
+     */
+
     public void setPassword(String password) {
         this.password = password;
     }
+
+    /**
+     * Returns a String Object of userName and password.
+     * @return userName, password
+     */
 
     public String toString(){
         return userName + " "  + password;
