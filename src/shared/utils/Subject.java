@@ -2,7 +2,8 @@ package shared.utils;
 
 import java.beans.PropertyChangeListener;
 
-/** Interface Subject creates and removes Listeners to be implemented by BackEndModel,
+/**
+ * Interface Subject creates and removes Listeners which are implemented by BackEndModel,
     FrontEndModel, Member, BookingViewModel, LoginViewController and LoginView
  * @author
  */

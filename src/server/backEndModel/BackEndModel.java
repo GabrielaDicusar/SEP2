@@ -8,6 +8,10 @@ import shared.sharedObjects.TrainingSessionList;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+/**
+ * A class containing the methods for the BackEndModel, whilst implementing BackEndModelManager.
+ * @author
+ */
 
 public class BackEndModel implements BackEndModelManager
 {
@@ -15,6 +19,9 @@ public class BackEndModel implements BackEndModelManager
     private TrainingSessionList listOfSessions;
     private AccountList listOfAccount;
 
+    /**
+     * BackEndModel constructor to instantiate support, listofAccount, listOfSessions.
+     */
     public BackEndModel()
     {
         support = new PropertyChangeSupport(this);

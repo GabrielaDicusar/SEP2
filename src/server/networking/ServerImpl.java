@@ -12,6 +12,10 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+/**
+ * A class containing the methods for the server and it implements the RMIServer.
+ * @author
+ */
 public class ServerImpl implements RMIServer
 
 {
@@ -23,6 +27,9 @@ public class ServerImpl implements RMIServer
     this.modelManager = modelManager;
   }
 
+  /**
+   * A method creating log instances once the server has been started.
+   */
   public void startServer()
   {
     Registry registry = null;
@@ -50,6 +57,12 @@ public class ServerImpl implements RMIServer
 //    });
 //  }
 
+  /**
+   * Returns the verified login account via a boolean method.
+   * @param account
+   * @return account
+   * @throws RemoteException
+   */
   @Override
   public boolean verifyLogin(Account account) throws RemoteException
   {
@@ -57,16 +70,35 @@ public class ServerImpl implements RMIServer
     return modelManager.verifyLogin(account);
   }
 
+  /**
+   * ??
+   * @param trainingSession
+   * @throws RemoteException
+   */
+
   @Override public void bookATrainingSession(TrainingSession trainingSession)
       throws RemoteException
   {
    modelManager.addSession(trainingSession);
   }
 
+  /**
+   * Adds a user and their credentials to the listOfAccounts.
+   * @param account
+   * @throws RemoteException
+   */
+
   @Override public void addUser(Account account) throws RemoteException
   {
   modelManager.addAccount(account);
   }
+
+  /**
+   * ??
+   * @param trainingSession
+   * @throws RemoteException
+   */
+
 public void cancelTrainingSession(TrainingSession trainingSession) {
     modelManager.removeSession(trainingSession);
 }

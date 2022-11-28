@@ -3,7 +3,7 @@ package shared.sharedObjects;
 import java.io.Serializable;
 
 /**
- * A class containing the methods for creating objects for an Account implementing Serializable.
+ * A class containing the methods for creating objects for an Account whilst implementing Serializable.
  * @author
  */
 
@@ -11,6 +11,12 @@ public class Account implements Serializable {
 
     private String userName;
     private String password;
+
+    /**
+     * Account constructor to instantiate userName and password.
+     * @param userName
+     * @param password
+     */
 
     public Account(String userName, String password) {
         this.userName = userName;

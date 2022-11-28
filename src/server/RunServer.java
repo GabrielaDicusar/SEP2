@@ -7,7 +7,10 @@ import server.networking.ServerImpl;
 
 import java.rmi.RemoteException;
 
-
+/**
+ * A class containing an execution method for ServerImpl.
+ * @author
+ */
 public class RunServer
 {
   public static void main(String[] args) throws RemoteException {
