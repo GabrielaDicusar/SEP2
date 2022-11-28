@@ -63,7 +63,7 @@ public class ServerImpl implements RMIServer
    * @throws RemoteException
    */
   @Override
-  public boolean verifyLogin(LoginCredentials loginCredentials) throws RemoteException
+  public int verifyLogin(LoginCredentials loginCredentials) throws RemoteException
   {
     System.out.println("5 Got loginCredentials from member, passing it to back model " + loginCredentials.toString());
     return modelManager.verifyLogin(loginCredentials);

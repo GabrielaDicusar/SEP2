@@ -49,18 +49,9 @@ public class BackEndModel implements BackEndModelManager
         listOfAccount.removeLoginCredentials(loginCredentials);
     }
 
-    @Override public boolean verifyLogin(LoginCredentials loginCredentials)
+    @Override public int verifyLogin(LoginCredentials loginCredentials)
     {
-
-        if (listOfAccount.getLoginCredential(loginCredentials) == null)
-        {
-            System.out.println("6 Back model verified loginCredentials false " + loginCredentials.toString()) ;
-            return false;
-        }
-        else {
-            System.out.println("6 Back model verified loginCredentials true " + loginCredentials.toString());
-            return true;
-        }
+        return  listOfAccount.getAccountType(loginCredentials);
     }
 
     public LoginCredentials getAccount(LoginCredentials loginCredentials)

@@ -13,5 +13,21 @@ public class Account {
     {
         this.accountType = accountType;
         this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.email = email;
+        this.loginCredentials = loginCredentials;
+    }
+
+    public int getAccountType() {
+        return accountType;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LoginCredentials getLoginCredentials() {
+        return loginCredentials;
     }
 }
