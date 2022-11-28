@@ -2,12 +2,16 @@ package client.core;
 
 import client.views.bookingView.BookingViewModel;
 import client.views.loginView.LoginViewModel;
+import client.views.managerView.ManagerViewModel;
+import client.views.trainerView.TrainerViewModel;
 
 public class ViewModelFactory {
 
     private ModelFactory modelFactory;
     private BookingViewModel bookingViewModel;
     private LoginViewModel loginViewModel;
+    private ManagerViewModel managerViewModel;
+    private TrainerViewModel trainerViewModel;
 
     public ViewModelFactory(ModelFactory modelFactory) {
         this.modelFactory = modelFactory;
@@ -27,7 +31,20 @@ public class ViewModelFactory {
         return loginViewModel;
         }
 
+    public ManagerViewModel getManagerViewModel() {
+        if (managerViewModel == null){
+            managerViewModel = new ManagerViewModel(modelFactory.getFrontEndModelManager());
+    }
+        return managerViewModel; }
+
+    public TrainerViewModel getTrainerViewModel() {
+        if (trainerViewModel == null){
+            trainerViewModel = new TrainerViewModel(modelFactory.getFrontEndModelManager());
+        }
+        return trainerViewModel;
+    }
     public ModelFactory getModelFactory() {
         return modelFactory;
     }
+
 }

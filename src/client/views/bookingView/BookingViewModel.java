@@ -7,6 +7,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 public class BookingViewModel implements PropertyChangeListener {
+
     public BookingViewModel(FrontEndModelManager frontEndModelManager) {
     }
 

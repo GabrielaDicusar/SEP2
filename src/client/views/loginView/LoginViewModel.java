@@ -4,7 +4,11 @@ import client.core.ModelFactory;
 import client.frontEndModel.FrontEndModelManager;
 import shared.sharedObjects.LoginCredentials;
 
-public class LoginViewModel {
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class LoginViewModel implements PropertyChangeListener
+{
     private FrontEndModelManager frontEndModelManager;
 
     public LoginViewModel(ModelFactory modelFactory) {
@@ -15,4 +19,8 @@ public class LoginViewModel {
         return frontEndModelManager.verifyLogin(loginCredentials);
     }
 
+    @Override public void propertyChange(PropertyChangeEvent evt)
+    {
+
+    }
 }
