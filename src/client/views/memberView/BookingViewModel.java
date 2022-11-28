@@ -1,7 +1,6 @@
-package client.views.bookingView;
+package client.views.memberView;
 
 import client.frontEndModel.FrontEndModelManager;
-import client.network.RMIClient;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

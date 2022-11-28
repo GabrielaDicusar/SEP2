@@ -1,4 +1,4 @@
-package client.views.bookingView;
+package client.views.memberView;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;

@@ -37,7 +37,7 @@ public class ViewHandler {
 
     public void openBookingView(){ if (bookingScene == null) {
         try {
-            Parent root = loadFXML("../views/bookingView/BookingView.fxml");
+            Parent root = loadFXML("../views/memberView/BookingView.fxml");
 
             bookingScene = new Scene(root);
             stage.setTitle("Member Account");

@@ -1,6 +1,6 @@
 package client.core;
 
-import client.views.bookingView.BookingViewModel;
+import client.views.memberView.BookingViewModel;
 import client.views.loginView.LoginViewModel;
 import client.views.managerView.ManagerViewModel;
 import client.views.trainerView.TrainerViewModel;
