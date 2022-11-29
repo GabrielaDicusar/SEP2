@@ -15,7 +15,7 @@ public class CreateSessionController implements ViewController
  public ComboBox ComboTrainer;
  public DatePicker datePicker1;
  public ComboBox ComboTime;
- public Button btnSave;
+ public Button btnCreate;
  private ViewHandler viewHandler;
  private CreateSessionViewModel createViewModel;
 

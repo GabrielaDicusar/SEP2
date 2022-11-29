@@ -17,9 +17,9 @@
             <Font name="System Bold" size="29.0" />
          </font>
       </Text>
-      <Button fx:id="btnSave" layoutX="415.0" layoutY="307.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" text="Save" />
-      <TextField fx:id="textTypeField" layoutX="87.0" layoutY="141.0" prefHeight="26.0" prefWidth="169.0" text="Type " />
-      <TextField fx:id="btnCapacityField" layoutX="87.0" layoutY="201.0" prefHeight="26.0" prefWidth="169.0" text="Capacity" />
+      <Button fx:id="btnCreate" layoutX="415.0" layoutY="307.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" text="Create" />
+      <TextField fx:id="textTypeField" layoutX="87.0" layoutY="141.0" prefHeight="26.0" prefWidth="169.0" promptText="Type" />
+      <TextField fx:id="btnCapacityField" layoutX="87.0" layoutY="201.0" prefHeight="26.0" prefWidth="169.0" promptText="Capacity" />
       <ComboBox fx:id="ComboTime" layoutX="338.0" layoutY="201.0" prefHeight="26.0" prefWidth="169.0" promptText="Available time" />
    </children>
 </AnchorPane>
