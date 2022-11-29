@@ -27,13 +27,13 @@ public class BackEndModel implements BackEndModelManager
         listOfAccount = new AccountList();
         listOfSessions = new TrainingSessionList();
         listOfAccount.addAccount(new Account(new LoginCredentials("member", "member"), 1, "Lukasz", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
-        listOfAccount.addAccount(new Account(new LoginCredentials("manager", "manager"), 2, "Lukasz", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
-        listOfAccount.addAccount(new Account(new LoginCredentials("trainer", "trainer"), 3, "Lukasz", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
+        listOfAccount.addAccount(new Account(new LoginCredentials("manager", "manager"), 2, "Diana", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
+        listOfAccount.addAccount(new Account(new LoginCredentials("trainer", "trainer"), 3, "Chris", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
         listOfSessions.addSession(new TrainingSession("Yoga", "13:00", 15, listOfAccount.getAccount(new LoginCredentials("trainer", "trainer"))));
+        listOfSessions.addSession(new TrainingSession("Fitness", "14:00", 10, listOfAccount.getAccount(new LoginCredentials("manager", "manager"))));
     }
 
     public TrainingSessionList getListOfSessions() {
-        System.out.println("testBackend");
         return listOfSessions;
     }
 

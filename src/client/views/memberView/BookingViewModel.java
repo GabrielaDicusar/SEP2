@@ -16,6 +16,7 @@ public class BookingViewModel implements PropertyChangeListener {
     ObservableList<TrainingSession> sessions;
     public BookingViewModel(FrontEndModelManager frontEndModelManager) {
         this.frontEndModelManager = frontEndModelManager;
+        frontEndModelManager.getClient().addListener("SessionAdded", this);
     }
 
     public void loadSessions() {
@@ -30,7 +31,8 @@ public class BookingViewModel implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("SessionAdded"))
         {
-            loadSessions();
+            System.out.println("testBookingViewModel");
+            sessions.add((TrainingSession) evt.getNewValue());
         }
     }
 }

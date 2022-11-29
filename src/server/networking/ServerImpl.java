@@ -71,7 +71,6 @@ public class ServerImpl implements RMIServer {
 
   @Override
   public TrainingSessionList getSessions() throws RemoteException {
-    System.out.println("testServer");
     return modelManager.getListOfSessions();
   }
 

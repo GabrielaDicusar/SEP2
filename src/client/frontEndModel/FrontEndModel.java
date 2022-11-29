@@ -28,25 +28,14 @@ public class FrontEndModel implements FrontEndModelManager {
         return client.getSessions();
     }
 
+    public RMIClient getClient() {
+        return client;
+    }
+
     @Override
     public void addSession(TrainingSession session) {
         client.addSession(session);
         support.firePropertyChange("SessionAdded", null, session);
-    }
-
-    @Override
-    public void removeSession(TrainingSession session) {
-
-    }
-
-    @Override
-    public void addAccount(LoginCredentials loginCredentials) {
-
-    }
-
-    @Override
-    public void removeAccount(LoginCredentials loginCredentials) {
-
     }
 
     @Override

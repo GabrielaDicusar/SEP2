@@ -29,6 +29,7 @@ public class Client implements RMIClient, ClientCallBack {
             UnicastRemoteObject.exportObject(this,0);
             registry = LocateRegistry.getRegistry("localhost",1234);
             server = (RMIServer) registry.lookup("Server");
+            server.registerCallback(this);
             System.out.println("Client started");
         } catch (RemoteException | NotBoundException e) {
             e.printStackTrace();
@@ -76,6 +77,7 @@ public class Client implements RMIClient, ClientCallBack {
 
     @Override
     public void updateNewSession(TrainingSession session) throws RemoteException {
+        System.out.println("Fires the update method");
         support.firePropertyChange("SessionAdded", null, session);
     }
 }
