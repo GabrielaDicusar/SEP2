@@ -1,7 +1,9 @@
 package shared.sharedObjects;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /** A class containing the methods for creating objects for a Training Session
  * @author
@@ -11,6 +13,7 @@ public class TrainingSession implements Serializable {
     private String time;
     private int participants;
     private Account trainer;
+    private List<Account> assignedMembers;
 
     /**
      * Training Session constructor to instantiate title, date and capacity.
@@ -23,6 +26,26 @@ public class TrainingSession implements Serializable {
         this.time = time;
         this.participants = participants;
         this.trainer = trainer;
+        assignedMembers = new ArrayList<>();
+    }
+    public void addMember(Account account)
+    {
+        assignedMembers.add(account);
+    }
+
+    public List<Account> getAssignedMembers() {
+        return assignedMembers;
+    }
+    public Account getAccount(LoginCredentials loginCredentials)
+    {
+        for (Account account : assignedMembers)
+        {
+            if (account.getLoginCredentials().equals(loginCredentials))
+            {
+                return account;
+            }
+        }
+        return null;
     }
 
     /**
