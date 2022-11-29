@@ -1,25 +1,28 @@
 package shared.sharedObjects;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** A class containing the methods for creating objects for a Training Session
  * @author
  */
-public class TrainingSession {
-    private String title;
-    private Date date;
-    private int capacity;
+public class TrainingSession implements Serializable {
+    private String type;
+    private String time;
+    private int participants;
+    private Account trainer;
 
     /**
      * Training Session constructor to instantiate title, date and capacity.
-     * @param title
-     * @param date
-     * @param capacity
+     * @param type
+     * @param time
+     * @param participants
      */
-    public TrainingSession(String title, Date date, int capacity) {
-        this.title = title;
-        this.date = date;
-        this.capacity = capacity;
+    public TrainingSession(String type, String time, int participants, Account trainer) {
+        this.type = type;
+        this.time = time;
+        this.participants = participants;
+        this.trainer = trainer;
     }
 
     /**
@@ -27,16 +30,16 @@ public class TrainingSession {
      * @return title
      */
 
-    public String getTitle() {
-        return title;
+    public String getType() {
+        return type;
     }
     /**
      * Sets the object of title.
-     * @param title
+     * @param type
      */
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
@@ -44,17 +47,17 @@ public class TrainingSession {
      * @return date
      */
 
-    public Date getDate() {
-        return date;
+    public String getTime() {
+        return time;
     }
 
     /**
      * Sets the object of date.
-     * @param date
+     * @param time
      */
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setTime(String time) {
+        this.time = time;
     }
 
     /**
@@ -62,16 +65,24 @@ public class TrainingSession {
      * @return capacity
      */
 
-    public int getCapacity() {
-        return capacity;
+    public int getParticipants() {
+        return participants;
     }
 
     /**
      * Sets the object of date.
-     * @param capacity
+     * @param participants
      */
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    public void setParticipants(int participants) {
+        this.participants = participants;
+    }
+
+    public String getTrainer() {
+        return trainer.getName();
+    }
+
+    public void setTrainer(Account trainer) {
+        this.trainer = trainer;
     }
 }

@@ -4,6 +4,8 @@ import shared.sharedObjects.*;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A class containing the methods for the BackEndModel, whilst implementing BackEndModelManager.
@@ -27,12 +29,24 @@ public class BackEndModel implements BackEndModelManager
         listOfAccount.addAccount(new Account(new LoginCredentials("member", "member"), 1, "Lukasz", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
         listOfAccount.addAccount(new Account(new LoginCredentials("manager", "manager"), 2, "Lukasz", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
         listOfAccount.addAccount(new Account(new LoginCredentials("trainer", "trainer"), 3, "Lukasz", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
+        listOfSessions.addSession(new TrainingSession("Yoga", "13:00", 15, listOfAccount.getAccount(new LoginCredentials("trainer", "trainer"))));
     }
 
+    public TrainingSessionList getListOfSessions() {
+        System.out.println("testBackend");
+        return listOfSessions;
+    }
 
     @Override public int verifyLogin(LoginCredentials loginCredentials)
     {
         return listOfAccount.getAccountType(loginCredentials);
+    }
+
+    @Override
+    public void addSession(TrainingSession session) {
+        listOfSessions.addSession(session);
+        System.out.println(listOfSessions.getTrainingSessions().size());
+        support.firePropertyChange("SessionAdded", null, session);
     }
 
     @Override public void addListener(String eventName,

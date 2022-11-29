@@ -1,9 +1,11 @@
 package server.networking;
 
 import server.backEndModel.BackEndModel;
+import shared.networking.ClientCallBack;
 import shared.networking.RMIServer;
 import shared.sharedObjects.LoginCredentials;
 import shared.sharedObjects.TrainingSession;
+import shared.sharedObjects.TrainingSessionList;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
@@ -49,6 +51,28 @@ public class ServerImpl implements RMIServer {
   public int verifyLogin(LoginCredentials loginCredentials) throws RemoteException {
     System.out.println("5 Got loginCredentials from member, passing it to back model " + loginCredentials.toString());
     return modelManager.verifyLogin(loginCredentials);
+  }
+
+  @Override
+  public void addSession(TrainingSession session) throws RemoteException{
+    modelManager.addSession(session);
+  }
+
+  @Override
+  public void registerCallback(ClientCallBack ccb) throws RemoteException {
+    modelManager.addListener("SessionAdded", evt -> {
+      try {
+        ccb.updateNewSession((TrainingSession) evt.getNewValue());
+      } catch (RemoteException e) {
+        throw new RuntimeException(e);
+      }
+    });
+  }
+
+  @Override
+  public TrainingSessionList getSessions() throws RemoteException {
+    System.out.println("testServer");
+    return modelManager.getListOfSessions();
   }
 
 }

@@ -15,4 +15,5 @@ public interface BackEndModelManager extends Subject
     int verifyLogin(LoginCredentials loginCredentials);
 
 
+    void addSession(TrainingSession session);
 }

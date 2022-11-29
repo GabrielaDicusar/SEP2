@@ -1,6 +1,8 @@
 package shared.sharedObjects;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
     // login credentials, account type, name, email, phone number, address
     private LoginCredentials loginCredentials;
     private int accountType;

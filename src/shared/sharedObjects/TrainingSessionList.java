@@ -1,5 +1,6 @@
 package shared.sharedObjects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * A class handling the arraylist methods for the Training Session Class.
  * @author
  */
-public class TrainingSessionList {
+public class TrainingSessionList implements Serializable {
     private List<TrainingSession> sessions;
 
     /**

@@ -4,6 +4,7 @@ import client.core.ClientFactory;
 import client.network.RMIClient;
 import shared.sharedObjects.LoginCredentials;
 import shared.sharedObjects.TrainingSession;
+import shared.sharedObjects.TrainingSessionList;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -23,8 +24,14 @@ public class FrontEndModel implements FrontEndModelManager {
     }
 
     @Override
-    public void addSession(TrainingSession session) {
+    public TrainingSessionList getSessions() {
+        return client.getSessions();
+    }
 
+    @Override
+    public void addSession(TrainingSession session) {
+        client.addSession(session);
+        support.firePropertyChange("SessionAdded", null, session);
     }
 
     @Override

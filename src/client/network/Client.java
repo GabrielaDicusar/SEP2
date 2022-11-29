@@ -3,6 +3,8 @@ package client.network;
 import shared.networking.ClientCallBack;
 import shared.networking.RMIServer;
 import shared.sharedObjects.LoginCredentials;
+import shared.sharedObjects.TrainingSession;
+import shared.sharedObjects.TrainingSessionList;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -34,6 +36,25 @@ public class Client implements RMIClient, ClientCallBack {
     }
 
     @Override
+    public void addSession(TrainingSession session){
+        try {
+            server.addSession(session);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public TrainingSessionList getSessions() {
+        try {
+            System.out.println("testClient");
+            return server.getSessions();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public int login(LoginCredentials loginCredentials) {
         try {
             System.out.println("4 Member got loginCredentials from front model, using server to verify " + loginCredentials.toString());
@@ -51,5 +72,10 @@ public class Client implements RMIClient, ClientCallBack {
     @Override
     public void removeListener(String eventName, PropertyChangeListener listener) {
         support.removePropertyChangeListener(eventName, listener);
+    }
+
+    @Override
+    public void updateNewSession(TrainingSession session) throws RemoteException {
+        support.firePropertyChange("SessionAdded", null, session);
     }
 }
