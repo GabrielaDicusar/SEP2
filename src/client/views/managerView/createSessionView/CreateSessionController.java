@@ -1,4 +1,4 @@
-package client.views.CreateSessionView;
+package client.views.managerView.createSessionView;
 
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
@@ -17,7 +17,7 @@ public class CreateSessionController implements ViewController
  public ComboBox ComboTime;
  public Button btnSave;
  private ViewHandler viewHandler;
- private CreateSessionModel createViewModel;
+ private CreateSessionViewModel createViewModel;
 
 
   @Override public void init(ViewHandler viewHandler,

@@ -1,15 +1,15 @@
-package client.views.CreateSessionView;
+package client.views.managerView.createSessionView;
 
 import client.frontEndModel.FrontEndModelManager;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class CreateSessionModel implements PropertyChangeListener
+public class CreateSessionViewModel implements PropertyChangeListener
 {
   private FrontEndModelManager frontEndModelManager;
 
-  public CreateSessionModel(FrontEndModelManager frontEndModelManager) {
+  public CreateSessionViewModel(FrontEndModelManager frontEndModelManager) {
     this.frontEndModelManager = frontEndModelManager;
   }
 
