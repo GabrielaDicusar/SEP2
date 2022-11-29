@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.CreateSessionView.CreateSessionController">
+   <children>
+      <DatePicker fx:id="datePicker1" layoutX="338.0" layoutY="141.0" prefHeight="26.0" prefWidth="169.0" promptText="Date" />
+      <ComboBox fx:id="ComboTrainer" layoutX="87.0" layoutY="258.0" prefHeight="26.0" prefWidth="169.0" promptText="Trainer" />
+      <Text layoutX="177.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add training session">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Text>
+      <Button layoutX="415.0" layoutY="307.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="92.0" text="Save" />
+      <TextField fx:id="textTypeField" layoutX="87.0" layoutY="141.0" prefHeight="26.0" prefWidth="169.0" text="Type " />
+      <TextField fx:id="btnCapacityField" layoutX="87.0" layoutY="201.0" prefHeight="26.0" prefWidth="169.0" text="Capacity" />
+      <ComboBox fx:id="ComboTime" layoutX="338.0" layoutY="201.0" prefHeight="26.0" prefWidth="169.0" promptText="Available time" />
+   </children>
+</AnchorPane>
