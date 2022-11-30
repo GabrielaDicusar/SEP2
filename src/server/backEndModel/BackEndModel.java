@@ -4,6 +4,9 @@ import shared.sharedObjects.*;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -19,7 +22,7 @@ public class BackEndModel implements BackEndModelManager
     private AccountList listOfAccount;
 
     /**
-     * BackEndModel constructor to instantiate support, listofAccount, listOfSessions.
+     * BackEndModel constructor to instantiate support, listOfAccount, listOfSessions.
      */
     public BackEndModel()
     {
@@ -29,8 +32,9 @@ public class BackEndModel implements BackEndModelManager
         listOfAccount.addAccount(new Account(new LoginCredentials("member", "member"), 1, "Lukasz", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
         listOfAccount.addAccount(new Account(new LoginCredentials("manager", "manager"), 2, "Diana", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
         listOfAccount.addAccount(new Account(new LoginCredentials("trainer", "trainer"), 3, "Chris", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
-        listOfSessions.addSession(new TrainingSession("Yoga", "13:00", 15, listOfAccount.getAccount(new LoginCredentials("trainer", "trainer"))));
-        listOfSessions.addSession(new TrainingSession("Fitness", "14:00", 10, listOfAccount.getAccount(new LoginCredentials("manager", "manager"))));
+        listOfAccount.addAccount(new Account(new LoginCredentials("trainer", "trainer"), 3, "Gabriela", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
+        listOfSessions.addSession(new TrainingSession("Yoga", LocalTime.of(9,0), 15, listOfAccount.getAccount(new LoginCredentials("trainer", "trainer")), LocalDate.now()));
+        listOfSessions.addSession(new TrainingSession("Fitness", LocalTime.of(10,0), 10, listOfAccount.getAccount(new LoginCredentials("manager", "manager")), LocalDate.now()));
     }
 
     public TrainingSessionList getListOfSessions() {
@@ -47,6 +51,28 @@ public class BackEndModel implements BackEndModelManager
         listOfSessions.addSession(session);
         System.out.println(listOfSessions.getTrainingSessions().size());
         support.firePropertyChange("SessionAdded", null, session);
+    }
+
+    @Override
+    public ArrayList getTrainersList(){
+        ArrayList trainers = new ArrayList();
+
+        for (int i = 0; i < listOfAccount.size(); i++) {
+            if(listOfAccount.getAccount(i).getAccountType() == 3){
+                trainers.add(listOfAccount.getAccount(i));
+            }
+        }
+        return trainers;
+    }
+
+    @Override
+    public boolean verifyAvailabilityOfSession(TrainingSession session) {
+        for (int i = 0; i < listOfSessions.size(); i++) {
+            if(session.getDate().isBefore(LocalDate.now())){
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override public void addListener(String eventName,

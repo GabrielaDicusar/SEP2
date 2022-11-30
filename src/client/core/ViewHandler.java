@@ -14,6 +14,7 @@ public class ViewHandler {
     private Scene loginScene;
     private Scene bookingScene;
     private Scene managerScene;
+    private Scene createSessionScene;
     private ViewModelFactory viewModelFactory;
 
     public ViewHandler(ViewModelFactory viewModelFactory){
@@ -80,6 +81,24 @@ public class ViewHandler {
         stage.setScene(managerScene);
         stage.show();
     }
+
+    public void openCreateSessionView(){
+        if (createSessionScene == null) {
+            try {
+                Parent root = loadFXML("../views/managerView/createSessionView/CreateSessionView.fxml");
+
+                createSessionScene = new Scene(root);
+                stage.setTitle("Create Session");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        stage.setScene(createSessionScene);
+        stage.show();
+    }
+
+
     public void openTrainerView(){
         if (managerScene == null) {
             try {

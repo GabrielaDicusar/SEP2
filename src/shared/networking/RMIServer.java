@@ -6,6 +6,7 @@ import shared.sharedObjects.TrainingSessionList;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  * Interface RMI Server creates verifyLogin, bookATrainingSession, and addUser which are implemented by
@@ -18,6 +19,8 @@ public interface RMIServer extends Remote {
     int verifyLogin(LoginCredentials loginCredentials) throws RemoteException;
     void addSession(TrainingSession session) throws RemoteException;
     void registerCallback(ClientCallBack ccb) throws RemoteException;
-
     TrainingSessionList getSessions() throws RemoteException;
+    ArrayList getTrainers() throws RemoteException;
+
+    boolean verifyAvailabilityOfSession(TrainingSession session) throws RemoteException;
 }

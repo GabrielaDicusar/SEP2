@@ -23,7 +23,8 @@ public class BookingViewModel implements PropertyChangeListener {
         TrainingSessionList logList = frontEndModelManager.getSessions();
         sessions = FXCollections.observableArrayList(logList.getTrainingSessions());
     }
-    ObservableList<TrainingSession> getSessions() {
+
+    public ObservableList<TrainingSession> getSessions() {
         return sessions;
     }
 

@@ -12,6 +12,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 /**
  * A class containing the methods for the server and it implements the RMIServer.
@@ -32,6 +33,7 @@ public class ServerImpl implements RMIServer {
     Registry registry = null;
     try {
       registry = LocateRegistry.createRegistry(1234);
+      System.setProperty("java.rmi.server.hostname","192.168.1.2");
       registry.bind("Server", this);
       System.out.println("The server has started.");
     } catch (RemoteException | AlreadyBoundException e) {
@@ -72,6 +74,16 @@ public class ServerImpl implements RMIServer {
   @Override
   public TrainingSessionList getSessions() throws RemoteException {
     return modelManager.getListOfSessions();
+  }
+
+  @Override
+  public ArrayList getTrainers() throws RemoteException {
+    return modelManager.getTrainersList();
+  }
+
+  @Override
+  public boolean verifyAvailabilityOfSession(TrainingSession session) throws RemoteException{
+    return modelManager.verifyAvailabilityOfSession(session);
   }
 
 }

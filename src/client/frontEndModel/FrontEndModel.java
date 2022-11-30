@@ -8,6 +8,8 @@ import shared.sharedObjects.TrainingSessionList;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 public class FrontEndModel implements FrontEndModelManager {
     private RMIClient client;
@@ -26,6 +28,20 @@ public class FrontEndModel implements FrontEndModelManager {
     @Override
     public TrainingSessionList getSessions() {
         return client.getSessions();
+    }
+
+    @Override
+    public ArrayList getTrainers() throws RemoteException {
+        return client.getTrainers();
+    }
+
+    @Override
+    public boolean verifyAvailabilityOfSession (TrainingSession session){
+        try {
+            return client.verifyAvailabilityOfSession(session);
+        } catch (RemoteException e) {
+            throw new RuntimeException("Something went wrong");
+        }
     }
 
     public RMIClient getClient() {

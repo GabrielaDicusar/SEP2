@@ -32,4 +32,8 @@ public class Account implements Serializable {
     public LoginCredentials getLoginCredentials() {
         return loginCredentials;
     }
+
+    public String toString(){
+        return name;
+    }
 }

@@ -12,6 +12,9 @@ import shared.sharedObjects.Account;
 import shared.sharedObjects.LoginCredentials;
 import shared.sharedObjects.TrainingSession;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class ManagerViewController implements ViewController
 {
   public DatePicker datePicker;
@@ -29,6 +32,6 @@ public class ManagerViewController implements ViewController
   }
 
   public void onButtonPressed(ActionEvent actionEvent) {
-    managerViewModel.getFrontEndModelManager().addSession(new TrainingSession("Fitness", "14:00", 10, new Account(new LoginCredentials("manager", "manager"), 3, "Temp", "123@gmail.com", "23232323", "Somewhere")));
+    viewHandler.openCreateSessionView();
   }
 }

@@ -36,4 +36,12 @@ public class AccountList {
         }
         return -1;
     }
+
+    public int size(){
+        return accounts.size();
+    }
+
+    public Account getAccount(int i){
+         return accounts.get(i);
+    }
 }

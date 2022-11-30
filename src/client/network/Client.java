@@ -13,6 +13,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 public class Client implements RMIClient, ClientCallBack {
     private RMIServer server;
@@ -52,6 +53,21 @@ public class Client implements RMIClient, ClientCallBack {
             return server.getSessions();
         } catch (RemoteException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public ArrayList getTrainers() throws RemoteException {
+        return server.getTrainers();
+    }
+
+    @Override
+    public boolean verifyAvailabilityOfSession(TrainingSession session) {
+        try {
+            return server.verifyAvailabilityOfSession(session);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Something went wrong");
         }
     }
 

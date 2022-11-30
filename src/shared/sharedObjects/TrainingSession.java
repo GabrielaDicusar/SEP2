@@ -1,6 +1,8 @@
 package shared.sharedObjects;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,10 +12,11 @@ import java.util.List;
  */
 public class TrainingSession implements Serializable {
     private String type;
-    private String time;
+    private LocalTime time;
     private int participants;
     private Account trainer;
     private List<Account> assignedMembers;
+    private LocalDate date;
 
     /**
      * Training Session constructor to instantiate title, date and capacity.
@@ -21,12 +24,13 @@ public class TrainingSession implements Serializable {
      * @param time
      * @param participants
      */
-    public TrainingSession(String type, String time, int participants, Account trainer) {
+    public TrainingSession(String type, LocalTime time, int participants, Account trainer, LocalDate date) {
         this.type = type;
         this.time = time;
         this.participants = participants;
         this.trainer = trainer;
         assignedMembers = new ArrayList<>();
+        this.date = date;
     }
     public void addMember(Account account)
     {
@@ -70,8 +74,12 @@ public class TrainingSession implements Serializable {
      * @return date
      */
 
-    public String getTime() {
+    public LocalTime getTime() {
         return time;
+    }
+
+    public LocalDate getDate(){
+        return date;
     }
 
     /**
@@ -79,7 +87,7 @@ public class TrainingSession implements Serializable {
      * @param time
      */
 
-    public void setTime(String time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 
@@ -91,6 +99,7 @@ public class TrainingSession implements Serializable {
     public int getParticipants() {
         return participants;
     }
+
 
     /**
      * Sets the object of date.
@@ -107,5 +116,10 @@ public class TrainingSession implements Serializable {
 
     public void setTrainer(Account trainer) {
         this.trainer = trainer;
+    }
+
+
+    public String toString(){
+        return type + " " + date + " " + time + " " + participants;
     }
 }

@@ -61,4 +61,12 @@ public class TrainingSessionList implements Serializable {
         }
         return null;
     }
+
+    public TrainingSession getTrainingSessionByIndex(int i){
+        return sessions.get(i);
+    }
+
+    public int size(){
+        return sessions.size();
+    }
 }
