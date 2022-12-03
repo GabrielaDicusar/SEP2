@@ -18,8 +18,10 @@ import java.util.ArrayList;
 public class Client implements RMIClient, ClientCallBack {
     private RMIServer server;
     private PropertyChangeSupport support;
+    private LoginCredentials loginCredentials;
 
     public Client(){
+        loginCredentials = new LoginCredentials("", "");
         support = new PropertyChangeSupport(this);
     }
 
@@ -72,13 +74,23 @@ public class Client implements RMIClient, ClientCallBack {
     }
 
     @Override
+    public void addParticipant(LoginCredentials loginCredentials, TrainingSession session) throws RemoteException{
+        server.addParticipant(loginCredentials, session);
+    }
+
+    @Override
     public int login(LoginCredentials loginCredentials) {
         try {
             System.out.println("4 Member got loginCredentials from front model, using server to verify " + loginCredentials.toString());
+            this.loginCredentials = loginCredentials;
             return server.verifyLogin(loginCredentials);
         } catch (RemoteException e) {
             throw new RuntimeException("Could not connect to the server :(");
         }
+    }
+
+    public LoginCredentials getLoginCredentials() {
+        return loginCredentials;
     }
 
     @Override
@@ -95,5 +107,10 @@ public class Client implements RMIClient, ClientCallBack {
     public void updateNewSession(TrainingSession session) throws RemoteException {
         System.out.println("Fires the update method");
         support.firePropertyChange("SessionAdded", null, session);
+    }
+
+    @Override
+    public void updateNewParticipant(TrainingSession prevSession, TrainingSession newSession) throws RemoteException {
+        support.firePropertyChange("ParticipantAdded", prevSession, newSession);
     }
 }

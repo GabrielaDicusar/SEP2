@@ -10,30 +10,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
-public class BookingViewModel implements PropertyChangeListener {
+public class BookingViewModel {
 
     FrontEndModelManager frontEndModelManager;
-    ObservableList<TrainingSession> sessions;
     public BookingViewModel(FrontEndModelManager frontEndModelManager) {
         this.frontEndModelManager = frontEndModelManager;
-        frontEndModelManager.getClient().addListener("SessionAdded", this);
-    }
-
-    public void loadSessions() {
-        TrainingSessionList logList = frontEndModelManager.getSessions();
-        sessions = FXCollections.observableArrayList(logList.getTrainingSessions());
-    }
-
-    public ObservableList<TrainingSession> getSessions() {
-        return sessions;
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals("SessionAdded"))
-        {
-            System.out.println("testBookingViewModel");
-            sessions.add((TrainingSession) evt.getNewValue());
-        }
     }
 }

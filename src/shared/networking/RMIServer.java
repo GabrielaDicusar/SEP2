@@ -23,4 +23,6 @@ public interface RMIServer extends Remote {
     ArrayList getTrainers() throws RemoteException;
 
     boolean verifyAvailabilityOfSession(TrainingSession session) throws RemoteException;
+
+    void addParticipant(LoginCredentials loginCredentials, TrainingSession session) throws RemoteException;
 }

@@ -53,6 +53,11 @@ public class BackEndModel implements BackEndModelManager
         support.firePropertyChange("SessionAdded", null, session);
     }
 
+    public void addParticipant(LoginCredentials loginCredentials, TrainingSession trainingSession)
+    {
+        TrainingSession temp = listOfSessions.addParticipant(loginCredentials, trainingSession);
+        support.firePropertyChange("ParticipantAdded", trainingSession, temp);
+    }
     @Override
     public ArrayList getTrainersList(){
         ArrayList trainers = new ArrayList();

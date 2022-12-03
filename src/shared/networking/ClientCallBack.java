@@ -11,4 +11,5 @@ import java.rmi.RemoteException;
  */
 public interface ClientCallBack extends Remote {
     void updateNewSession(TrainingSession session) throws RemoteException;
+    void updateNewParticipant(TrainingSession prevSession, TrainingSession newSession) throws RemoteException;
 }

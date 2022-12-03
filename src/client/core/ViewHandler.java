@@ -15,6 +15,7 @@ public class ViewHandler {
     private Scene bookingScene;
     private Scene managerScene;
     private Scene createSessionScene;
+    private Scene availableToBookScene;
     private ViewModelFactory viewModelFactory;
 
     public ViewHandler(ViewModelFactory viewModelFactory){
@@ -48,6 +49,20 @@ public class ViewHandler {
         }
     }
         stage.setScene(bookingScene);
+        stage.show();
+    }
+    public void openAvailableToBookView(){ if (availableToBookScene == null) {
+        try {
+            Parent root = loadFXML("../views/memberView/availableToBookView/availableToBookView.fxml");
+
+            availableToBookScene = new Scene(root);
+            stage.setTitle("Booking a Session");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+        stage.setScene(availableToBookScene);
         stage.show();
     }
 

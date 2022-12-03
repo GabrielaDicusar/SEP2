@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -14,21 +10,10 @@
     <effect>
         <DropShadow />
     </effect>
-    <ListView layoutX="189.0" layoutY="83.0" prefHeight="270.0" prefWidth="384.0" />
-    <DatePicker fx:id="datePicker" layoutX="14.0" layoutY="83.0" prefHeight="26.0" prefWidth="151.0" promptText="Pick a date" />
-    <TableView fx:id="sessionTableView" layoutX="189.0" layoutY="83.0" prefHeight="270.0" prefWidth="384.0">
-      <columns>
-          <TableColumn fx:id="timeColumn" prefWidth="75.0" text="Time" />
-          <TableColumn fx:id="typeColumn" prefWidth="100.0" text="Session Type" />
-          <TableColumn fx:id="trainerColumn" prefWidth="75.0" text="Trainer" />
-          <TableColumn fx:id="participantsColumn" prefWidth="133.0" text="No. of Participants" />
-      </columns>
-    </TableView>
-    <Label layoutX="181.0" layoutY="27.0" text="Session Timetable">
+    <Label layoutX="130.0" layoutY="26.0" text="Welome to Fitness 101">
         <font>
           <Font size="36.0" />
         </font>
     </Label>
-    <Button fx:id="btnBookSession" layoutX="14.0" layoutY="128.0" mnemonicParsing="false" text="Book Session" />
-    <Button fx:id="btnRemoveBooking" layoutX="14.0" layoutY="174.0" mnemonicParsing="false" text="Remove Booking" />
+    <Button fx:id="btnBookSession" layoutX="255.0" layoutY="187.0" mnemonicParsing="false" onAction="#onButtonPressed" text="Book Session" />
 </AnchorPane>

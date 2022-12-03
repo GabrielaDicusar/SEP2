@@ -18,4 +18,6 @@ public interface FrontEndModelManager extends Subject {
     ArrayList getTrainers() throws RemoteException;
 
     boolean verifyAvailabilityOfSession(TrainingSession session) throws RemoteException;
+
+    void addParticipant(LoginCredentials loginCredentials, TrainingSession session);
 }

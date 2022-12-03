@@ -44,6 +44,15 @@ public class FrontEndModel implements FrontEndModelManager {
         }
     }
 
+    @Override
+    public void addParticipant(LoginCredentials loginCredentials, TrainingSession session) {
+        try {
+            client.addParticipant(loginCredentials, session);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public RMIClient getClient() {
         return client;
     }

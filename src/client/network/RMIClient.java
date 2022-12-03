@@ -11,10 +11,13 @@ import java.util.ArrayList;
 public interface RMIClient extends Subject {
     int login(LoginCredentials loginCredentials);
 
+    LoginCredentials getLoginCredentials();
     void startClient();
     void addSession(TrainingSession session);
     TrainingSessionList getSessions();
     ArrayList getTrainers() throws RemoteException;
 
     boolean verifyAvailabilityOfSession(TrainingSession session) throws RemoteException;
+
+    void addParticipant(LoginCredentials loginCredentials, TrainingSession session) throws RemoteException;
 }

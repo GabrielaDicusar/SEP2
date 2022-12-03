@@ -33,7 +33,7 @@ public class ServerImpl implements RMIServer {
     Registry registry = null;
     try {
       registry = LocateRegistry.createRegistry(1234);
-      System.setProperty("java.rmi.server.hostname","192.168.1.2");
+      //System.setProperty("java.rmi.server.hostname","192.168.1.2");
       registry.bind("Server", this);
       System.out.println("The server has started.");
     } catch (RemoteException | AlreadyBoundException e) {
@@ -51,7 +51,6 @@ public class ServerImpl implements RMIServer {
    */
   @Override
   public int verifyLogin(LoginCredentials loginCredentials) throws RemoteException {
-    System.out.println("5 Got loginCredentials from member, passing it to back model " + loginCredentials.toString());
     return modelManager.verifyLogin(loginCredentials);
   }
 
@@ -66,6 +65,14 @@ public class ServerImpl implements RMIServer {
       try {
         ccb.updateNewSession((TrainingSession) evt.getNewValue());
       } catch (RemoteException e) {
+        throw new RuntimeException(e);
+      }
+    });
+    modelManager.addListener("ParticipantAdded", evt -> {
+      try {
+        ccb.updateNewParticipant((TrainingSession)evt.getOldValue(), (TrainingSession) evt.getNewValue());
+      } catch (RemoteException e)
+      {
         throw new RuntimeException(e);
       }
     });
@@ -84,6 +91,11 @@ public class ServerImpl implements RMIServer {
   @Override
   public boolean verifyAvailabilityOfSession(TrainingSession session) throws RemoteException{
     return modelManager.verifyAvailabilityOfSession(session);
+  }
+
+  @Override
+  public void addParticipant(LoginCredentials loginCredentials, TrainingSession session) throws RemoteException {
+    modelManager.addParticipant(loginCredentials, session);
   }
 
 }

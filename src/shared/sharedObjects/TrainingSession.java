@@ -15,7 +15,7 @@ public class TrainingSession implements Serializable {
     private LocalTime time;
     private int participants;
     private Account trainer;
-    private List<Account> assignedMembers;
+    private List<LoginCredentials> assignedMembers;
     private LocalDate date;
 
     /**
@@ -32,19 +32,38 @@ public class TrainingSession implements Serializable {
         assignedMembers = new ArrayList<>();
         this.date = date;
     }
-    public void addMember(Account account)
+    public void addMember(LoginCredentials loginCredentials)
     {
-        assignedMembers.add(account);
+        if (assignedMembers.size() != 0)
+        {
+            for (LoginCredentials item : assignedMembers)
+            {
+                if (!item.equals(loginCredentials) || assignedMembers.size() == 0)
+                {
+                    if (participants != 0)
+                    {
+                        assignedMembers.add(loginCredentials);
+                        participants--;
+                    }
+                }
+            }
+        }
+        else
+        {
+            assignedMembers.add(loginCredentials);
+            participants--;
+        }
+
     }
 
-    public List<Account> getAssignedMembers() {
+    public List<LoginCredentials> getAssignedMembers() {
         return assignedMembers;
     }
-    public Account getAccount(LoginCredentials loginCredentials)
+    public LoginCredentials getAccount(LoginCredentials loginCredentials)
     {
-        for (Account account : assignedMembers)
+        for (LoginCredentials account : assignedMembers)
         {
-            if (account.getLoginCredentials().equals(loginCredentials))
+            if (account.equals(loginCredentials))
             {
                 return account;
             }
@@ -116,6 +135,19 @@ public class TrainingSession implements Serializable {
 
     public void setTrainer(Account trainer) {
         this.trainer = trainer;
+    }
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof TrainingSession))
+        {
+            return false;
+        }
+        else
+        {
+            TrainingSession other = (TrainingSession) obj;
+            return other.type.equals(type) && other.time.equals(time) && other.date.equals(date) && other.participants == participants
+                    && other.assignedMembers.equals(assignedMembers);
+        }
     }
 
 
