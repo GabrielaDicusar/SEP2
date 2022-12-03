@@ -20,4 +20,6 @@ public interface FrontEndModelManager extends Subject {
     boolean verifyAvailabilityOfSession(TrainingSession session) throws RemoteException;
 
     void addParticipant(LoginCredentials loginCredentials, TrainingSession session);
+
+    TrainingSessionList getAvailableSessionsForMember(LoginCredentials loginCredentials);
 }

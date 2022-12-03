@@ -53,6 +53,15 @@ public class FrontEndModel implements FrontEndModelManager {
         }
     }
 
+    @Override
+    public TrainingSessionList getAvailableSessionsForMember(LoginCredentials loginCredentials) {
+        try {
+            return client.getAvailableSessionsForMember(loginCredentials);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public RMIClient getClient() {
         return client;
     }

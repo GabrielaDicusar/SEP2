@@ -98,4 +98,9 @@ public class ServerImpl implements RMIServer {
     modelManager.addParticipant(loginCredentials, session);
   }
 
+  @Override
+  public TrainingSessionList getAvailableSessionsForMember(LoginCredentials loginCredentials) throws RemoteException {
+    return modelManager.getListOfSessionsAvailableForMember(loginCredentials);
+  }
+
 }

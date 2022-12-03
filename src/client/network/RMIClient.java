@@ -20,4 +20,6 @@ public interface RMIClient extends Subject {
     boolean verifyAvailabilityOfSession(TrainingSession session) throws RemoteException;
 
     void addParticipant(LoginCredentials loginCredentials, TrainingSession session) throws RemoteException;
+
+    TrainingSessionList getAvailableSessionsForMember(LoginCredentials loginCredentials) throws RemoteException;
 }

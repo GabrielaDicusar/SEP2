@@ -79,6 +79,11 @@ public class Client implements RMIClient, ClientCallBack {
     }
 
     @Override
+    public TrainingSessionList getAvailableSessionsForMember(LoginCredentials loginCredentials) throws RemoteException {
+        return server.getAvailableSessionsForMember(loginCredentials);
+    }
+
+    @Override
     public int login(LoginCredentials loginCredentials) {
         try {
             System.out.println("4 Member got loginCredentials from front model, using server to verify " + loginCredentials.toString());

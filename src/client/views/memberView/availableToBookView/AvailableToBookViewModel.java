@@ -16,12 +16,12 @@ public class AvailableToBookViewModel implements PropertyChangeListener {
 
     public AvailableToBookViewModel(FrontEndModelManager frontEndModelManager) {
         modelManager = frontEndModelManager;
-        modelManager.getClient().addListener("AddedSession", this);
+        modelManager.getClient().addListener("SessionAdded", this);
         modelManager.getClient().addListener("ParticipantAdded", this);
     }
 
     public void loadSessions() {
-        TrainingSessionList logList = modelManager.getSessions();
+        TrainingSessionList logList = modelManager.getAvailableSessionsForMember(modelManager.getClient().getLoginCredentials());
         sessions = FXCollections.observableArrayList(logList.getTrainingSessions());
     }
 
@@ -36,10 +36,14 @@ public class AvailableToBookViewModel implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("ParticipantAdded")) {
-            sessions.add((TrainingSession) evt.getNewValue());
+            TrainingSession newValue = (TrainingSession) evt.getNewValue();
+            if (newValue.getParticipants() != 0)
+            {
+                sessions.add(newValue);
+            }
             sessions.remove((TrainingSession) evt.getOldValue());
         }
-        else if (evt.getPropertyName().equals("AddedSession"))
+        else if (evt.getPropertyName().equals("SessionAdded"))
         {
             sessions.add((TrainingSession) evt.getNewValue());
         }

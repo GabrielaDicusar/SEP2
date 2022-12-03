@@ -2,6 +2,7 @@ package server.backEndModel;
 
 import shared.sharedObjects.LoginCredentials;
 import shared.sharedObjects.TrainingSession;
+import shared.sharedObjects.TrainingSessionList;
 import shared.utils.Subject;
 
 import java.util.ArrayList;
@@ -19,4 +20,6 @@ public interface BackEndModelManager extends Subject
     ArrayList getTrainersList();
 
     boolean verifyAvailabilityOfSession(TrainingSession session);
+
+    TrainingSessionList getListOfSessionsAvailableForMember(LoginCredentials loginCredentials);
 }

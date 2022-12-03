@@ -30,6 +30,7 @@ public class BackEndModel implements BackEndModelManager
         listOfAccount = new AccountList();
         listOfSessions = new TrainingSessionList();
         listOfAccount.addAccount(new Account(new LoginCredentials("member", "member"), 1, "Lukasz", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
+        listOfAccount.addAccount(new Account(new LoginCredentials("member1", "member1"), 1, "Adam", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
         listOfAccount.addAccount(new Account(new LoginCredentials("manager", "manager"), 2, "Diana", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
         listOfAccount.addAccount(new Account(new LoginCredentials("trainer", "trainer"), 3, "Chris", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
         listOfAccount.addAccount(new Account(new LoginCredentials("trainer", "trainer"), 3, "Gabriela", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
@@ -78,6 +79,19 @@ public class BackEndModel implements BackEndModelManager
             }
         }
         return true;
+    }
+
+    @Override
+    public TrainingSessionList getListOfSessionsAvailableForMember(LoginCredentials loginCredentials) {
+        TrainingSessionList temp = new TrainingSessionList();
+        for (int i = 0; i < listOfSessions.size(); i++)
+        {
+            if (listOfSessions.getTrainingSessionByIndex(i).getAccount(loginCredentials) == null && listOfSessions.getTrainingSessionByIndex(i).getParticipants() != 0)
+            {
+                temp.addSession(listOfSessions.getTrainingSessionByIndex(i));
+            }
+        }
+        return temp;
     }
 
     @Override public void addListener(String eventName,
