@@ -1,14 +1,15 @@
 package server.backEndModel;
 
+import server.mediator.LoginDB.LoginDAO;
+import server.mediator.LoginDB.LoginDAOImpl;
 import shared.sharedObjects.*;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * A class containing the methods for the BackEndModel, whilst implementing BackEndModelManager.
@@ -20,22 +21,17 @@ public class BackEndModel implements BackEndModelManager
     private PropertyChangeSupport support;
     private TrainingSessionList listOfSessions;
     private AccountList listOfAccount;
+    private LoginDAO loginDAO;
 
     /**
      * BackEndModel constructor to instantiate support, listOfAccount, listOfSessions.
      */
-    public BackEndModel()
+    public BackEndModel() throws SQLException
     {
         support = new PropertyChangeSupport(this);
         listOfAccount = new AccountList();
         listOfSessions = new TrainingSessionList();
-        listOfAccount.addAccount(new Account(1, "Adam", "@", "55", "sm", "member", "member"));
-        listOfAccount.addAccount(new Account(1, "Chris", "@", "55", "sm", "member1", "member1"));
-        listOfAccount.addAccount(new Account(2, "Diana", "@", "55", "sm", "manager", "manager"));
-        listOfAccount.addAccount(new Account(3, "Lukasz", "@", "55", "sm", "trainer", "trainer"));
-        listOfAccount.addAccount(new Account(3, "Gabriela", "@", "55", "sm", "trainer1", "trainer1"));
-        listOfSessions.addSession(new TrainingSession("Yoga", LocalTime.of(9,0), 15, listOfAccount.getAccount("trainer", "trainer"), LocalDate.now()));
-        listOfSessions.addSession(new TrainingSession("Fitness", LocalTime.of(10,0), 10, listOfAccount.getAccount("trainer1", "trainer1"), LocalDate.now()));
+        loginDAO = new LoginDAOImpl();
     }
 
     public TrainingSessionList getListOfSessions() {
@@ -44,7 +40,14 @@ public class BackEndModel implements BackEndModelManager
 
     @Override public Account verifyLogin(Account account)
     {
-        return listOfAccount.getAccount(account.getUsername(), account.getPassword());
+       try {
+           return loginDAO.login(account.getUsername(), account.getPassword());
+       }
+       catch (SQLException e)
+       {
+           e.printStackTrace();
+       }
+       return null;
     }
 
     @Override

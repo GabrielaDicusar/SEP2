@@ -7,19 +7,19 @@ public class Account implements Serializable {
     private String username;
     private String password;
     private int accountType;
-    private String name;
+    private String firstname;
+    private String lastname;
     private String email;
     private String phoneNumber;
-    private String address;
 
-    public Account( int accountType, String name, String email, String phoneNumber, String address, String username, String password)
+    public Account( int accountType, String firstname, String lastname, String email, String phoneNumber, String username, String password)
     {
         this.username = username;
         this.password = password;
         this.accountType = accountType;
-        this.name = name;
+        this.firstname = firstname;
+        this.lastname=lastname;
         this.phoneNumber = phoneNumber;
-        this.address = address;
         this.email = email;
     }
     public Account(String username, String password)
@@ -27,9 +27,9 @@ public class Account implements Serializable {
         this.password = password;
         this.username = username;
         this.accountType = 0;
-        this.name = null;
+        this.firstname = null;
+        this.lastname=null;
         this.phoneNumber = null;
-        this.address = null;
         this.email = null;
     }
 
@@ -37,8 +37,11 @@ public class Account implements Serializable {
         return accountType;
     }
 
-    public String getName() {
-        return name;
+    public String getFName() {
+        return firstname;
+    }
+    public String getLName() {
+        return lastname;
     }
 
     public String getUsername() {
@@ -63,6 +66,6 @@ public class Account implements Serializable {
     }
 
     public String toString(){
-        return name;
+        return firstname;
     }
 }
