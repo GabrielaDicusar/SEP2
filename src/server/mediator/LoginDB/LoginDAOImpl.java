@@ -17,23 +17,12 @@ import static java.sql.DriverManager.getConnection;
 
 public class LoginDAOImpl implements LoginDAO
 {
-  /**
-   * Private constructor following the Singleton Pattern, registering the SQL driver
-   *
-   * @throws SQLException if something is wrong with the database
-   */
 
   public LoginDAOImpl() throws SQLException
   {
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
-  /**
-   * Getting the single existing instance
-   *
-   * @return the instance
-   * @throws SQLException if something is wrong with the database
-   */
 
   @Override public Account login(String username, String password)
       throws SQLException
