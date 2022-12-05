@@ -2,7 +2,7 @@ package client.frontEndModel;
 
 import client.core.ClientFactory;
 import client.network.RMIClient;
-import shared.sharedObjects.LoginCredentials;
+import shared.sharedObjects.Account;
 import shared.sharedObjects.TrainingSession;
 import shared.sharedObjects.TrainingSessionList;
 
@@ -20,9 +20,9 @@ public class FrontEndModel implements FrontEndModelManager {
         support = new PropertyChangeSupport(this);
     }
 
-    public int verifyLogin(LoginCredentials loginCredentials){
-        System.out.println("3 Front model got loginCredentials from view model, passing it to member " + loginCredentials.toString());
-        return client.login(loginCredentials);
+    public Account verifyLogin(Account account){
+        System.out.println("3 Front model got loginCredentials from view model, passing it to member " + account.toString());
+        return client.login(account);
     }
 
     @Override
@@ -45,21 +45,25 @@ public class FrontEndModel implements FrontEndModelManager {
     }
 
     @Override
-    public void addParticipant(LoginCredentials loginCredentials, TrainingSession session) {
+    public void addParticipant(Account account, TrainingSession session) {
         try {
-            client.addParticipant(loginCredentials, session);
+            client.addParticipant(account, session);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public TrainingSessionList getAvailableSessionsForMember(LoginCredentials loginCredentials) {
+    public TrainingSessionList getAvailableSessionsForMember(Account account) {
         try {
-            return client.getAvailableSessionsForMember(loginCredentials);
+            return client.getAvailableSessionsForMember(account);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
+    }
+    public TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException
+    {
+        return client.getListOfSessionsBookedByMember(account);
     }
 
     public RMIClient getClient() {

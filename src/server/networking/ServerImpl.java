@@ -3,7 +3,7 @@ package server.networking;
 import server.backEndModel.BackEndModel;
 import shared.networking.ClientCallBack;
 import shared.networking.RMIServer;
-import shared.sharedObjects.LoginCredentials;
+import shared.sharedObjects.Account;
 import shared.sharedObjects.TrainingSession;
 import shared.sharedObjects.TrainingSessionList;
 
@@ -45,13 +45,13 @@ public class ServerImpl implements RMIServer {
   /**
    * Returns the verified login loginCredentials via a boolean method.
    *
-   * @param loginCredentials
+   * @param account
    * @return loginCredentials
    * @throws RemoteException
    */
   @Override
-  public int verifyLogin(LoginCredentials loginCredentials) throws RemoteException {
-    return modelManager.verifyLogin(loginCredentials);
+  public Account verifyLogin(Account account) throws RemoteException {
+    return modelManager.verifyLogin(account);
   }
 
   @Override
@@ -94,13 +94,17 @@ public class ServerImpl implements RMIServer {
   }
 
   @Override
-  public void addParticipant(LoginCredentials loginCredentials, TrainingSession session) throws RemoteException {
-    modelManager.addParticipant(loginCredentials, session);
+  public void addParticipant(Account account, TrainingSession session) throws RemoteException {
+    modelManager.addParticipant(account, session);
   }
 
   @Override
-  public TrainingSessionList getAvailableSessionsForMember(LoginCredentials loginCredentials) throws RemoteException {
-    return modelManager.getListOfSessionsAvailableForMember(loginCredentials);
+  public TrainingSessionList getAvailableSessionsForMember(Account account) throws RemoteException {
+    return modelManager.getListOfSessionsAvailableForMember(account);
+  }
+  @Override
+  public TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException {
+    return modelManager.getListOfSessionsAvailableForMember(account);
   }
 
 }

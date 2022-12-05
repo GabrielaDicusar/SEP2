@@ -16,6 +16,7 @@ public class ViewHandler {
     private Scene managerScene;
     private Scene createSessionScene;
     private Scene availableToBookScene;
+    private Scene bookedSessionsScene;
     private ViewModelFactory viewModelFactory;
 
     public ViewHandler(ViewModelFactory viewModelFactory){
@@ -63,6 +64,20 @@ public class ViewHandler {
         }
     }
         stage.setScene(availableToBookScene);
+        stage.show();
+    }
+    public void openBookedSessionsView(){ if (bookedSessionsScene == null) {
+        try {
+            Parent root = loadFXML("../views/memberView/bookedSessionsView/bookedSessionsView.fxml");
+
+            bookedSessionsScene = new Scene(root);
+            stage.setTitle("Booked Sessions");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+        stage.setScene(bookedSessionsScene);
         stage.show();
     }
 

@@ -29,22 +29,22 @@ public class BackEndModel implements BackEndModelManager
         support = new PropertyChangeSupport(this);
         listOfAccount = new AccountList();
         listOfSessions = new TrainingSessionList();
-        listOfAccount.addAccount(new Account(new LoginCredentials("member", "member"), 1, "Lukasz", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
-        listOfAccount.addAccount(new Account(new LoginCredentials("member1", "member1"), 1, "Adam", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
-        listOfAccount.addAccount(new Account(new LoginCredentials("manager", "manager"), 2, "Diana", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
-        listOfAccount.addAccount(new Account(new LoginCredentials("trainer", "trainer"), 3, "Chris", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
-        listOfAccount.addAccount(new Account(new LoginCredentials("trainer", "trainer"), 3, "Gabriela", "luskk@vestas.com", "52683345", "Kollegievenget 1"));
-        listOfSessions.addSession(new TrainingSession("Yoga", LocalTime.of(9,0), 15, listOfAccount.getAccount(new LoginCredentials("trainer", "trainer")), LocalDate.now()));
-        listOfSessions.addSession(new TrainingSession("Fitness", LocalTime.of(10,0), 10, listOfAccount.getAccount(new LoginCredentials("manager", "manager")), LocalDate.now()));
+        listOfAccount.addAccount(new Account(1, "Adam", "@", "55", "sm", "member", "member"));
+        listOfAccount.addAccount(new Account(1, "Chris", "@", "55", "sm", "member1", "member1"));
+        listOfAccount.addAccount(new Account(2, "Diana", "@", "55", "sm", "manager", "manager"));
+        listOfAccount.addAccount(new Account(3, "Lukasz", "@", "55", "sm", "trainer", "trainer"));
+        listOfAccount.addAccount(new Account(3, "Gabriela", "@", "55", "sm", "trainer1", "trainer1"));
+        listOfSessions.addSession(new TrainingSession("Yoga", LocalTime.of(9,0), 15, listOfAccount.getAccount("trainer", "trainer"), LocalDate.now()));
+        listOfSessions.addSession(new TrainingSession("Fitness", LocalTime.of(10,0), 10, listOfAccount.getAccount("trainer1", "trainer1"), LocalDate.now()));
     }
 
     public TrainingSessionList getListOfSessions() {
         return listOfSessions;
     }
 
-    @Override public int verifyLogin(LoginCredentials loginCredentials)
+    @Override public Account verifyLogin(Account account)
     {
-        return listOfAccount.getAccountType(loginCredentials);
+        return listOfAccount.getAccount(account.getUsername(), account.getPassword());
     }
 
     @Override
@@ -54,9 +54,9 @@ public class BackEndModel implements BackEndModelManager
         support.firePropertyChange("SessionAdded", null, session);
     }
 
-    public void addParticipant(LoginCredentials loginCredentials, TrainingSession trainingSession)
+    public void addParticipant(Account account, TrainingSession trainingSession)
     {
-        TrainingSession temp = listOfSessions.addParticipant(loginCredentials, trainingSession);
+        TrainingSession temp = listOfSessions.addParticipant(account, trainingSession);
         support.firePropertyChange("ParticipantAdded", trainingSession, temp);
     }
     @Override
@@ -82,11 +82,30 @@ public class BackEndModel implements BackEndModelManager
     }
 
     @Override
-    public TrainingSessionList getListOfSessionsAvailableForMember(LoginCredentials loginCredentials) {
+    public TrainingSessionList getListOfSessionsAvailableForMember(Account account) {
         TrainingSessionList temp = new TrainingSessionList();
         for (int i = 0; i < listOfSessions.size(); i++)
         {
-            if (listOfSessions.getTrainingSessionByIndex(i).getAccount(loginCredentials) == null && listOfSessions.getTrainingSessionByIndex(i).getParticipants() != 0)
+            if (listOfSessions.getTrainingSessionByIndex(i).getAssignedMembers().size() == 0)
+            {
+                temp.addSession(listOfSessions.getTrainingSessionByIndex(i));
+            }
+            else {
+                if (!listOfSessions.getTrainingSessionByIndex(i).getAssignedMembers().contains(account)
+                        && listOfSessions.getTrainingSessionByIndex(i).getParticipants() != 0)
+                {
+                    temp.addSession(listOfSessions.getTrainingSessionByIndex(i));
+                }
+            }
+        }
+        return temp;
+    }
+    @Override
+    public TrainingSessionList getListOfSessionsBookedByMember(Account account) {
+        TrainingSessionList temp = new TrainingSessionList();
+        for (int i = 0; i < listOfSessions.size(); i++)
+        {
+            if (listOfSessions.getTrainingSessionByIndex(i).getAssignedMembers().contains(account))
             {
                 temp.addSession(listOfSessions.getTrainingSessionByIndex(i));
             }

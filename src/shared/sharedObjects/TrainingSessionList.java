@@ -61,15 +61,13 @@ public class TrainingSessionList implements Serializable {
         }
         return null;
     }
-    public TrainingSession addParticipant(LoginCredentials loginCredentials, TrainingSession trainingSession)
+    public TrainingSession addParticipant(Account account, TrainingSession trainingSession)
     {
         for (TrainingSession item : sessions)
         {
             if (item.equals(trainingSession))
             {
-                sessions.remove(item);
-                item.addMember(loginCredentials);
-                sessions.add(item);
+                item.addMember(account);
                 return item;
             }
         }

@@ -1,6 +1,6 @@
 package client.network;
 
-import shared.sharedObjects.LoginCredentials;
+import shared.sharedObjects.Account;
 import shared.sharedObjects.TrainingSession;
 import shared.sharedObjects.TrainingSessionList;
 import shared.utils.Subject;
@@ -9,9 +9,9 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface RMIClient extends Subject {
-    int login(LoginCredentials loginCredentials);
+    Account login(Account account);
 
-    LoginCredentials getLoginCredentials();
+    Account getLoginCredentials();
     void startClient();
     void addSession(TrainingSession session);
     TrainingSessionList getSessions();
@@ -19,7 +19,8 @@ public interface RMIClient extends Subject {
 
     boolean verifyAvailabilityOfSession(TrainingSession session) throws RemoteException;
 
-    void addParticipant(LoginCredentials loginCredentials, TrainingSession session) throws RemoteException;
+    void addParticipant(Account account, TrainingSession session) throws RemoteException;
 
-    TrainingSessionList getAvailableSessionsForMember(LoginCredentials loginCredentials) throws RemoteException;
+    TrainingSessionList getAvailableSessionsForMember(Account account) throws RemoteException;
+    TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException;
 }

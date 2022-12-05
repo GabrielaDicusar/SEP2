@@ -16,21 +16,21 @@ public class AccountList {
     public void removeAccount(Account a){
         //
     }
-    public Account getAccount(LoginCredentials loginCredentials)
+    public Account getAccount(String username, String password)
     {
-        for (Account account : accounts)
+        for (Account item : accounts)
         {
-            if (account.getLoginCredentials().equals(loginCredentials))
+            if (item.getUsername().equals(username) && item.getPassword().equals(password))
             {
-                return account;
+                return item;
             }
         }
         return null;
     }
 
-    public int getAccountType(LoginCredentials lc){
+    public int getAccountType(Account account){
         for (int i = 0; i < accounts.size(); i++) {
-            if (accounts.get(i).getLoginCredentials().equals(lc)){
+            if (accounts.get(i).equals(account)){
                 return accounts.get(i).getAccountType();
             }
         }

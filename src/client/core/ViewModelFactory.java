@@ -6,6 +6,7 @@ import client.views.memberView.BookingViewModel;
 import client.views.loginView.LoginViewModel;
 import client.views.managerView.ManagerViewModel;
 import client.views.memberView.availableToBookView.AvailableToBookViewModel;
+import client.views.memberView.bookedSessionsView.BookedSessionsViewModel;
 import client.views.trainerView.TrainerViewModel;
 
 public class ViewModelFactory {
@@ -18,6 +19,7 @@ public class ViewModelFactory {
     private CreateSessionViewModel createViewModel;
     private EditViewModel editViewModel;
     private AvailableToBookViewModel availableToBookViewModel;
+    private BookedSessionsViewModel bookedSessionsViewModel;
 
     public ViewModelFactory(ModelFactory modelFactory) {
         this.modelFactory = modelFactory;
@@ -69,6 +71,12 @@ public class ViewModelFactory {
             availableToBookViewModel = new AvailableToBookViewModel(modelFactory.getFrontEndModelManager());
         }
         return availableToBookViewModel;
+    }
+    public BookedSessionsViewModel getBookedSessionsViewModel() {
+        if (bookedSessionsViewModel == null){
+            bookedSessionsViewModel = new BookedSessionsViewModel(modelFactory.getFrontEndModelManager());
+        }
+        return bookedSessionsViewModel;
     }
     public ModelFactory getModelFactory() {
         return modelFactory;

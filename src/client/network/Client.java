@@ -2,7 +2,7 @@ package client.network;
 
 import shared.networking.ClientCallBack;
 import shared.networking.RMIServer;
-import shared.sharedObjects.LoginCredentials;
+import shared.sharedObjects.Account;
 import shared.sharedObjects.TrainingSession;
 import shared.sharedObjects.TrainingSessionList;
 
@@ -18,10 +18,10 @@ import java.util.ArrayList;
 public class Client implements RMIClient, ClientCallBack {
     private RMIServer server;
     private PropertyChangeSupport support;
-    private LoginCredentials loginCredentials;
+    private Account account;
 
     public Client(){
-        loginCredentials = new LoginCredentials("", "");
+        account = new Account("temp", "temp");
         support = new PropertyChangeSupport(this);
     }
 
@@ -74,28 +74,32 @@ public class Client implements RMIClient, ClientCallBack {
     }
 
     @Override
-    public void addParticipant(LoginCredentials loginCredentials, TrainingSession session) throws RemoteException{
-        server.addParticipant(loginCredentials, session);
+    public void addParticipant(Account account, TrainingSession session) throws RemoteException{
+        server.addParticipant(account, session);
     }
 
     @Override
-    public TrainingSessionList getAvailableSessionsForMember(LoginCredentials loginCredentials) throws RemoteException {
-        return server.getAvailableSessionsForMember(loginCredentials);
+    public TrainingSessionList getAvailableSessionsForMember(Account account) throws RemoteException {
+        return server.getAvailableSessionsForMember(account);
     }
 
     @Override
-    public int login(LoginCredentials loginCredentials) {
+    public Account login(Account account) {
         try {
-            System.out.println("4 Member got loginCredentials from front model, using server to verify " + loginCredentials.toString());
-            this.loginCredentials = loginCredentials;
-            return server.verifyLogin(loginCredentials);
+            System.out.println("4 Member got loginCredentials from front model, using server to verify " + account.toString());
+            this.account = account;
+            return server.verifyLogin(account);
         } catch (RemoteException e) {
             throw new RuntimeException("Could not connect to the server :(");
         }
     }
+    public TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException
+    {
+        return server.getListOfSessionsBookedByMember(account);
+    }
 
-    public LoginCredentials getLoginCredentials() {
-        return loginCredentials;
+    public Account getLoginCredentials() {
+        return account;
     }
 
     @Override

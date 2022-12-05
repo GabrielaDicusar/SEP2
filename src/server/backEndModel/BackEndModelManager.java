@@ -1,6 +1,6 @@
 package server.backEndModel;
 
-import shared.sharedObjects.LoginCredentials;
+import shared.sharedObjects.Account;
 import shared.sharedObjects.TrainingSession;
 import shared.sharedObjects.TrainingSessionList;
 import shared.utils.Subject;
@@ -15,11 +15,12 @@ import java.util.ArrayList;
 
 public interface BackEndModelManager extends Subject
 {
-    int verifyLogin(LoginCredentials loginCredentials);
+    Account verifyLogin(Account account);
     void addSession(TrainingSession session);
     ArrayList getTrainersList();
 
     boolean verifyAvailabilityOfSession(TrainingSession session);
 
-    TrainingSessionList getListOfSessionsAvailableForMember(LoginCredentials loginCredentials);
+    TrainingSessionList getListOfSessionsAvailableForMember(Account account);
+    TrainingSessionList getListOfSessionsBookedByMember(Account account);
 }

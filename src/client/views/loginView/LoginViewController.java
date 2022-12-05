@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import shared.sharedObjects.LoginCredentials;
+import shared.sharedObjects.Account;
 
 public class LoginViewController implements ViewController {
 
@@ -33,21 +33,20 @@ public class LoginViewController implements ViewController {
     }
 
     public void onbtnLogin() {
-        LoginCredentials loginCredentials = new LoginCredentials(txtUsername.getText(), txtPassword.getText());
-        System.out.println("1 Login controller created loginCredentials to pass to login view model " + loginCredentials);
-        if (loginViewModel.verifyLogin(loginCredentials) == 1) {
-            System.out.println(loginViewModel.verifyLogin(loginCredentials));
+        Account account = new Account(txtUsername.getText(), txtPassword.getText());
+        System.out.println("1 Login controller created loginCredentials to pass to login view model " + account);
+        if (loginViewModel.verifyLogin(account).getAccountType() == 1) {
+            System.out.println(loginViewModel.verifyLogin(account));
             viewHandler.openBookingView();
         }
-        else if (loginViewModel.verifyLogin(loginCredentials) == 2) {
-            System.out.println(loginViewModel.verifyLogin(loginCredentials));
+        else if (loginViewModel.verifyLogin(account).getAccountType() == 2) {
+            System.out.println(loginViewModel.verifyLogin(account));
             viewHandler.openManagerView();
         }
-        else if (loginViewModel.verifyLogin(loginCredentials) == 3)
+        else if (loginViewModel.verifyLogin(account).getAccountType() == 3)
         {
-            System.out.println(loginViewModel.verifyLogin(loginCredentials));
+            System.out.println(loginViewModel.verifyLogin(account));
             viewHandler.openTrainerView();
-
         }
         else {
             errorLabel.setText("Invalid username or password");

@@ -1,6 +1,6 @@
 package shared.networking;
 
-import shared.sharedObjects.LoginCredentials;
+import shared.sharedObjects.Account;
 import shared.sharedObjects.TrainingSession;
 import shared.sharedObjects.TrainingSessionList;
 
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 
 public interface RMIServer extends Remote {
-    int verifyLogin(LoginCredentials loginCredentials) throws RemoteException;
+    Account verifyLogin(Account account) throws RemoteException;
     void addSession(TrainingSession session) throws RemoteException;
     void registerCallback(ClientCallBack ccb) throws RemoteException;
     TrainingSessionList getSessions() throws RemoteException;
@@ -24,7 +24,8 @@ public interface RMIServer extends Remote {
 
     boolean verifyAvailabilityOfSession(TrainingSession session) throws RemoteException;
 
-    void addParticipant(LoginCredentials loginCredentials, TrainingSession session) throws RemoteException;
+    void addParticipant(Account account, TrainingSession session) throws RemoteException;
 
-    TrainingSessionList getAvailableSessionsForMember(LoginCredentials loginCredentials) throws RemoteException;
+    TrainingSessionList getAvailableSessionsForMember(Account account) throws RemoteException;
+    TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException;
 }

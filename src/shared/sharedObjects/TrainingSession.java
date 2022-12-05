@@ -15,7 +15,7 @@ public class TrainingSession implements Serializable {
     private LocalTime time;
     private int participants;
     private Account trainer;
-    private List<LoginCredentials> assignedMembers;
+    private List<Account> assignedMembers;
     private LocalDate date;
 
     /**
@@ -32,43 +32,48 @@ public class TrainingSession implements Serializable {
         assignedMembers = new ArrayList<>();
         this.date = date;
     }
-    public void addMember(LoginCredentials loginCredentials)
+    public void addMember(Account account)
     {
-        if (assignedMembers.size() != 0)
+        if (assignedMembers.size() == 0)
         {
-            for (LoginCredentials item : assignedMembers)
+            assignedMembers.add(account);
+            participants--;
+        }
+        else
+        {
+            for (int i = 0; i < assignedMembers.size(); i++)
             {
-                if (!item.equals(loginCredentials) || assignedMembers.size() == 0)
+                if (!assignedMembers.get(i).equals(account))
                 {
                     if (participants != 0)
                     {
-                        assignedMembers.add(loginCredentials);
+                        assignedMembers.add(account);
                         participants--;
+                        break;
                     }
                 }
             }
         }
-        else
-        {
-            assignedMembers.add(loginCredentials);
-            participants--;
-        }
 
     }
 
-    public List<LoginCredentials> getAssignedMembers() {
+    public List<Account> getAssignedMembers() {
         return assignedMembers;
     }
-    public LoginCredentials getAccount(LoginCredentials loginCredentials)
+    public Account getAccount(Account account)
     {
-        for (LoginCredentials account : assignedMembers)
+        for (Account temp : assignedMembers)
         {
-            if (account.equals(loginCredentials))
+            if (temp.equals(account))
             {
-                return account;
+                return temp;
             }
         }
         return null;
+    }
+    public Account getAccountById(int i)
+    {
+        return assignedMembers.get(i);
     }
 
     /**

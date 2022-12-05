@@ -14,6 +14,7 @@ import shared.sharedObjects.TrainingSession;
 public class BookingViewController implements ViewController {
 
     public Button btnBookSession;
+    public Button bookedSessionsBtn;
     private ViewHandler viewHandler;
     private BookingViewModel bookingViewModel;
 
@@ -26,6 +27,10 @@ public class BookingViewController implements ViewController {
        if (actionEvent.getSource() == btnBookSession)
        {
            viewHandler.openAvailableToBookView();
+       }
+       else if (actionEvent.getSource() == bookedSessionsBtn)
+       {
+           viewHandler.openBookedSessionsView();
        }
     }
 }

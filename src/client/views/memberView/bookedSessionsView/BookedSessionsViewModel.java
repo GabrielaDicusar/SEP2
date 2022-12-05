@@ -1,28 +1,32 @@
-package client.views.memberView.availableToBookView;
+package client.views.memberView.bookedSessionsView;
 
 import client.frontEndModel.FrontEndModelManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import shared.sharedObjects.Account;
 import shared.sharedObjects.TrainingSession;
 import shared.sharedObjects.TrainingSessionList;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.rmi.RemoteException;
 
-public class AvailableToBookViewModel implements PropertyChangeListener {
+public class BookedSessionsViewModel implements PropertyChangeListener {
     private FrontEndModelManager modelManager;
     private ObservableList<TrainingSession> sessions;
 
-    public AvailableToBookViewModel(FrontEndModelManager frontEndModelManager) {
+    public BookedSessionsViewModel(FrontEndModelManager frontEndModelManager)
+    {
         modelManager = frontEndModelManager;
-        modelManager.getClient().addListener("SessionAdded", this);
         modelManager.getClient().addListener("ParticipantAdded", this);
     }
-
     public void loadSessions() {
-        TrainingSessionList logList = modelManager.getAvailableSessionsForMember(modelManager.getClient().getLoginCredentials());
-        sessions = FXCollections.observableArrayList(logList.getTrainingSessions());
+        TrainingSessionList logList = null;
+        try {
+            logList = modelManager.getListOfSessionsBookedByMember(modelManager.getClient().getLoginCredentials());
+            sessions = FXCollections.observableArrayList(logList.getTrainingSessions());
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public ObservableList<TrainingSession> getSessions() {
@@ -32,6 +36,7 @@ public class AvailableToBookViewModel implements PropertyChangeListener {
     public FrontEndModelManager getModelManager() {
         return modelManager;
     }
+
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
@@ -46,13 +51,5 @@ public class AvailableToBookViewModel implements PropertyChangeListener {
             }
             sessions.remove((TrainingSession) evt.getOldValue());
         }
-        else if (evt.getPropertyName().equals("SessionAdded"))
-        {
-            sessions.add((TrainingSession) evt.getNewValue());
-        }
-    }
-
-    public void addParticipant(Account account, TrainingSession session) {
-        modelManager.addParticipant(account, session);
     }
 }
