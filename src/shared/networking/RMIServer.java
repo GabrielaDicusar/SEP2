@@ -22,7 +22,7 @@ public interface RMIServer extends Remote {
     void registerCallback(ClientCallBack ccb) throws RemoteException;
     TrainingSessionList getSessions() throws RemoteException;
     ArrayList getTrainers() throws RemoteException;
-
+    void createAccount(Account account) throws RemoteException;
     boolean verifyAvailabilityOfSession(TrainingSession session) throws RemoteException;
 
     void addParticipant(Account account, TrainingSession session) throws RemoteException;

@@ -1,7 +1,7 @@
 package server.mediator.AccountDB;
 
 import server.mediator.ConnectionDB;
-
+import shared.sharedObjects.Account;
 
 import java.sql.*;
 /**
@@ -23,32 +23,32 @@ public class AccountDAOImpl implements AccountDAO
     }
   }
 
-  @Override public String addAccount(String firstname, String lastname, String email, String phonenumber, int account_type, String username, String password)
+  @Override public void addAccount(Account account)
   {
     try (Connection connection = ConnectionDB.getConnection()) {
       PreparedStatement statement = connection.prepareStatement("SELECT * from sep2schema.account where username=?;");
-      statement.setString(1, username);
+      statement.setString(1, account.getUsername());
       ResultSet resultSet = statement.executeQuery();
       if (resultSet.next()) {
         connection.close();
-        return "Username is already taken";
+
       } else {
         PreparedStatement statement2 = connection.prepareStatement("INSERT INTO sep2schema.account(\"firstname\", \"lastname\", \"email\", \"phonenumber\", \"account_type\", \"username\", \"password\") VALUES (?,?,?,?,?,?,?);");
-        statement2.setString(1, firstname);
-        statement2.setString(2, lastname);
-        statement2.setString(3, email);
-        statement2.setString(4, phonenumber);
-        statement2.setInt(5, account_type);
-        statement2.setString(5, username);
-        statement2.setString(6, password);
+        statement2.setString(1, account.getFName());
+        statement2.setString(2, account.getLName());
+        statement2.setString(3, account.getEmail());
+        statement2.setString(4, account.getPhoneNumber());
+        statement2.setInt(5, 1);
+        statement2.setString(6, account.getUsername());
+        statement2.setString(7, account.getPassword());
         statement2.executeUpdate();
         connection.close();
 
-        return "User created successfully";
+
       }
     } catch (SQLException throwable) {
 
-      return throwable.getMessage();
+      throw new RuntimeException(throwable);
   }
 }
 

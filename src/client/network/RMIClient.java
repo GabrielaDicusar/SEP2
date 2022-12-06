@@ -15,6 +15,7 @@ public interface RMIClient extends Subject {
     Account getLoginCredentials();
     void startClient();
     void addSession(TrainingSession session);
+    void createAccount(Account account);
     TrainingSessionList getSessions();
     ArrayList getTrainers() throws RemoteException;
 

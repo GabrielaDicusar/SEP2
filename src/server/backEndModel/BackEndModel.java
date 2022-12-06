@@ -1,5 +1,7 @@
 package server.backEndModel;
 
+import server.mediator.AccountDB.AccountDAO;
+import server.mediator.AccountDB.AccountDAOImpl;
 import server.mediator.LoginDB.LoginDAO;
 import server.mediator.LoginDB.LoginDAOImpl;
 import server.mediator.TrainingSessionDAO.TrainingSessionDAO;
@@ -25,6 +27,7 @@ public class BackEndModel implements BackEndModelManager
     private AccountList listOfAccount;
     private LoginDAO loginDAO;
     private TrainingSessionDAO trainingSessionDAO;
+    private AccountDAO accountDAO;
 
     /**
      * BackEndModel constructor to instantiate support, listOfAccount, listOfSessions.
@@ -36,6 +39,7 @@ public class BackEndModel implements BackEndModelManager
         listOfSessions = new TrainingSessionList();
         loginDAO = new LoginDAOImpl();
         trainingSessionDAO = new TrainingSessionDAOImpl();
+        accountDAO=new AccountDAOImpl();
         listOfAccount.addAccount(new Account(3, "Chris", "Hunt", "@", "2323", "asda", "sada"));
         listOfSessions.addSession(new TrainingSession("Yoga", "12:00", 2, new Account(3, "Chris", "Hunt", "@", "2323", "asda", "sada"), LocalDate.now()));
     }
@@ -82,6 +86,11 @@ public class BackEndModel implements BackEndModelManager
             }
         }
         return trainers;
+    }
+
+    @Override public void createAccount(Account account)
+    {
+        accountDAO.addAccount(account);
     }
 
     @Override

@@ -1,10 +1,11 @@
 package server.mediator.AccountDB;
 
-
+import shared.sharedObjects.Account;
 
 public interface AccountDAO
 {
 
-  String addAccount(String firstname, String lastname, String email, String phonenumber, int account_type, String username, String password);
+
+  void addAccount(Account account);
 }
 

@@ -49,6 +49,15 @@ public class Client implements RMIClient, ClientCallBack {
         }
     }
 
+    @Override public void createAccount(Account account)
+    {
+        try {
+            server.createAccount(account);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public TrainingSessionList getSessions() {
         try {

@@ -16,7 +16,7 @@ public interface FrontEndModelManager extends Subject {
     RMIClient getClient();
     TrainingSessionList getSessions();
     ArrayList getTrainers() throws RemoteException;
-
+   void createAccount(Account account);
     boolean verifyAvailabilityOfSession(TrainingSession session) throws RemoteException;
 
     void addParticipant(Account account, TrainingSession session);
@@ -24,4 +24,6 @@ public interface FrontEndModelManager extends Subject {
     TrainingSessionList getAvailableSessionsForMember(Account account);
     TrainingSessionList getAvailableSessionsForMember(Account account, LocalDate date);
     TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException;
+
+
 }

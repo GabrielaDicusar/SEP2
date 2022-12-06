@@ -89,6 +89,11 @@ public class ServerImpl implements RMIServer {
     return modelManager.getTrainersList();
   }
 
+  @Override public void createAccount(Account account) throws RemoteException
+  {
+    modelManager.createAccount(account);
+  }
+
   @Override
   public boolean verifyAvailabilityOfSession(TrainingSession session) throws RemoteException{
     return modelManager.verifyAvailabilityOfSession(session);

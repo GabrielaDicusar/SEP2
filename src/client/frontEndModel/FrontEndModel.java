@@ -12,30 +12,38 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class FrontEndModel implements FrontEndModelManager {
+public class FrontEndModel implements FrontEndModelManager
+{
     private RMIClient client;
     private PropertyChangeSupport support;
 
-    public FrontEndModel(ClientFactory clientFactory) {
+    public FrontEndModel(ClientFactory clientFactory)
+    {
         client = clientFactory.getClient();
         support = new PropertyChangeSupport(this);
     }
 
-    public Account verifyLogin(Account account){
-        System.out.println("3 Front model got loginCredentials from view model, passing it to member " + account.toString());
+    public Account verifyLogin(Account account)
+    {
+        System.out.println(
+            "3 Front model got loginCredentials from view model, passing it to member "
+                + account.toString());
         return client.login(account);
     }
 
-    @Override
-    public TrainingSessionList getSessions() {
+    @Override public TrainingSessionList getSessions()
+    {
         return client.getSessions();
     }
 
-    @Override
-    public ArrayList getTrainers() throws RemoteException {
+    @Override public ArrayList getTrainers() throws RemoteException
+    {
         return client.getTrainers();
     }
 
+    @Override public void createAccount(Account account) {
+        client.createAccount(account);
+    }
     @Override
     public boolean verifyAvailabilityOfSession (TrainingSession session){
         try {

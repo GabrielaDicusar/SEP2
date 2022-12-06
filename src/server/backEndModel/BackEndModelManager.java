@@ -19,7 +19,7 @@ public interface BackEndModelManager extends Subject
     Account verifyLogin(Account account);
     void addSession(TrainingSession session);
     ArrayList getTrainersList();
-
+    void createAccount(Account account);
     boolean verifyAvailabilityOfSession(TrainingSession session);
 
     TrainingSessionList getListOfSessionsAvailableForMember(Account account);

@@ -48,6 +48,16 @@ public class Account implements Serializable {
         return username;
     }
 
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public String getPhoneNumber()
+    {
+        return phoneNumber;
+    }
+
     public String getPassword() {
         return password;
     }
