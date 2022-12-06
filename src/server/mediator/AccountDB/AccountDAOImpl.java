@@ -4,6 +4,8 @@ import server.mediator.ConnectionDB;
 import shared.sharedObjects.Account;
 
 import java.sql.*;
+import java.util.ArrayList;
+
 /**
  * @author dianasuzana
  * @version 1.0
@@ -51,5 +53,28 @@ public class AccountDAOImpl implements AccountDAO
       throw new RuntimeException(throwable);
   }
 }
+
+  @Override
+  public ArrayList<Account> getTrainers() {
+    ArrayList<Account> temp = new ArrayList<>();
+    try (Connection connection = ConnectionDB.getConnection()) {
+      PreparedStatement statement = connection.prepareStatement("SELECT * from account where account_type = 3;");
+      ResultSet resultSet = statement.executeQuery();
+      while (resultSet.next())
+      {
+        String firstname = resultSet.getString("firstname");
+        String lastname = resultSet.getString("lastname");
+        String email = resultSet.getString("email");
+        String phonenumber = resultSet.getString("phonenumber");
+        String username = resultSet.getString("username");
+        String password = resultSet.getString("password");
+        temp.add(new Account(3, firstname, lastname, email, phonenumber, username, password));
+      }
+      return temp;
+
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
 
 }

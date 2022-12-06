@@ -83,14 +83,7 @@ public class BackEndModel implements BackEndModelManager
     }
     @Override
     public ArrayList getTrainersList(){
-        ArrayList trainers = new ArrayList();
-
-        for (int i = 0; i < listOfAccount.size(); i++) {
-            if(listOfAccount.getAccount(i).getAccountType() == 3){
-                trainers.add(listOfAccount.getAccount(i));
-            }
-        }
-        return trainers;
+        return accountDAO.getTrainers();
     }
 
     @Override public void createAccount(Account account)
