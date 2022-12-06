@@ -17,7 +17,7 @@ public class CreateSessionViewModel implements PropertyChangeListener
 {
   private FrontEndModelManager frontEndModelManager;
   private ObservableList<Account> trainers;
-  private ObservableList<LocalTime> timeList;
+  private ObservableList<String> timeList;
 
   public CreateSessionViewModel(FrontEndModelManager frontEndModelManager) {
     this.frontEndModelManager = frontEndModelManager;
@@ -37,23 +37,20 @@ public class CreateSessionViewModel implements PropertyChangeListener
   }
 
   public void loadTimeList(){
-    ArrayList<LocalTime> time = new ArrayList<>();
-    time.add(LocalTime.of(8,0));
-    time.add(LocalTime.of(9,0));
-    time.add(LocalTime.of(10,0));
-    time.add(LocalTime.of(11,0));
-    time.add(LocalTime.of(12,0));
-    time.add(LocalTime.of(13,0));
-    time.add(LocalTime.of(14,0));
-    time.add(LocalTime.of(15,0));
-    time.add(LocalTime.of(16,0));
-    time.add(LocalTime.of(17,0));
-    time.add(LocalTime.of(18,0));
-    time.add(LocalTime.of(19,0));
+    ArrayList<String> time = new ArrayList<>();
+    time.add("8.00");
+    time.add("9.00");
+    time.add("10.00");
+    time.add("11.00");
+    time.add("12.00");
+    time.add("13.00");
+    time.add("14.00");
+    time.add("15.00");
+    time.add("16.00");
     timeList = FXCollections.observableArrayList(time);
   }
 
-  public ObservableList<LocalTime> getTimeSlots(){
+  public ObservableList<String> getTimeSlots(){
     return timeList;
   }
 

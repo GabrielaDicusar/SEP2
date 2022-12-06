@@ -92,8 +92,7 @@ public class Client implements RMIClient, ClientCallBack {
     public Account login(Account account) {
         try {
             System.out.println("4 Member got loginCredentials from front model, using server to verify " + account.toString());
-            this.account = account;
-            return server.verifyLogin(account);
+            return this.account = server.verifyLogin(account);
         } catch (RemoteException e) {
             throw new RuntimeException("Could not connect to the server :(");
         }

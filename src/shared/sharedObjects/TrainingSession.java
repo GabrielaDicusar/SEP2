@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class TrainingSession implements Serializable {
     private String type;
-    private LocalTime time;
+    private String time;
     private int participants;
     private Account trainer;
     private List<Account> assignedMembers;
@@ -24,7 +24,7 @@ public class TrainingSession implements Serializable {
      * @param time
      * @param participants
      */
-    public TrainingSession(String type, LocalTime time, int participants, Account trainer, LocalDate date) {
+    public TrainingSession(String type, String time, int participants, Account trainer, LocalDate date) {
         this.type = type;
         this.time = time;
         this.participants = participants;
@@ -99,7 +99,7 @@ public class TrainingSession implements Serializable {
      */
 
     public String getTime() {
-        return time.getHour() + ":" + time.getMinute();
+        return time;
     }
 
     public LocalDate getDate(){
@@ -111,7 +111,7 @@ public class TrainingSession implements Serializable {
      * @param time
      */
 
-    public void setTime(LocalTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
@@ -134,8 +134,15 @@ public class TrainingSession implements Serializable {
         this.participants = participants;
     }
 
+    public String getTrainerUsername() {
+        return trainer.getUsername();
+    }
+    public String getTrainerPassword() {
+        return trainer.getPassword();
+    }
+
     public String getTrainer() {
-        return trainer.getFName();
+        return trainer.getFName() + " " + trainer.getLName();
     }
 
     public void setTrainer(Account trainer) {

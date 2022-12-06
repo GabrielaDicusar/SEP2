@@ -2,6 +2,8 @@ package server.backEndModel;
 
 import server.mediator.LoginDB.LoginDAO;
 import server.mediator.LoginDB.LoginDAOImpl;
+import server.mediator.TrainingSessionDAO.TrainingSessionDAO;
+import server.mediator.TrainingSessionDAO.TrainingSessionDAOImpl;
 import shared.sharedObjects.*;
 
 import java.beans.PropertyChangeListener;
@@ -22,6 +24,7 @@ public class BackEndModel implements BackEndModelManager
     private TrainingSessionList listOfSessions;
     private AccountList listOfAccount;
     private LoginDAO loginDAO;
+    private TrainingSessionDAO trainingSessionDAO;
 
     /**
      * BackEndModel constructor to instantiate support, listOfAccount, listOfSessions.
@@ -32,8 +35,9 @@ public class BackEndModel implements BackEndModelManager
         listOfAccount = new AccountList();
         listOfSessions = new TrainingSessionList();
         loginDAO = new LoginDAOImpl();
+        trainingSessionDAO = new TrainingSessionDAOImpl();
         listOfAccount.addAccount(new Account(3, "Chris", "Hunt", "@", "2323", "asda", "sada"));
-        listOfSessions.addSession(new TrainingSession("Yoga", LocalTime.now(), 2, new Account(3, "Chris", "Hunt", "@", "2323", "asda", "sada"), LocalDate.now()));
+        listOfSessions.addSession(new TrainingSession("Yoga", "12:00", 2, new Account(3, "Chris", "Hunt", "@", "2323", "asda", "sada"), LocalDate.now()));
     }
 
     public TrainingSessionList getListOfSessions() {
@@ -54,9 +58,13 @@ public class BackEndModel implements BackEndModelManager
 
     @Override
     public void addSession(TrainingSession session) {
-        listOfSessions.addSession(session);
-        System.out.println(listOfSessions.getTrainingSessions().size());
-        support.firePropertyChange("SessionAdded", null, session);
+        try {
+            trainingSessionDAO.create(session);
+            System.out.println(listOfSessions.getTrainingSessions().size());
+            support.firePropertyChange("SessionAdded", null, session);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void addParticipant(Account account, TrainingSession trainingSession)
@@ -129,13 +137,10 @@ public class BackEndModel implements BackEndModelManager
     }
     @Override
     public TrainingSessionList getListOfSessionsBookedByMember(Account account) {
-        TrainingSessionList temp = new TrainingSessionList();
-        for (int i = 0; i < listOfSessions.size(); i++)
+        TrainingSessionList temp = trainingSessionDAO.getListOfSessionsBookedByMember(account);
+        for (int i = 0; i < temp.size(); i++)
         {
-            if (listOfSessions.getTrainingSessionByIndex(i).getAssignedMembers().contains(account))
-            {
-                temp.addSession(listOfSessions.getTrainingSessionByIndex(i));
-            }
+            System.out.println(temp.getTrainingSessions().get(i));
         }
         return temp;
     }

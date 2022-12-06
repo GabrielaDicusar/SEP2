@@ -34,7 +34,7 @@ public class CreateSessionController implements ViewController
   public void onSaveButton(){
    if(textTypeField.getText() != null && datePicker1.getValue() != null && btnCapacityField.getText() != null && comboTrainer.getSelectionModel().getSelectedItem() != null && comboTime.getSelectionModel().getSelectedItem() != null) {
     System.out.println("fields are not empty");
-    TrainingSession session = new TrainingSession(textTypeField.getText(), (LocalTime) comboTime.getSelectionModel().getSelectedItem(), (Integer) Integer.valueOf(btnCapacityField.getText()), (Account) comboTrainer.getSelectionModel().getSelectedItem(), datePicker1.getValue());
+    TrainingSession session = new TrainingSession(textTypeField.getText(), (String) comboTime.getSelectionModel().getSelectedItem(), (Integer) Integer.valueOf(btnCapacityField.getText()), (Account) comboTrainer.getSelectionModel().getSelectedItem(), datePicker1.getValue());
     if (viewModel.verifyAvailabilityOfSession(session)) {
      viewModel.addSession(session);
      textTypeField.clear();
