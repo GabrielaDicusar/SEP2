@@ -26,14 +26,14 @@ public class AccountDAOImpl implements AccountDAO
   @Override public void addAccount(Account account)
   {
     try (Connection connection = ConnectionDB.getConnection()) {
-      PreparedStatement statement = connection.prepareStatement("SELECT * from sep2schema.account where username=?;");
+      PreparedStatement statement = connection.prepareStatement("SELECT * from account where username=?;");
       statement.setString(1, account.getUsername());
       ResultSet resultSet = statement.executeQuery();
       if (resultSet.next()) {
         connection.close();
 
       } else {
-        PreparedStatement statement2 = connection.prepareStatement("INSERT INTO sep2schema.account(\"firstname\", \"lastname\", \"email\", \"phonenumber\", \"account_type\", \"username\", \"password\") VALUES (?,?,?,?,?,?,?);");
+        PreparedStatement statement2 = connection.prepareStatement("INSERT INTO account(\"firstname\", \"lastname\", \"email\", \"phonenumber\", \"account_type\", \"username\", \"password\") VALUES (?,?,?,?,?,?,?);");
         statement2.setString(1, account.getFName());
         statement2.setString(2, account.getLName());
         statement2.setString(3, account.getEmail());

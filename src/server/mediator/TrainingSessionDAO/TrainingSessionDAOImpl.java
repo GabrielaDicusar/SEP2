@@ -95,4 +95,43 @@ public class TrainingSessionDAOImpl implements TrainingSessionDAO {
         }
         return temp;
     }
+
+    @Override
+    public TrainingSessionList getListOfAllSessions() {
+        TrainingSessionList temp = new TrainingSessionList();
+        try (Connection connection = ConnectionDB.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from trainingsession");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            String type;
+            String time;
+            int participants = 0;
+            Account trainer;
+            LocalDate date;
+
+            while (resultSet.next())
+            {
+                type = resultSet.getString("type");
+                time = resultSet.getString("time");
+                participants = resultSet.getInt("capacity");
+                date = LocalDate.parse(resultSet.getString("date"));
+                PreparedStatement statement2 = connection.prepareStatement("Select * from account where account_id = ?;");
+                statement2.setInt(1, resultSet.getInt("trainer_id"));
+                ResultSet resultSet1 = statement2.executeQuery();
+                if (resultSet1.next())
+                {
+                    trainer = new Account(resultSet1.getInt("account_type"), resultSet1.getString("firstname"), resultSet1.getString("lastname"), resultSet1.getString("email"), resultSet1.getString("phonenumber"), resultSet1.getString("username"), resultSet1.getString("password"));
+                    temp.addSession(new TrainingSession(type, time, participants, trainer, date));
+                }
+                else
+                {
+                    connection.close();
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return temp;
+    }
 }
