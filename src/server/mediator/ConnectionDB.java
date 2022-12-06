@@ -12,7 +12,7 @@ public class ConnectionDB {
   public static Connection getConnection() throws SQLException {
 
 
-    return DriverManager.getConnection("jdbc:postgresql://localhost:5433/postgres", "postgres","soaresoare" );
+    return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres","JasperMond@y1" );
 
   }
 

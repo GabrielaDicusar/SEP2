@@ -15,7 +15,7 @@
         <DropShadow />
     </effect>
     <ListView layoutX="189.0" layoutY="83.0" prefHeight="270.0" prefWidth="384.0" />
-    <DatePicker fx:id="datePicker" layoutX="14.0" layoutY="83.0" prefHeight="26.0" prefWidth="151.0" promptText="Pick a date" />
+    <DatePicker fx:id="datePicker" layoutX="14.0" layoutY="83.0" onAction="#onDatePicker" prefHeight="26.0" prefWidth="151.0" promptText="Pick a date" />
     <TableView fx:id="sessionTableView" layoutX="189.0" layoutY="83.0" prefHeight="270.0" prefWidth="384.0">
         <columns>
             <TableColumn fx:id="timeColumn" prefWidth="75.0" text="Time" />

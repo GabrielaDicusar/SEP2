@@ -32,6 +32,8 @@ public class BackEndModel implements BackEndModelManager
         listOfAccount = new AccountList();
         listOfSessions = new TrainingSessionList();
         loginDAO = new LoginDAOImpl();
+        listOfAccount.addAccount(new Account(3, "Chris", "Hunt", "@", "2323", "asda", "sada"));
+        listOfSessions.addSession(new TrainingSession("Yoga", LocalTime.now(), 2, new Account(3, "Chris", "Hunt", "@", "2323", "asda", "sada"), LocalDate.now()));
     }
 
     public TrainingSessionList getListOfSessions() {
@@ -104,6 +106,28 @@ public class BackEndModel implements BackEndModelManager
         return temp;
     }
     @Override
+    public TrainingSessionList getListOfSessionsAvailableForMember(Account account, LocalDate date) {
+        TrainingSessionList temp = new TrainingSessionList();
+        for (int i = 0; i < listOfSessions.size(); i++)
+        {
+            if (listOfSessions.getTrainingSessionByIndex(i).getDate().equals(date))
+            {
+                if (listOfSessions.getTrainingSessionByIndex(i).getAssignedMembers().size() == 0)
+                {
+                    temp.addSession(listOfSessions.getTrainingSessionByIndex(i));
+                }
+                else {
+                    if (!listOfSessions.getTrainingSessionByIndex(i).getAssignedMembers().contains(account)
+                            && listOfSessions.getTrainingSessionByIndex(i).getParticipants() != 0)
+                    {
+                        temp.addSession(listOfSessions.getTrainingSessionByIndex(i));
+                    }
+                }
+            }
+        }
+        return temp;
+    }
+    @Override
     public TrainingSessionList getListOfSessionsBookedByMember(Account account) {
         TrainingSessionList temp = new TrainingSessionList();
         for (int i = 0; i < listOfSessions.size(); i++)
@@ -116,14 +140,12 @@ public class BackEndModel implements BackEndModelManager
         return temp;
     }
 
-    @Override public void addListener(String eventName,
-        PropertyChangeListener listener)
+    @Override public void addListener(String eventName, PropertyChangeListener listener)
     {
         support.addPropertyChangeListener(eventName, listener);
     }
 
-    @Override public void removeListener(String eventName,
-        PropertyChangeListener listener)
+    @Override public void removeListener(String eventName, PropertyChangeListener listener)
     {
         support.removePropertyChangeListener(eventName, listener);
     }

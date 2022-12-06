@@ -9,6 +9,7 @@ import shared.sharedObjects.TrainingSessionList;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class FrontEndModel implements FrontEndModelManager {
@@ -57,6 +58,14 @@ public class FrontEndModel implements FrontEndModelManager {
     public TrainingSessionList getAvailableSessionsForMember(Account account) {
         try {
             return client.getAvailableSessionsForMember(account);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Override
+    public TrainingSessionList getAvailableSessionsForMember(Account account, LocalDate date) {
+        try {
+            return client.getAvailableSessionsForMember(account, date);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }

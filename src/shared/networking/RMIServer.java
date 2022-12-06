@@ -6,6 +6,7 @@ import shared.sharedObjects.TrainingSessionList;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -27,5 +28,6 @@ public interface RMIServer extends Remote {
     void addParticipant(Account account, TrainingSession session) throws RemoteException;
 
     TrainingSessionList getAvailableSessionsForMember(Account account) throws RemoteException;
+    TrainingSessionList getAvailableSessionsForMember(Account account, LocalDate date) throws RemoteException;
     TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException;
 }

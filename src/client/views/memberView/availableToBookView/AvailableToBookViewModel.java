@@ -1,6 +1,8 @@
 package client.views.memberView.availableToBookView;
 
 import client.frontEndModel.FrontEndModelManager;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.sharedObjects.Account;
@@ -9,20 +11,31 @@ import shared.sharedObjects.TrainingSessionList;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class AvailableToBookViewModel implements PropertyChangeListener {
     private FrontEndModelManager modelManager;
     private ObservableList<TrainingSession> sessions;
+    private StringProperty date;
+    private DateTimeFormatter dateTimeFormatter;
 
     public AvailableToBookViewModel(FrontEndModelManager frontEndModelManager) {
         modelManager = frontEndModelManager;
         modelManager.getClient().addListener("SessionAdded", this);
         modelManager.getClient().addListener("ParticipantAdded", this);
+        date = new SimpleStringProperty();
+        dateTimeFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+    }
+
+    public StringProperty getDate() {
+        return date;
     }
 
     public void loadSessions() {
-        TrainingSessionList logList = modelManager.getAvailableSessionsForMember(modelManager.getClient().getLoginCredentials());
-        sessions = FXCollections.observableArrayList(logList.getTrainingSessions());
+        System.out.println(date.get());
+            TrainingSessionList logList = modelManager.getAvailableSessionsForMember(modelManager.getClient().getLoginCredentials(), LocalDate.parse(date.get(), dateTimeFormatter));
+            sessions = FXCollections.observableArrayList(logList.getTrainingSessions());
     }
 
     public ObservableList<TrainingSession> getSessions() {

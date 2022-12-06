@@ -7,6 +7,7 @@ import shared.sharedObjects.TrainingSessionList;
 import shared.utils.Subject;
 
 import java.rmi.RemoteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface FrontEndModelManager extends Subject {
@@ -21,5 +22,6 @@ public interface FrontEndModelManager extends Subject {
     void addParticipant(Account account, TrainingSession session);
 
     TrainingSessionList getAvailableSessionsForMember(Account account);
+    TrainingSessionList getAvailableSessionsForMember(Account account, LocalDate date);
     TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException;
 }

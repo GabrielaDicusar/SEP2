@@ -98,8 +98,8 @@ public class TrainingSession implements Serializable {
      * @return date
      */
 
-    public LocalTime getTime() {
-        return time;
+    public String getTime() {
+        return time.getHour() + ":" + time.getMinute();
     }
 
     public LocalDate getDate(){

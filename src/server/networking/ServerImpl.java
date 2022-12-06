@@ -12,6 +12,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -102,9 +103,12 @@ public class ServerImpl implements RMIServer {
   public TrainingSessionList getAvailableSessionsForMember(Account account) throws RemoteException {
     return modelManager.getListOfSessionsAvailableForMember(account);
   }
+  public TrainingSessionList getAvailableSessionsForMember(Account account, LocalDate date) throws RemoteException {
+    return modelManager.getListOfSessionsAvailableForMember(account, date);
+  }
   @Override
   public TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException {
-    return modelManager.getListOfSessionsAvailableForMember(account);
+    return modelManager.getListOfSessionsBookedByMember(account);
   }
 
 }

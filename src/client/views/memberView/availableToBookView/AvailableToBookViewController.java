@@ -26,12 +26,12 @@ public class AvailableToBookViewController implements ViewController {
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) {
         this.viewHandler = viewHandler;
         availableToBookViewModel = viewModelFactory.getAvailableToBookViewModel();
-        reset();
 
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         trainerColumn.setCellValueFactory(new PropertyValueFactory<>("trainer"));
         participantsColumn.setCellValueFactory(new PropertyValueFactory<>("participants"));
+        datePicker.getEditor().textProperty().bindBidirectional(availableToBookViewModel.getDate());
     }
     public void reset()
     {
@@ -42,6 +42,10 @@ public class AvailableToBookViewController implements ViewController {
     public void onButtonPressed(ActionEvent actionEvent) {
         availableToBookViewModel.addParticipant(availableToBookViewModel.getModelManager().getClient().getLoginCredentials(), sessionTableView.getSelectionModel().getSelectedItem());
         viewHandler.openBookingView();
+        reset();
+    }
+    public void onDatePicker(ActionEvent actionEvent)
+    {
         reset();
     }
 }

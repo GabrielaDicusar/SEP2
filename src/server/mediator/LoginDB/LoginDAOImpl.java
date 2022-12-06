@@ -29,7 +29,7 @@ public class LoginDAOImpl implements LoginDAO
   {
     try (Connection connection = ConnectionDB.getConnection())
     {
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM sep2schema.account WHERE username=? and password=?;");
+      PreparedStatement statement = connection.prepareStatement("SELECT * FROM account WHERE username=? and password=?;");
       statement.setString(1, username);
       statement.setString(2, password);
       ResultSet resultSet = statement.executeQuery();
