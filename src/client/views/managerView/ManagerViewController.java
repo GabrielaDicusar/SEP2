@@ -14,7 +14,7 @@ public class ManagerViewController implements ViewController
   public TableView Timetable;
   public Button btnCreateSession;
   public Button btnEditSession;
-  public Button btnRemoveSession;
+  public Button btnRegisterTrainer;
   private ViewHandler viewHandler;
   private ManagerViewModel managerViewModel;
 
@@ -26,5 +26,8 @@ public class ManagerViewController implements ViewController
 
   public void onButtonPressed(ActionEvent actionEvent) {
     viewHandler.openCreateSessionView();
+  }
+  public void onRegisterTrainer(ActionEvent actionEvent) {
+    viewHandler.openRegisterTrainerView();
   }
 }

@@ -29,6 +29,7 @@
           <Font size="36.0" />
         </font>
     </Label>
-    <Button fx:id="btnEditSession" layoutX="14.0" layoutY="167.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="Edit Session" />
-   <Button fx:id="btnCreateSession" layoutX="14.0" layoutY="129.0" mnemonicParsing="false" onAction="#onButtonPressed" prefHeight="26.0" prefWidth="108.0" text="Create Session" />
+    <Button fx:id="btnEditSession" layoutX="14.0" layoutY="124.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="Edit Session" />
+   <Button fx:id="btnCreateSession" layoutX="14.0" layoutY="163.0" mnemonicParsing="false" onAction="#onButtonPressed" prefHeight="26.0" prefWidth="108.0" text="Create Session" />
+   <Button fx:id="btnRegisterTrainer" layoutX="14.0" layoutY="200.0" mnemonicParsing="false" onAction="#onRegisterTrainer" prefHeight="26.0" prefWidth="108.0" text="Register trainer" />
 </AnchorPane>

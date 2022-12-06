@@ -1,4 +1,4 @@
-package client.views.registerView;
+package client.views.managerView.registerTrainerView;
 
 import client.frontEndModel.FrontEndModel;
 import client.frontEndModel.FrontEndModelManager;
@@ -9,22 +9,26 @@ import shared.sharedObjects.Account;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class RegisterViewModel implements PropertyChangeListener
+public class RegisterTrainerViewModel implements PropertyChangeListener
 {
   private FrontEndModelManager frontEndModelManager;
 
-  private StringProperty firstName,lastName,eMail, phoneNumber, username, password, errorLabel;
+  private StringProperty firstName, lastName, eMail, phoneNumber, username, password, errorLabel;
 
-  public RegisterViewModel (FrontEndModelManager frontEndModelManager) {
+  public RegisterTrainerViewModel(FrontEndModelManager frontEndModelManager)
+  {
     initializeAllProperties();
-   this.frontEndModelManager = frontEndModelManager;
+    this.frontEndModelManager = frontEndModelManager;
   }
-  public FrontEndModel getFrontEndModel() {
+
+  public FrontEndModel getFrontEndModel()
+  {
     return getFrontEndModel();
   }
 
   /**
    * A method that will return first name
+   *
    * @return firstname
    */
   public StringProperty getFirstNameProperty()
@@ -34,6 +38,7 @@ public class RegisterViewModel implements PropertyChangeListener
 
   /**
    * A method that will return last name
+   *
    * @return last name
    */
   public StringProperty getLastNameProperty()
@@ -43,14 +48,17 @@ public class RegisterViewModel implements PropertyChangeListener
 
   /**
    * A method that will return e-mail
+   *
    * @return firstname
    */
   public StringProperty geteMailProperty()
   {
     return eMail;
   }
+
   /**
    * A method that will return e-mail
+   *
    * @return firstname
    */
   public StringProperty getPhoneNumberProperty()
@@ -60,6 +68,7 @@ public class RegisterViewModel implements PropertyChangeListener
 
   /**
    * A method that will return username
+   *
    * @return username
    */
   public StringProperty getUserNameProperty()
@@ -69,20 +78,24 @@ public class RegisterViewModel implements PropertyChangeListener
 
   /**
    * A method that will return password
+   *
    * @return password
    */
   public StringProperty getPasswordProperty()
   {
     return password;
   }
+
   /**
    * A method that will return error label
+   *
    * @return error message
    */
   public StringProperty errorLabelProperty()
   {
     return errorLabel;
   }
+
   /**
    * A function that will initialize all the variables
    */
@@ -97,7 +110,6 @@ public class RegisterViewModel implements PropertyChangeListener
     errorLabel = new SimpleStringProperty();
   }
 
-
   public void createAccount()
   {
     if (username.get() == null || username.get().isEmpty())
@@ -106,7 +118,7 @@ public class RegisterViewModel implements PropertyChangeListener
 
     }
     else if (firstName.get() == null || firstName.get().isEmpty()
-        || lastName.get().isEmpty()|| lastName.get()==null)
+        || lastName.get().isEmpty() || lastName.get() == null)
     {
       errorLabel.set("Fields cannot be empty..");
 
@@ -129,7 +141,7 @@ public class RegisterViewModel implements PropertyChangeListener
     else
     {
       frontEndModelManager.createAccount(
-          new Account(1, firstName.get(), lastName.get(), eMail.get(),
+          new Account(3, firstName.get(), lastName.get(), eMail.get(),
               phoneNumber.get(), username.get(), password.get()));
 
     }

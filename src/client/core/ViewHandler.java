@@ -18,6 +18,7 @@ public class ViewHandler {
     private Scene availableToBookScene;
     private Scene bookedSessionsScene;
     private Scene registerMemberScene;
+    private Scene registerTrainerScene;
     private ViewModelFactory viewModelFactory;
 
     public ViewHandler(ViewModelFactory viewModelFactory){
@@ -141,6 +142,21 @@ public class ViewHandler {
             }
         }
         stage.setScene(registerMemberScene);
+        stage.show();
+    }
+    public void openRegisterTrainerView() {
+        if ( registerTrainerScene== null) {
+            try {
+                Parent root = loadFXML("../views/managerView/registerTrainerView/RegisterTrainerView.fxml");
+
+                registerTrainerScene = new Scene(root);
+                stage.setTitle("Register trainer account");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        stage.setScene(registerTrainerScene);
         stage.show();
     }
 

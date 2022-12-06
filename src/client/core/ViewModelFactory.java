@@ -2,6 +2,7 @@ package client.core;
 
 import client.views.managerView.createSessionView.CreateSessionViewModel;
 import client.views.managerView.editView.EditViewModel;
+import client.views.managerView.registerTrainerView.RegisterTrainerViewModel;
 import client.views.memberView.BookingViewModel;
 import client.views.loginView.LoginViewModel;
 import client.views.managerView.ManagerViewModel;
@@ -22,6 +23,7 @@ public class ViewModelFactory {
     private AvailableToBookViewModel availableToBookViewModel;
     private BookedSessionsViewModel bookedSessionsViewModel;
     private RegisterViewModel registerViewModel;
+    private RegisterTrainerViewModel registerTrainerViewModel;
 
     public ViewModelFactory(ModelFactory modelFactory) {
         this.modelFactory = modelFactory;
@@ -66,6 +68,12 @@ public class ViewModelFactory {
             registerViewModel = new RegisterViewModel(modelFactory.getFrontEndModelManager());
         }
         return registerViewModel;
+    }
+    public RegisterTrainerViewModel getRegisterTrainerViewModel() {
+        if (registerTrainerViewModel == null) {
+            registerTrainerViewModel = new RegisterTrainerViewModel(modelFactory.getFrontEndModelManager());
+        }
+        return registerTrainerViewModel;
     }
     public EditViewModel getEditViewModel() {
         if (editViewModel == null){

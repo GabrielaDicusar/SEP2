@@ -4,6 +4,8 @@ import server.mediator.AccountDB.AccountDAO;
 import server.mediator.AccountDB.AccountDAOImpl;
 import server.mediator.LoginDB.LoginDAO;
 import server.mediator.LoginDB.LoginDAOImpl;
+import server.mediator.RegisterTrainerDB.RegisterDAO;
+import server.mediator.RegisterTrainerDB.RegisterDAOImpl;
 import server.mediator.TrainingSessionDAO.TrainingSessionDAO;
 import server.mediator.TrainingSessionDAO.TrainingSessionDAOImpl;
 import shared.sharedObjects.*;
@@ -28,6 +30,7 @@ public class BackEndModel implements BackEndModelManager
     private LoginDAO loginDAO;
     private TrainingSessionDAO trainingSessionDAO;
     private AccountDAO accountDAO;
+    private RegisterDAO registerDAO;
 
     /**
      * BackEndModel constructor to instantiate support, listOfAccount, listOfSessions.
@@ -40,6 +43,7 @@ public class BackEndModel implements BackEndModelManager
         loginDAO = new LoginDAOImpl();
         trainingSessionDAO = new TrainingSessionDAOImpl();
         accountDAO=new AccountDAOImpl();
+        registerDAO = new RegisterDAOImpl();
         listOfAccount.addAccount(new Account(3, "Chris", "Hunt", "@", "2323", "asda", "sada"));
         listOfSessions.addSession(new TrainingSession("Yoga", "12:00", 2, new Account(3, "Chris", "Hunt", "@", "2323", "asda", "sada"), LocalDate.now()));
     }
@@ -91,7 +95,14 @@ public class BackEndModel implements BackEndModelManager
 
     @Override public void createAccount(Account account)
     {
-        accountDAO.addAccount(account);
+        if(account.getAccountType() == 1)
+        {
+            accountDAO.addAccount(account);
+        }
+        else
+        {
+            registerDAO.addAccount(account);
+        }
     }
 
     @Override
