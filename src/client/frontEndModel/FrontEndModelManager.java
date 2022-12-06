@@ -20,8 +20,6 @@ public interface FrontEndModelManager extends Subject {
     boolean verifyAvailabilityOfSession(TrainingSession session) throws RemoteException;
 
     void addParticipant(Account account, TrainingSession session);
-
-    TrainingSessionList getAvailableSessionsForMember(Account account);
     TrainingSessionList getAvailableSessionsForMember(Account account, LocalDate date);
     TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException;
 

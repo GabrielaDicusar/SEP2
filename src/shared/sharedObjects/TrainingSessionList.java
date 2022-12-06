@@ -81,4 +81,12 @@ public class TrainingSessionList implements Serializable {
     public int size(){
         return sessions.size();
     }
+
+    public void remove(TrainingSession session){
+        sessions.remove(session);
+    }
+
+    public boolean contain(TrainingSession session){
+        return sessions.contains(session);
+    }
 }

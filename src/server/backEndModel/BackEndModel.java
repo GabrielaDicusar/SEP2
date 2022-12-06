@@ -48,6 +48,7 @@ public class BackEndModel implements BackEndModelManager
         return listOfSessions;
     }
 
+
     @Override public Account verifyLogin(Account account)
     {
        try {
@@ -124,25 +125,18 @@ public class BackEndModel implements BackEndModelManager
     }
     @Override
     public TrainingSessionList getListOfSessionsAvailableForMember(Account account, LocalDate date) {
-        TrainingSessionList temp = new TrainingSessionList();
-        for (int i = 0; i < listOfSessions.size(); i++)
-        {
-            if (listOfSessions.getTrainingSessionByIndex(i).getDate().equals(date))
-            {
-                if (listOfSessions.getTrainingSessionByIndex(i).getAssignedMembers().size() == 0)
-                {
-                    temp.addSession(listOfSessions.getTrainingSessionByIndex(i));
-                }
-                else {
-                    if (!listOfSessions.getTrainingSessionByIndex(i).getAssignedMembers().contains(account)
-                            && listOfSessions.getTrainingSessionByIndex(i).getParticipants() != 0)
-                    {
-                        temp.addSession(listOfSessions.getTrainingSessionByIndex(i));
-                    }
-                }
+        TrainingSessionList temp1 = trainingSessionDAO.getListOfAllSessions();
+        for (int i = 0; i < trainingSessionDAO.getListOfSessionsBookedByMember(account).size(); i++) {
+            if(temp1.contain(trainingSessionDAO.getListOfSessionsBookedByMember(account).getTrainingSessionByIndex(i))){
+                temp1.remove(trainingSessionDAO.getListOfSessionsBookedByMember(account).getTrainingSessionByIndex(i));
             }
         }
-        return temp;
+        for (int i = 0; i < temp1.size(); i++) {
+            if(!temp1.getTrainingSessionByIndex(i).getDate().equals(date)){
+                temp1.removeTrainingSession(temp1.getTrainingSessionByIndex(i));
+            }
+        }
+        return temp1;
     }
     @Override
     public TrainingSessionList getListOfSessionsBookedByMember(Account account) {

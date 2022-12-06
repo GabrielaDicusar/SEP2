@@ -62,14 +62,7 @@ public class FrontEndModel implements FrontEndModelManager
         }
     }
 
-    @Override
-    public TrainingSessionList getAvailableSessionsForMember(Account account) {
-        try {
-            return client.getAvailableSessionsForMember(account);
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
     @Override
     public TrainingSessionList getAvailableSessionsForMember(Account account, LocalDate date) {
         try {
