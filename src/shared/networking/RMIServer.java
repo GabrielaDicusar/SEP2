@@ -1,5 +1,6 @@
 package shared.networking;
 
+import server.backEndModel.BackEndModel;
 import shared.sharedObjects.Account;
 import shared.sharedObjects.TrainingSession;
 import shared.sharedObjects.TrainingSessionList;
@@ -30,4 +31,6 @@ public interface RMIServer extends Remote {
     TrainingSessionList getAvailableSessionsForMember(Account account) throws RemoteException;
     TrainingSessionList getAvailableSessionsForMember(Account account, LocalDate date) throws RemoteException;
     TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException;
+
+    boolean isMemberInSession(Account account, TrainingSession trainingSession) throws RemoteException;
 }

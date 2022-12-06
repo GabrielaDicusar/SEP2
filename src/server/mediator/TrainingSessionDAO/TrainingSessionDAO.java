@@ -12,4 +12,6 @@ public interface TrainingSessionDAO
   void create(TrainingSession session) throws SQLException;
   TrainingSessionList getListOfSessionsBookedByMember(Account account);
   TrainingSessionList getListOfAllSessions();
+  TrainingSession addParticipant(Account account, TrainingSession trainingSession);
+  boolean isMemberInSession(Account account, TrainingSession trainingSession);
 }

@@ -134,4 +134,121 @@ public class TrainingSessionDAOImpl implements TrainingSessionDAO {
         }
         return temp;
     }
+    public TrainingSession addParticipant(Account account, TrainingSession trainingSession)
+    {
+        TrainingSession temp = new TrainingSession(null, null, 0, null, null);
+        try (Connection connection = ConnectionDB.getConnection()) {
+            PreparedStatement insert = connection.prepareStatement("insert into BookedSession (session_id, account_id) values (?, ?);");
+            PreparedStatement sessionId = connection.prepareStatement("select session_id from TrainingSession where time = ? and date = ?;");
+            sessionId.setString(1, trainingSession.getTime());
+            sessionId.setString(2, trainingSession.getDate().toString());
+
+            PreparedStatement accountId = connection.prepareStatement("select account_id from Account where username = ? and password = ?;");
+            accountId.setString(1, account.getUsername());
+            accountId.setString(2, account.getPassword());
+
+            ResultSet resultSessionId = sessionId.executeQuery();
+            ResultSet resultAccountId = accountId.executeQuery();
+
+            PreparedStatement isAccountThere = connection.prepareStatement("select * from BookedSession where account_id = ? and session_id = ?;");
+
+                if (resultAccountId.next() && resultSessionId.next())
+                {
+                    isAccountThere.setInt(1 ,resultAccountId.getInt(1));
+                    isAccountThere.setInt(2 ,resultSessionId.getInt(1));
+                    ResultSet checkIF = isAccountThere.executeQuery();
+                    if (checkIF.next()) {
+                        connection.close();
+                    }
+                    else
+                    {
+                        insert.setInt(1, resultSessionId.getInt(1));
+                        insert.setInt(2, resultAccountId.getInt(1));
+                    }
+                }
+                insert.executeUpdate();
+
+                PreparedStatement capacity = connection.prepareStatement("update TrainingSession " +
+                        "set capacity = capacity-1 " +
+                        "where session_id in (select session_id from BookedSession where account_id = ? and BookedSession.session_id = ?)");
+                capacity.setInt(1, resultAccountId.getInt(1));
+                capacity.setInt(2, resultSessionId.getInt(1));
+
+                capacity.executeUpdate();
+
+                PreparedStatement returnTraining = connection.prepareStatement("select * from TrainingSession where time = ? and date = ?;");
+                returnTraining.setString(1, trainingSession.getTime());
+                returnTraining.setString(2, trainingSession.getDate().toString());
+                ResultSet resultTraining = returnTraining.executeQuery();
+                if (resultTraining.next())
+                {
+                    String type = resultTraining.getString("type");
+                    String time = resultTraining.getString("time");
+                    int participants = resultTraining.getInt("capacity");
+                    LocalDate date = LocalDate.parse(resultTraining.getString("date"));
+                    Account trainer;
+
+                    PreparedStatement getTrainer = connection.prepareStatement("Select * from account where account_id = ?;");
+                    getTrainer.setInt(1, resultTraining.getInt("trainer_id"));
+                    ResultSet resultTrainer = getTrainer.executeQuery();
+                    if (resultTrainer.next())
+                    {
+                        trainer = new Account(resultTrainer.getInt("account_type"), resultTrainer.getString("firstname"), resultTrainer.getString("lastname"), resultTrainer.getString("email"), resultTrainer.getString("phonenumber"), resultTrainer.getString("username"), resultTrainer.getString("password"));
+                        temp = new TrainingSession(type, time, participants, trainer, date);
+                    }
+                    else
+                    {
+                        connection.close();
+                    }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return temp;
+    }
+    public boolean isMemberInSession(Account account, TrainingSession trainingSession)
+    {
+        int account_id = 0;
+        int session_id = 0;
+        try (Connection connection = ConnectionDB.getConnection()) {
+            PreparedStatement getMember = connection.prepareStatement("Select account_id from account where username = ? and password = ?;");
+            getMember.setString(1, account.getUsername());
+            getMember.setString(2, account.getPassword());
+
+            ResultSet resultGetMember = getMember.executeQuery();
+
+            if (resultGetMember.next())
+            {
+                account_id = resultGetMember.getInt(1);
+            }
+
+            PreparedStatement getSessionId = connection.prepareStatement("Select session_id from trainingsession where time = ? and date = ?;");
+            getSessionId.setString(1, trainingSession.getTime());
+            getSessionId.setString(2, trainingSession.getDate().toString());
+
+            ResultSet resultGetSessionId = getSessionId.executeQuery();
+            if(resultGetSessionId.next())
+            {
+                session_id = resultGetSessionId.getInt(1);
+            }
+
+            PreparedStatement isMemberInSession = connection.prepareStatement("SELECT * from bookedsession where account_id = ? and session_id = ?;");
+            isMemberInSession.setInt(1, account_id);
+            isMemberInSession.setInt(2, session_id);
+
+            ResultSet isMember = isMemberInSession.executeQuery();
+
+            if (isMember.next())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

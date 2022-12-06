@@ -78,7 +78,7 @@ public class BackEndModel implements BackEndModelManager
 
     public void addParticipant(Account account, TrainingSession trainingSession)
     {
-        TrainingSession temp = listOfSessions.addParticipant(account, trainingSession);
+        TrainingSession temp = trainingSessionDAO.addParticipant(account, trainingSession);
         support.firePropertyChange("ParticipantAdded", trainingSession, temp);
     }
     @Override
@@ -149,6 +149,12 @@ public class BackEndModel implements BackEndModelManager
         }
         return temp1;
     }
+    @Override
+    public boolean isMemberInSession(Account account, TrainingSession trainingSession)
+    {
+        return trainingSessionDAO.isMemberInSession(account, trainingSession);
+    }
+
     @Override
     public TrainingSessionList getListOfSessionsBookedByMember(Account account) {
         TrainingSessionList temp = trainingSessionDAO.getListOfSessionsBookedByMember(account);

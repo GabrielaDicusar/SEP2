@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import server.mediator.TrainingSessionDAO.TrainingSessionDAO;
 import shared.sharedObjects.Account;
 import shared.sharedObjects.TrainingSession;
 import shared.sharedObjects.TrainingSessionList;
@@ -52,7 +53,7 @@ public class AvailableToBookViewModel implements PropertyChangeListener {
             TrainingSession newValue = (TrainingSession) evt.getNewValue();
             if (newValue.getParticipants() != 0)
             {
-                if (!newValue.getAssignedMembers().contains(modelManager.getClient().getLoginCredentials()))
+                if (!modelManager.getClient().isMemberInSession(modelManager.getClient().getLoginCredentials(), (TrainingSession) evt.getNewValue())) //check if the client is in bookedSessions database
                 {
                     sessions.add(newValue);
                 }

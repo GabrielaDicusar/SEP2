@@ -25,4 +25,5 @@ public interface BackEndModelManager extends Subject
     TrainingSessionList getListOfSessionsAvailableForMember(Account account);
     TrainingSessionList getListOfSessionsAvailableForMember(Account account, LocalDate date);
     TrainingSessionList getListOfSessionsBookedByMember(Account account);
+    boolean isMemberInSession(Account account, TrainingSession trainingSession);
 }

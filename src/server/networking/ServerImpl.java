@@ -116,4 +116,9 @@ public class ServerImpl implements RMIServer {
     return modelManager.getListOfSessionsBookedByMember(account);
   }
 
+  @Override
+  public boolean isMemberInSession(Account account, TrainingSession trainingSession) throws RemoteException {
+    return modelManager.isMemberInSession(account, trainingSession);
+  }
+
 }

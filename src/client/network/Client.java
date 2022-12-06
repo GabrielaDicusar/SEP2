@@ -40,6 +40,16 @@ public class Client implements RMIClient, ClientCallBack {
         }
     }
 
+    public boolean isMemberInSession(Account account, TrainingSession trainingSession)
+    {
+        try {
+            return server.isMemberInSession(account, trainingSession);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     @Override
     public void addSession(TrainingSession session){
         try {
