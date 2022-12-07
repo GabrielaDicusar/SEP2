@@ -24,4 +24,5 @@ public interface FrontEndModelManager extends Subject {
     TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException;
 
 
+    void removeSession(TrainingSession trainingSession);
 }

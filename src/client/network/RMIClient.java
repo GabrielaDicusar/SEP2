@@ -28,4 +28,6 @@ public interface RMIClient extends Subject {
     TrainingSessionList getAvailableSessionsForMember(Account account, LocalDate date) throws RemoteException;
     TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException;
     boolean isMemberInSession(Account account, TrainingSession trainingSession);
+
+    void removeSession(TrainingSession trainingSession) throws RemoteException;
 }

@@ -32,6 +32,7 @@ public class BookedSessionsViewController implements ViewController {
     }
 
     public void onButtonPressed(ActionEvent actionEvent) {
+        bookedSessionsViewModel.removeSession(sessionTableView.getSelectionModel().getSelectedItem());
         viewHandler.openBookingView();
         reset();
     }

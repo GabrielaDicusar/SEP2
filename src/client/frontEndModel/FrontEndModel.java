@@ -76,6 +76,15 @@ public class FrontEndModel implements FrontEndModelManager
         return client.getListOfSessionsBookedByMember(account);
     }
 
+    @Override
+    public void removeSession(TrainingSession trainingSession) {
+        try {
+            client.removeSession(trainingSession);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public RMIClient getClient() {
         return client;
     }

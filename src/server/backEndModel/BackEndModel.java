@@ -149,6 +149,11 @@ public class BackEndModel implements BackEndModelManager
     }
 
     @Override
+    public void removeSession(Account account, TrainingSession trainingSession) {
+        trainingSessionDAO.removeSession(account, trainingSession);
+    }
+
+    @Override
     public TrainingSessionList getListOfSessionsBookedByMember(Account account) {
         TrainingSessionList temp = trainingSessionDAO.getListOfSessionsBookedByMember(account);
         for (int i = 0; i < temp.size(); i++)

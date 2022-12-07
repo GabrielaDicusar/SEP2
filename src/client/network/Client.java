@@ -49,6 +49,15 @@ public class Client implements RMIClient, ClientCallBack {
         }
     }
 
+    @Override
+    public void removeSession(TrainingSession trainingSession) throws RemoteException {
+        try {
+            server.removeSession(account, trainingSession);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     @Override
     public void addSession(TrainingSession session){

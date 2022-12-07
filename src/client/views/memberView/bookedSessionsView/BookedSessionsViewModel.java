@@ -52,4 +52,8 @@ public class BookedSessionsViewModel implements PropertyChangeListener {
             sessions.remove((TrainingSession) evt.getOldValue());
         }
     }
+
+    public void removeSession(TrainingSession trainingSession) {
+        modelManager.removeSession(trainingSession);
+    }
 }

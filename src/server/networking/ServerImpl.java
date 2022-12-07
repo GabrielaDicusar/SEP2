@@ -121,4 +121,9 @@ public class ServerImpl implements RMIServer {
     return modelManager.isMemberInSession(account, trainingSession);
   }
 
+  @Override
+  public void removeSession(Account account, TrainingSession trainingSession) throws RemoteException {
+    modelManager.removeSession(account, trainingSession);
+  }
+
 }
