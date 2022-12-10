@@ -85,6 +85,40 @@ public class FrontEndModel implements FrontEndModelManager
         }
     }
 
+    @Override
+    public TrainingSessionList getSessionsForManager(LocalDate parse) {
+        try {
+            return client.getSessionsForManager(parse);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void sendToEdit(TrainingSession selectedItem) {
+        support.firePropertyChange("SendToEdit", null, selectedItem);
+    }
+
+    @Override
+    public void updateSession(TrainingSession session) {
+        try {
+            client.updateSession(session);
+            support.firePropertyChange("SessionChanged", null, session);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void deleteSession(TrainingSession session) {
+        try {
+            client.deleteSession(session);
+            support.firePropertyChange("SessionDeleted", null, session);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public RMIClient getClient() {
         return client;
     }

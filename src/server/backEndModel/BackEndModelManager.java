@@ -28,4 +28,10 @@ public interface BackEndModelManager extends Subject
     boolean isMemberInSession(Account account, TrainingSession trainingSession);
 
     void removeSession(Account account, TrainingSession trainingSession);
+
+    TrainingSessionList getSessionsForManager(LocalDate parse);
+
+    void updateSession(TrainingSession session);
+
+    void deleteSession(TrainingSession session);
 }

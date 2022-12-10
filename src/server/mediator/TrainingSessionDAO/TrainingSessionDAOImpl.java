@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class TrainingSessionDAOImpl implements TrainingSessionDAO {
@@ -277,7 +278,64 @@ public class TrainingSessionDAOImpl implements TrainingSessionDAO {
         }
     }
 
+    public TrainingSessionList getSessionsForManager(LocalDate date)
+    {
+        TrainingSessionList temp = getListOfAllSessions();
+        TrainingSessionList removed = getListOfAllSessions();
+
+        int size = temp.size();
+        for (TrainingSession item : temp.getTrainingSessions())
+        {
+           if (item.getDate().isBefore(date) || item.getDate().isAfter(date))
+           {
+               removed.removeTrainingSession(item);
+           }
+        }
+        return removed;
+    }
+
     @Override
+    public void updateSession(TrainingSession session) {
+        try (Connection connection = ConnectionDB.getConnection()) {
+            PreparedStatement updateSession = connection.prepareStatement("update trainingsession " +
+                    "set type = ?, trainer_id = ?, capacity = ? " +
+                    "where date = ? and time = ?;");
+            updateSession.setString(1, session.getType());
+
+            PreparedStatement getTrainer = connection.prepareStatement("select account_id from account where username = ? and password = ?;");
+            getTrainer.setString(1, session.getTrainerAccount().getUsername());
+            getTrainer.setString(2, session.getTrainerAccount().getPassword());
+            ResultSet trainer = getTrainer.executeQuery();
+            if (trainer.next())
+            {
+                updateSession.setInt(2, trainer.getInt(1));
+            }
+            else
+            {
+                connection.close();
+            }
+            updateSession.setInt(3, session.getParticipants());
+            updateSession.setString(4, session.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-d")));
+            updateSession.setString(5, session.getTime());
+            updateSession.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void deleteSession(TrainingSession session) {
+        try (Connection connection = ConnectionDB.getConnection()) {
+            PreparedStatement updateSession = connection.prepareStatement("delete from trainingsession where time = ? and date = ?;");
+            updateSession.setString(1, session.getTime());
+            updateSession.setString(2, session.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-d")));
+            updateSession.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+        @Override
     public void removeSession(Account account, TrainingSession trainingSession) {
         try (Connection connection = ConnectionDB.getConnection()) {
             PreparedStatement deleteSession = connection.prepareStatement("delete from BookedSession where session_id = ? and account_id = ?;");

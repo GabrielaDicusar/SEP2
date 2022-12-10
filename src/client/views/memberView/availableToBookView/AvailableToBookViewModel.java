@@ -25,6 +25,7 @@ public class AvailableToBookViewModel implements PropertyChangeListener {
         modelManager = frontEndModelManager;
         modelManager.getClient().addListener("SessionAdded", this);
         modelManager.getClient().addListener("ParticipantAdded", this);
+        modelManager.getClient().addListener("SessionDeleted", this);
         date = new SimpleStringProperty();
         dateTimeFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
     }
@@ -63,6 +64,10 @@ public class AvailableToBookViewModel implements PropertyChangeListener {
         else if (evt.getPropertyName().equals("SessionAdded"))
         {
             sessions.add((TrainingSession) evt.getNewValue());
+        }
+        else if (evt.getPropertyName().equals("SessionDeleted"))
+        {
+            sessions.remove((TrainingSession) evt.getNewValue());
         }
     }
 

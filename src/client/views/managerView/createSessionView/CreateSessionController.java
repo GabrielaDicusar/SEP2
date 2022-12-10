@@ -36,7 +36,6 @@ public class CreateSessionController implements ViewController
     System.out.println("fields are not empty");
     TrainingSession session = new TrainingSession(textTypeField.getText(), (String) comboTime.getSelectionModel().getSelectedItem(), (Integer) Integer.valueOf(btnCapacityField.getText()), (Account) comboTrainer.getSelectionModel().getSelectedItem(), datePicker1.getValue());
     if (viewModel.verifyAvailabilityOfSession(session)) {
-     viewModel.addSession(session);
      textTypeField.clear();
      btnCapacityField.clear();
      Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
@@ -44,6 +43,7 @@ public class CreateSessionController implements ViewController
      alert.setHeaderText(null);
      alert.showAndWait();
      viewHandler.openManagerView();
+     viewModel.addSession(session);
     } else if (!viewModel.verifyAvailabilityOfSession(session)) {
      Alert alert = new Alert(Alert.AlertType.ERROR,
              "Wrong date compatibility");

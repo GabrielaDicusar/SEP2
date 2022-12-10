@@ -47,6 +47,7 @@ public class ViewModelFactory {
     public ManagerViewModel getManagerViewModel() {
         if (managerViewModel == null){
             managerViewModel = new ManagerViewModel(modelFactory.getFrontEndModelManager());
+            editViewModel = new EditViewModel(modelFactory.getFrontEndModelManager());
     }
         return managerViewModel; }
 

@@ -35,4 +35,10 @@ public interface RMIServer extends Remote {
     boolean isMemberInSession(Account account, TrainingSession trainingSession) throws RemoteException;
 
     void removeSession(Account account, TrainingSession trainingSession) throws RemoteException;
+
+    TrainingSessionList getSessionsForManager(LocalDate parse) throws RemoteException;
+
+    void updateSession(TrainingSession session) throws RemoteException;
+
+    void deleteSession(TrainingSession session) throws RemoteException;
 }

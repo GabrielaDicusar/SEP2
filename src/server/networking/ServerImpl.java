@@ -77,6 +77,14 @@ public class ServerImpl implements RMIServer {
         throw new RuntimeException(e);
       }
     });
+    modelManager.addListener("SessionDeleted", evt -> {
+      try {
+        ccb.updateDeleteSession((TrainingSession) evt.getNewValue());
+      } catch (RemoteException e)
+      {
+        throw new RuntimeException(e);
+      }
+    });
   }
 
   @Override
@@ -124,6 +132,21 @@ public class ServerImpl implements RMIServer {
   @Override
   public void removeSession(Account account, TrainingSession trainingSession) throws RemoteException {
     modelManager.removeSession(account, trainingSession);
+  }
+
+  @Override
+  public TrainingSessionList getSessionsForManager(LocalDate parse) throws RemoteException {
+    return modelManager.getSessionsForManager(parse);
+  }
+
+  @Override
+  public void updateSession(TrainingSession session) throws RemoteException {
+    modelManager.updateSession(session);
+  }
+
+  @Override
+  public void deleteSession(TrainingSession session) throws RemoteException {
+    modelManager.deleteSession(session);
   }
 
 }

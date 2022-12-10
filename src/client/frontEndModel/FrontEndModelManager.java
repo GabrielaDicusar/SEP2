@@ -25,4 +25,12 @@ public interface FrontEndModelManager extends Subject {
 
 
     void removeSession(TrainingSession trainingSession);
+
+    TrainingSessionList getSessionsForManager(LocalDate parse);
+
+    void sendToEdit(TrainingSession selectedItem);
+
+    void updateSession(TrainingSession session);
+
+    void deleteSession(TrainingSession session);
 }

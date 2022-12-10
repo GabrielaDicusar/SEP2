@@ -15,13 +15,13 @@
         <DropShadow />
     </effect>
     <ListView layoutX="189.0" layoutY="83.0" prefHeight="270.0" prefWidth="384.0" />
-    <DatePicker fx:id="datePicker" layoutX="14.0" layoutY="83.0" prefHeight="26.0" prefWidth="151.0" promptText="Pick a date" />
-    <TableView fx:id="Timetable" layoutX="189.0" layoutY="83.0" prefHeight="270.0" prefWidth="384.0">
+    <DatePicker fx:id="datePicker" layoutX="14.0" layoutY="83.0" onAction="#onDatePicker" prefHeight="26.0" prefWidth="151.0" promptText="Pick a date" />
+    <TableView fx:id="sessionTable" layoutX="189.0" layoutY="83.0" prefHeight="270.0" prefWidth="384.0">
       <columns>
-          <TableColumn prefWidth="75.0" text="Time" />
-          <TableColumn prefWidth="100.0" text="Session Type" />
-          <TableColumn prefWidth="75.0" text="Trainer" />
-          <TableColumn prefWidth="133.0" text="No. of Participants" />
+          <TableColumn fx:id="timeColumn" prefWidth="75.0" text="Time" />
+          <TableColumn fx:id="typeColumn" prefWidth="100.0" text="Session Type" />
+          <TableColumn fx:id="trainerColumn" prefWidth="75.0" text="Trainer" />
+          <TableColumn fx:id="participantsColumn" prefWidth="133.0" text="No. of Participants" />
       </columns>
     </TableView>
     <Label layoutX="181.0" layoutY="27.0" text="Session Timetable">
@@ -29,7 +29,7 @@
           <Font size="36.0" />
         </font>
     </Label>
-    <Button fx:id="btnEditSession" layoutX="14.0" layoutY="124.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="Edit Session" />
+    <Button fx:id="btnEditSession" layoutX="14.0" layoutY="124.0" mnemonicParsing="false" onAction="#onButtonPressed" prefHeight="26.0" prefWidth="108.0" text="Edit Session" />
    <Button fx:id="btnCreateSession" layoutX="14.0" layoutY="163.0" mnemonicParsing="false" onAction="#onButtonPressed" prefHeight="26.0" prefWidth="108.0" text="Create Session" />
    <Button fx:id="btnRegisterTrainer" layoutX="14.0" layoutY="200.0" mnemonicParsing="false" onAction="#onRegisterTrainer" prefHeight="26.0" prefWidth="108.0" text="Register trainer" />
 </AnchorPane>

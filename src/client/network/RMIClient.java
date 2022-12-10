@@ -30,4 +30,10 @@ public interface RMIClient extends Subject {
     boolean isMemberInSession(Account account, TrainingSession trainingSession);
 
     void removeSession(TrainingSession trainingSession) throws RemoteException;
+
+    TrainingSessionList getSessionsForManager(LocalDate parse) throws RemoteException;
+
+    void updateSession(TrainingSession session) throws RemoteException;
+
+    void deleteSession(TrainingSession session) throws RemoteException;
 }

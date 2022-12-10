@@ -154,6 +154,22 @@ public class BackEndModel implements BackEndModelManager
     }
 
     @Override
+    public TrainingSessionList getSessionsForManager(LocalDate parse) {
+        return trainingSessionDAO.getSessionsForManager(parse);
+    }
+
+    @Override
+    public void updateSession(TrainingSession session) {
+        trainingSessionDAO.updateSession(session);
+    }
+
+    @Override
+    public void deleteSession(TrainingSession session) {
+        trainingSessionDAO.deleteSession(session);
+        support.firePropertyChange("SessionDeleted", null, session);
+    }
+
+    @Override
     public TrainingSessionList getListOfSessionsBookedByMember(Account account) {
         TrainingSessionList temp = trainingSessionDAO.getListOfSessionsBookedByMember(account);
         for (int i = 0; i < temp.size(); i++)

@@ -144,6 +144,10 @@ public class TrainingSession implements Serializable {
     public String getTrainer() {
         return trainer.getFName() + " " + trainer.getLName();
     }
+    public Account getTrainerAccount()
+    {
+        return trainer;
+    }
 
     public void setTrainer(Account trainer) {
         this.trainer = trainer;

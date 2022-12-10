@@ -18,6 +18,7 @@ public class BookedSessionsViewModel implements PropertyChangeListener {
     {
         modelManager = frontEndModelManager;
         modelManager.getClient().addListener("ParticipantAdded", this);
+        modelManager.getClient().addListener("SessionDeleted", this);
     }
     public void loadSessions() {
         TrainingSessionList logList = null;
@@ -50,6 +51,10 @@ public class BookedSessionsViewModel implements PropertyChangeListener {
                 }
             }
             sessions.remove((TrainingSession) evt.getOldValue());
+        }
+        else if(evt.getPropertyName().equals("SessionDeleted"))
+        {
+            sessions.remove((TrainingSession) evt.getNewValue());
         }
     }
 

@@ -58,6 +58,21 @@ public class Client implements RMIClient, ClientCallBack {
         }
     }
 
+    @Override
+    public TrainingSessionList getSessionsForManager(LocalDate parse) throws RemoteException {
+        return server.getSessionsForManager(parse);
+    }
+
+    @Override
+    public void updateSession(TrainingSession session) throws RemoteException {
+        server.updateSession(session);
+    }
+
+    @Override
+    public void deleteSession(TrainingSession session) throws RemoteException {
+        server.deleteSession(session);
+    }
+
 
     @Override
     public void addSession(TrainingSession session){
@@ -153,5 +168,10 @@ public class Client implements RMIClient, ClientCallBack {
     @Override
     public void updateNewParticipant(TrainingSession prevSession, TrainingSession newSession) throws RemoteException {
         support.firePropertyChange("ParticipantAdded", prevSession, newSession);
+    }
+
+    @Override
+    public void updateDeleteSession(TrainingSession session) throws RemoteException {
+        support.firePropertyChange("SessionDeleted", null, session);
     }
 }

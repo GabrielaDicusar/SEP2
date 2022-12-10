@@ -3,28 +3,83 @@ package client.views.managerView.editView;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.beans.property.StringProperty;
+import javafx.event.ActionEvent;
+import javafx.scene.control.*;
+import shared.sharedObjects.Account;
+import shared.sharedObjects.TrainingSession;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class EditViewController implements ViewController
 {
-  public TextField textTypeField1;
-  public TextField btnCapacityField1;
-  public ComboBox ComboTrainer1;
-  public DatePicker datePicker2;
-  public ComboBox ComboTime1;
+  public TextField typeField;
+  public DatePicker datePicker;
+  public ComboBox trainerCombo;
   public Button btnSave;
-  public Button btnCancel1;
-  public Button btnDelete1;
+  public TextField capacityField;
+  public ComboBox availableTimeCombo;
+  public Button btnCancel;
+  public Button btnDelete;
   private ViewHandler viewHandler;
   private EditViewModel editViewModel;
+  private DateTimeFormatter dateTimeFormatter;
 
   @Override public void init(ViewHandler viewHandler,
       ViewModelFactory viewModelFactory)
   {
     this.viewHandler = viewHandler;
     editViewModel = viewModelFactory.getEditViewModel();
+    dateTimeFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+    typeField.textProperty().bindBidirectional(editViewModel.getType());
+    capacityField.textProperty().bindBidirectional(editViewModel.getCapacity());
+    datePicker.getEditor().textProperty().bindBidirectional(editViewModel.getDate());
+    availableTimeCombo.getEditor().textProperty().bindBidirectional(editViewModel.getTime());
+    editViewModel.loadListOfTrainers();
+    trainerCombo.setItems(editViewModel.getTrainers());
+
+  }
+
+  public void onButtonPressed(ActionEvent actionEvent) {
+    if (actionEvent.getSource() == btnCancel)
+    {
+      viewHandler.openManagerView();
+    }
+    else if (actionEvent.getSource() == btnSave)
+    {
+      if(typeField.getText() != null && capacityField.getText() != null && trainerCombo.getSelectionModel().getSelectedItem() != null) {
+        System.out.println("fields are not empty");
+        TrainingSession session = new TrainingSession(typeField.getText(), editViewModel.getTime().get(), (Integer) Integer.valueOf(capacityField.getText()), (Account) trainerCombo.getSelectionModel().getSelectedItem(), LocalDate.parse(editViewModel.getDate().get(), dateTimeFormatter));
+          typeField.clear();
+          capacityField.clear();
+          Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                  "You have successfully created a training session");
+          alert.setHeaderText(null);
+          alert.showAndWait();
+          viewHandler.openManagerView();
+          editViewModel.updateSession(session);
+      } else{
+        System.out.println("fields are empty");
+        Alert alert = new Alert(Alert.AlertType.ERROR,
+                "Empty fields");
+        alert.setHeaderText(null);
+        alert.showAndWait();
+      }
+    }
+    else if (actionEvent.getSource() == btnDelete)
+    {
+      TrainingSession session = new TrainingSession(editViewModel.getType().get(), editViewModel.getTime().get(), Integer.parseInt(editViewModel.getCapacity().get()), (Account) trainerCombo.getSelectionModel().getSelectedItem(), LocalDate.parse(editViewModel.getDate().get(), dateTimeFormatter));
+      editViewModel.deleteSession(session);
+      typeField.clear();
+      capacityField.clear();
+
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+              "You have successfully deleted a training session");
+      alert.setHeaderText(null);
+      alert.showAndWait();
+      viewHandler.openManagerView();
+    }
+
   }
 }

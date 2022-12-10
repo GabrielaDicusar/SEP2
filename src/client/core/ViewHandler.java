@@ -1,6 +1,7 @@
 package client.core;
 
 import client.views.ViewController;
+import client.views.managerView.ManagerViewController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,6 +20,7 @@ public class ViewHandler {
     private Scene bookedSessionsScene;
     private Scene registerMemberScene;
     private Scene registerTrainerScene;
+    private Scene editSessionScene;
     private ViewModelFactory viewModelFactory;
 
     public ViewHandler(ViewModelFactory viewModelFactory){
@@ -175,6 +177,22 @@ public class ViewHandler {
         stage.setScene(managerScene);
         stage.show();
     }
+    public void openEditView(){
+        if (editSessionScene == null) {
+            try {
+                Parent root = loadFXML("../views/managerView/editView/EditView.fxml");
+
+                editSessionScene = new Scene(root);
+                stage.setTitle("Edit Session");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        stage.setScene(editSessionScene);
+        stage.show();
+    }
+
 
     public ViewModelFactory getViewModelFactory() {
         return viewModelFactory;
