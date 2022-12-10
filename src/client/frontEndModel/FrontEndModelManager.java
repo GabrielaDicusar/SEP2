@@ -6,11 +6,12 @@ import shared.sharedObjects.TrainingSession;
 import shared.sharedObjects.TrainingSessionList;
 import shared.utils.Subject;
 
+import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public interface FrontEndModelManager extends Subject {
+public interface FrontEndModelManager extends Subject, PropertyChangeListener {
     void addSession(TrainingSession session);
     Account verifyLogin(Account account);
     RMIClient getClient();

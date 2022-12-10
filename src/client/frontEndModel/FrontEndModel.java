@@ -6,6 +6,7 @@ import shared.sharedObjects.Account;
 import shared.sharedObjects.TrainingSession;
 import shared.sharedObjects.TrainingSessionList;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.RemoteException;
@@ -20,6 +21,9 @@ public class FrontEndModel implements FrontEndModelManager
     public FrontEndModel(ClientFactory clientFactory)
     {
         client = clientFactory.getClient();
+        client.addListener("SessionAdded", this);
+        client.addListener("ParticipantAdded", this);
+        client.addListener("SessionDeleted", this);
         support = new PropertyChangeSupport(this);
     }
 
@@ -137,5 +141,21 @@ public class FrontEndModel implements FrontEndModelManager
     @Override
     public void removeListener(String eventName, PropertyChangeListener listener) {
         support.removePropertyChangeListener(eventName, listener);
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("SessionAdded"))
+        {
+            support.firePropertyChange("SessionAdded", null, evt.getNewValue());
+        }
+        else if(evt.getPropertyName().equals("ParticipantAdded"))
+        {
+            support.firePropertyChange("ParticipantAdded", evt.getOldValue(), evt.getNewValue());
+        }
+        else if (evt.getPropertyName().equals("SessionDeleted"))
+        {
+            support.firePropertyChange("SessionDeleted", null, evt.getNewValue());
+        }
     }
 }

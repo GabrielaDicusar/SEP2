@@ -23,9 +23,9 @@ public class ManagerViewModel implements PropertyChangeListener
     this.modelManager = frontEndModelManager;
     date = new SimpleStringProperty();
     dateTimeFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-    modelManager.getClient().addListener("SessionAdded", this);
-    modelManager.getClient().addListener("ParticipantAdded", this);
-    modelManager.getClient().addListener("SessionDeleted", this);
+    modelManager.addListener("SessionAdded", this);
+    modelManager.addListener("ParticipantAdded", this);
+    modelManager.addListener("SessionDeleted", this);
   }
 
   public void loadSessions() {

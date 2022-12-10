@@ -17,8 +17,8 @@ public class BookedSessionsViewModel implements PropertyChangeListener {
     public BookedSessionsViewModel(FrontEndModelManager frontEndModelManager)
     {
         modelManager = frontEndModelManager;
-        modelManager.getClient().addListener("ParticipantAdded", this);
-        modelManager.getClient().addListener("SessionDeleted", this);
+        modelManager.addListener("ParticipantAdded", this);
+        modelManager.addListener("SessionDeleted", this);
     }
     public void loadSessions() {
         TrainingSessionList logList = null;
