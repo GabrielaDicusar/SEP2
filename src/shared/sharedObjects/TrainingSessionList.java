@@ -33,7 +33,14 @@ public class TrainingSessionList implements Serializable {
      */
     public void addSession(TrainingSession trainingSession)
     {
-        sessions.add(trainingSession);
+        if (trainingSession == null)
+        {
+            throw new IllegalArgumentException("The session is null");
+        }
+        else
+        {
+            sessions.add(trainingSession);
+        }
     }
 
     /**
@@ -63,15 +70,21 @@ public class TrainingSessionList implements Serializable {
     }
     public TrainingSession addParticipant(Account account, TrainingSession trainingSession)
     {
-        for (TrainingSession item : sessions)
+        if (account == null || trainingSession == null)
         {
-            if (item.equals(trainingSession))
-            {
-                item.addMember(account);
-                return item;
-            }
+            throw new IllegalArgumentException("The parameter is null");
         }
-        return null;
+        else {
+            for (TrainingSession item : sessions)
+            {
+                if (item.equals(trainingSession))
+                {
+                    item.addMember(account);
+                    return item;
+                }
+            }
+            return null;
+        }
     }
 
     public TrainingSession getTrainingSessionByIndex(int i){
