@@ -27,8 +27,6 @@ public interface RMIServer extends Remote {
     boolean verifyAvailabilityOfSession(TrainingSession session) throws RemoteException;
 
     void addParticipant(Account account, TrainingSession session) throws RemoteException;
-
-    TrainingSessionList getAvailableSessionsForMember(Account account) throws RemoteException;
     TrainingSessionList getAvailableSessionsForMember(Account account, LocalDate date) throws RemoteException;
     TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException;
 

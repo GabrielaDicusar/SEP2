@@ -100,47 +100,36 @@ public class BackEndModel implements BackEndModelManager
 
     @Override
     public boolean verifyAvailabilityOfSession(TrainingSession session) {
-        for (int i = 0; i < listOfSessions.size(); i++) {
+        TrainingSessionList temp = trainingSessionDAO.getListOfAllSessions();
+        for (int i = 0; i < temp.size(); i++) {
             if(session.getDate().isBefore(LocalDate.now())){
                 return false;
+            }
+            else if (session.getTime().equals(temp.getTrainingSessionByIndex(i).getTime()))
+            {
+                if(session.getDate().equals(temp.getTrainingSessionByIndex(i).getDate()))
+                {
+                    return false;
+                }
             }
         }
         return true;
     }
-
-    @Override
-    public TrainingSessionList getListOfSessionsAvailableForMember(Account account) {
-        TrainingSessionList temp = new TrainingSessionList();
-        for (int i = 0; i < listOfSessions.size(); i++)
-        {
-            if (listOfSessions.getTrainingSessionByIndex(i).getAssignedMembers().size() == 0)
-            {
-                temp.addSession(listOfSessions.getTrainingSessionByIndex(i));
-            }
-            else {
-                if (!listOfSessions.getTrainingSessionByIndex(i).getAssignedMembers().contains(account)
-                        && listOfSessions.getTrainingSessionByIndex(i).getParticipants() != 0)
-                {
-                    temp.addSession(listOfSessions.getTrainingSessionByIndex(i));
-                }
-            }
-        }
-        return temp;
-    }
     @Override
     public TrainingSessionList getListOfSessionsAvailableForMember(Account account, LocalDate date) {
         TrainingSessionList temp1 = trainingSessionDAO.getListOfAllSessions();
+        TrainingSessionList temp2 = trainingSessionDAO.getListOfAllSessions();
         for (int i = 0; i < trainingSessionDAO.getListOfSessionsBookedByMember(account).size(); i++) {
             if(temp1.contain(trainingSessionDAO.getListOfSessionsBookedByMember(account).getTrainingSessionByIndex(i))){
-                temp1.remove(trainingSessionDAO.getListOfSessionsBookedByMember(account).getTrainingSessionByIndex(i));
+                temp2.remove(trainingSessionDAO.getListOfSessionsBookedByMember(account).getTrainingSessionByIndex(i));
             }
         }
         for (int i = 0; i < temp1.size(); i++) {
             if(!temp1.getTrainingSessionByIndex(i).getDate().equals(date)){
-                temp1.removeTrainingSession(temp1.getTrainingSessionByIndex(i));
+                temp2.removeTrainingSession(temp1.getTrainingSessionByIndex(i));
             }
         }
-        return temp1;
+        return temp2;
     }
     @Override
     public boolean isMemberInSession(Account account, TrainingSession trainingSession)

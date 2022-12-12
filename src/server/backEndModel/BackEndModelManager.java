@@ -22,7 +22,6 @@ public interface BackEndModelManager extends Subject
     void createAccount(Account account);
     boolean verifyAvailabilityOfSession(TrainingSession session);
 
-    TrainingSessionList getListOfSessionsAvailableForMember(Account account);
     TrainingSessionList getListOfSessionsAvailableForMember(Account account, LocalDate date);
     TrainingSessionList getListOfSessionsBookedByMember(Account account);
     boolean isMemberInSession(Account account, TrainingSession trainingSession);

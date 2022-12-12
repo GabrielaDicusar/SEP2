@@ -56,14 +56,21 @@ public class AvailableToBookViewModel implements PropertyChangeListener {
             {
                 if (!modelManager.getClient().isMemberInSession(modelManager.getClient().getLoginCredentials(), (TrainingSession) evt.getNewValue())) //check if the client is in bookedSessions database
                 {
-                    sessions.add(newValue);
+                    if (date.get().equals(newValue.getDate().format(DateTimeFormatter.ofPattern("d/MM/yyyy"))))
+                    {
+                        sessions.add((TrainingSession) evt.getNewValue());
+                    }
                 }
             }
             sessions.remove((TrainingSession) evt.getOldValue());
         }
         else if (evt.getPropertyName().equals("SessionAdded"))
         {
-            sessions.add((TrainingSession) evt.getNewValue());
+            TrainingSession newValue = (TrainingSession) evt.getNewValue();
+            if (date.get().equals(newValue.getDate().format(DateTimeFormatter.ofPattern("d/MM/yyyy"))))
+            {
+                sessions.add((TrainingSession) evt.getNewValue());
+            }
         }
         else if (evt.getPropertyName().equals("SessionDeleted"))
         {

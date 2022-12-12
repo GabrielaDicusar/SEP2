@@ -45,10 +45,15 @@ public class ManagerViewController implements ViewController
 
   public void onButtonPressed(ActionEvent actionEvent) {
     if (actionEvent.getSource() == btnCreateSession)
-    viewHandler.openCreateSessionView();
+    {
+      viewHandler.openCreateSessionView();
+      reset();
+    }
+
     else if (actionEvent.getSource() == btnEditSession) {
       managerViewModel.sendToEdit(sessionTable.getSelectionModel().getSelectedItem());
       viewHandler.openEditView();
+      reset();
     }
   }
   public void onDatePicker(ActionEvent actionEvent)
@@ -59,5 +64,6 @@ public class ManagerViewController implements ViewController
 
   public void onRegisterTrainer(ActionEvent actionEvent) {
     viewHandler.openRegisterTrainerView();
+    reset();
   }
 }

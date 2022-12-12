@@ -121,11 +121,6 @@ public class Client implements RMIClient, ClientCallBack {
     public void addParticipant(Account account, TrainingSession session) throws RemoteException{
         server.addParticipant(account, session);
     }
-
-    @Override
-    public TrainingSessionList getAvailableSessionsForMember(Account account) throws RemoteException {
-        return server.getAvailableSessionsForMember(account);
-    }
     @Override
     public TrainingSessionList getAvailableSessionsForMember(Account account, LocalDate date) throws RemoteException {
         return server.getAvailableSessionsForMember(account, date);

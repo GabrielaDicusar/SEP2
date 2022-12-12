@@ -111,11 +111,6 @@ public class ServerImpl implements RMIServer {
   public void addParticipant(Account account, TrainingSession session) throws RemoteException {
     modelManager.addParticipant(account, session);
   }
-
-  @Override
-  public TrainingSessionList getAvailableSessionsForMember(Account account) throws RemoteException {
-    return modelManager.getListOfSessionsAvailableForMember(account);
-  }
   public TrainingSessionList getAvailableSessionsForMember(Account account, LocalDate date) throws RemoteException {
     return modelManager.getListOfSessionsAvailableForMember(account, date);
   }

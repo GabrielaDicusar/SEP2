@@ -338,6 +338,8 @@ public class TrainingSessionDAOImpl implements TrainingSessionDAO {
         @Override
     public void removeSession(Account account, TrainingSession trainingSession) {
         try (Connection connection = ConnectionDB.getConnection()) {
+
+
             PreparedStatement deleteSession = connection.prepareStatement("delete from BookedSession where session_id = ? and account_id = ?;");
             PreparedStatement sessionId = connection.prepareStatement
                     ("select session_id from TrainingSession where time = ? and date = ?;");
@@ -355,8 +357,20 @@ public class TrainingSessionDAOImpl implements TrainingSessionDAO {
             {
                 deleteSession.setInt(1, resultSessionId.getInt(1));
                 deleteSession.setInt(2, resultAccountId.getInt(1));
+
+                PreparedStatement capacity = connection.prepareStatement
+                        ("update TrainingSession " +
+                                "set capacity = capacity+1 " +
+                                "where session_id in " +
+                                "(select session_id from BookedSession where account_id = ? " +
+                                "and BookedSession.session_id = ?)");
+                capacity.setInt(1, resultAccountId.getInt(1));
+                capacity.setInt(2, resultSessionId.getInt(1));
+
+                capacity.executeUpdate();
+                deleteSession.executeUpdate();
             }
-            deleteSession.executeUpdate();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

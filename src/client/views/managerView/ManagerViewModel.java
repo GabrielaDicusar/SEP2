@@ -56,7 +56,12 @@ public class ManagerViewModel implements PropertyChangeListener
     }
     else if (evt.getPropertyName().equals("SessionAdded"))
     {
-      sessions.add((TrainingSession) evt.getNewValue());
+      TrainingSession newValue = (TrainingSession) evt.getNewValue();
+      if (date.get().equals(newValue.getDate().format(DateTimeFormatter.ofPattern("d/MM/yyyy"))))
+      {
+        sessions.remove((TrainingSession) evt.getNewValue());
+        sessions.add((TrainingSession) evt.getNewValue());
+      }
     }
     else if (evt.getPropertyName().equals("SessionDeleted"))
     {
