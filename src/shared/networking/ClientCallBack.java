@@ -6,7 +6,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- * Interface ClientCallBack creates ...
+ * Interface ClientCallBack extends Remote and hosts the observer pattern object for updateNewSession,
+ * updateNewParticipant and updateDeleteSession.
  * @author
  */
 public interface ClientCallBack extends Remote {

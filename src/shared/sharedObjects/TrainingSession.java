@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 /** A class containing the methods for creating objects for a Training Session
- * @author
+ * @author Group 7
  */
 public class TrainingSession implements Serializable {
     private String type;
@@ -32,6 +32,11 @@ public class TrainingSession implements Serializable {
         assignedMembers = new ArrayList<>();
         this.date = date;
     }
+
+    /**
+     * Adds a member to a Training Session
+     * @param account
+     */
     public void addMember(Account account)
     {
         if (assignedMembers.size() == 0)
@@ -57,6 +62,10 @@ public class TrainingSession implements Serializable {
 
     }
 
+    /**
+     * Returns the assigned member.
+     * @return assigned member
+     */
     public List<Account> getAssignedMembers() {
         return assignedMembers;
     }
@@ -73,7 +82,11 @@ public class TrainingSession implements Serializable {
         return null;
     }
 
-
+    /**
+     * Returns the account by index.
+     * @param i
+     * @return index
+     */
     public Account getAccountById(int i)
     {
         return assignedMembers.get(i);
@@ -137,27 +150,49 @@ public class TrainingSession implements Serializable {
         this.participants = participants;
     }
 
+    /**
+     * Returns the username of the specified trainer.
+     * @return trainer username
+     */
     public String getTrainerUsername() {
         return trainer.getUsername();
     }
-
+    /**
+     * Returns the password of the specified trainer.
+     * @return trainer password
+     */
     public String getTrainerPassword() {
         return trainer.getPassword();
     }
-
+    /**
+     * Returns the firstname and lastname of the specified trainer.
+     * @return trainer firstname, lastname
+     */
     public String getTrainer() {
         return trainer.getFName() + " " + trainer.getLName();
     }
-
+    /**
+     * Returns the account of the specified trainer.
+     * @return trainer account
+     */
     public Account getTrainerAccount()
     {
         return trainer;
     }
 
+    /**
+     * Sets the trainer to the account.
+     * @param trainer
+     */
     public void setTrainer(Account trainer) {
         this.trainer = trainer;
     }
 
+    /**
+     * Checks if the object exists in the class and returns them.
+     * @param obj
+     * @return type, time, date, participant and assigned member
+     */
     public boolean equals(Object obj)
     {
         if (!(obj instanceof TrainingSession))
@@ -172,7 +207,10 @@ public class TrainingSession implements Serializable {
         }
     }
 
-
+    /**
+     * Returns a combined string object of type, date, time and participant.
+     * @return type, date, time, participants
+     */
     public String toString(){
         return type + " " + date + " " + time + " " + participants;
     }

@@ -26,7 +26,11 @@ public class TrainingSessionListTest {
     @Test
     public void testAddingOneSessionToTrainingSession() {
         //Creating the temp training session
-        TrainingSession testTrainingSession = new TrainingSession("Yoga", "12:00", 10, new Account(3, "Chris", "Hunt", "@", "4545", "chris", "chris"), LocalDate.now());
+        TrainingSession testTrainingSession = new TrainingSession
+                ("Yoga", "12:00", 10,
+                        new Account(3, "Chris", "Hunt", "@",
+                                "4545", "chris", "chris"),
+                        LocalDate.now());
 
         //Add a temp session to the training session list
         testList.addSession(testTrainingSession);

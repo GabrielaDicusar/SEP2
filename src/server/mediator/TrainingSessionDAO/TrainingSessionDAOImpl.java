@@ -16,8 +16,7 @@ import java.time.format.DateTimeFormatter;
 
 public class TrainingSessionDAOImpl implements TrainingSessionDAO {
     /**
-     * A function that creates a new training session
-     *
+     * A  that creates a new training session.
      * @param session
      * @throws SQLException
      */
