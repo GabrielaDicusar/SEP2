@@ -3,7 +3,7 @@ package shared.sharedObjects;
 import java.io.Serializable;
 
 /** A class containing the methods for creating objects for an Account.
- * @author
+ * @author Group 7
  */
 public class Account implements Serializable {
     // login credentials, account type, name, email, phone number, address
@@ -17,13 +17,13 @@ public class Account implements Serializable {
 
     /**
      * Constructor to instantiate accountType, firstname, lastname, email, phonenumber, username, password.
-     * @param accountType
-     * @param firstname
-     * @param lastname
-     * @param email
-     * @param phoneNumber
-     * @param username
-     * @param password
+     * @param accountType the account type
+     * @param firstname the firstname
+     * @param lastname the lastname
+     * @param email the email address
+     * @param phoneNumber the phonenumber
+     * @param username the username
+     * @param password the password
      */
     public Account( int accountType, String firstname, String lastname, String email, String phoneNumber, String username, String password)
     {
@@ -38,8 +38,8 @@ public class Account implements Serializable {
 
     /**
      * Constructor instantiating values to the account parameters.
-     * @param username
-     * @param password
+     * @param username the username
+     * @param password the password
      */
     public Account(String username, String password)
     {
@@ -107,8 +107,8 @@ public class Account implements Serializable {
 
     /**
      * Checks for the specific objects in the class and returns them.
-     * @param obj
-     * @return
+     * @param obj the compared object
+     * @return boolean
      */
     public boolean equals(Object obj)
     {

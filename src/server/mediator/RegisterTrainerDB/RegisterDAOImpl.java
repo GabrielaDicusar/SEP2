@@ -7,9 +7,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+/**
+ * A class containing the methods for registering a trainer in the database.
+ * @author Group 7
+ */
 public class RegisterDAOImpl implements RegisterDAO
 {
+  /**
+   * Adds the trainer account to the database.
+   * @param account the trainer account
+   */
   @Override public void addAccount(Account account)
   {
     try (Connection connection = ConnectionDB.getConnection()) {

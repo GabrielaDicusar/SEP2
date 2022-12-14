@@ -48,11 +48,19 @@ public class BackEndModel implements BackEndModelManager
         listOfSessions.addSession(new TrainingSession("Yoga", "12:00", 2, new Account(3, "Chris", "Hunt", "@", "2323", "asda", "sada"), LocalDate.now()));
     }
 
+    /**
+     * Returns the list of sessions
+     * @return list of sessions
+     */
     public TrainingSessionList getListOfSessions() {
         return listOfSessions;
     }
 
-
+    /**
+     * Verifies the account login username and password.
+     * @param account the account
+     * @return the account password
+     */
     @Override public Account verifyLogin(Account account)
     {
        try {
@@ -65,6 +73,10 @@ public class BackEndModel implements BackEndModelManager
        return null;
     }
 
+    /**
+     * Adds the training session to the database.
+     * @param session the training session
+     */
     @Override
     public void addSession(TrainingSession session) {
         try {
@@ -76,11 +88,21 @@ public class BackEndModel implements BackEndModelManager
         }
     }
 
+    /**
+     * Adds the participant to the database.
+     * @param account the account
+     * @param trainingSession the training session
+     */
     public void addParticipant(Account account, TrainingSession trainingSession)
     {
         TrainingSession temp = trainingSessionDAO.addParticipant(account, trainingSession);
         support.firePropertyChange("ParticipantAdded", trainingSession, temp);
     }
+
+    /**
+     * Returns the account from the database.
+     * @return account
+     */
     @Override
     public ArrayList getTrainersList(){
         return accountDAO.getTrainers();
@@ -98,6 +120,11 @@ public class BackEndModel implements BackEndModelManager
         }
     }
 
+    /**
+     * verifies the availability of the training session.
+     * @param session the session
+     * @return boolean
+     */
     @Override
     public boolean verifyAvailabilityOfSession(TrainingSession session) {
         TrainingSessionList temp = trainingSessionDAO.getListOfAllSessions();
@@ -115,6 +142,13 @@ public class BackEndModel implements BackEndModelManager
         }
         return true;
     }
+
+    /**
+     * Returns the avaialble sessions for a specific member.
+     * @param account the account
+     * @param date the date
+     * @return temp
+     */
     @Override
     public TrainingSessionList getListOfSessionsAvailableForMember(Account account, LocalDate date) {
         TrainingSessionList temp1 = trainingSessionDAO.getListOfAllSessions();

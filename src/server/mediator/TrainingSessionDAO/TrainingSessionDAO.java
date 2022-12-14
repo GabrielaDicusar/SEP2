@@ -7,6 +7,10 @@ import shared.sharedObjects.TrainingSessionList;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+/**
+ * An interface containing the methods for training sessions.
+ * @author Group 7
+ */
 public interface TrainingSessionDAO
 {
   void create(TrainingSession session) throws SQLException;

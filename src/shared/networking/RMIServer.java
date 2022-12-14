@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Interface RMI Server creates verifyLogin, bookATrainingSession, and addUser which are implemented by
    BackEndModelManager, FrontEndModel, FrontEndModelManager, Client, LoginViewController, LoginViewModel,
    BackEndModel and ServerImpl. Its extends Remote.
- * @author
+ * @author Group 7
  */
 
 public interface RMIServer extends Remote {

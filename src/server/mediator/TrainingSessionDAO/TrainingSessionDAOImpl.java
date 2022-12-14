@@ -13,11 +13,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * A class the handles the training sessions in the database.
+ * author Group 7
+ */
 public class TrainingSessionDAOImpl implements TrainingSessionDAO {
     /**
-     * A  that creates a new training session.
-     * @param session
+     * A method that creates a new training session in the database.
+     * @param session the training session
      * @throws SQLException
      */
     @Override

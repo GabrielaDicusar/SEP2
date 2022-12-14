@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 /**
  * A class containing an execution method for ServerImpl.
- * @author
+ * @author Group 7
  */
 public class RunServer
 {

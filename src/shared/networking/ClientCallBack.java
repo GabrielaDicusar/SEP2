@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 /**
  * Interface ClientCallBack extends Remote and hosts the observer pattern object for updateNewSession,
  * updateNewParticipant and updateDeleteSession.
- * @author
+ * @author Group 7
  */
 public interface ClientCallBack extends Remote {
     void updateNewSession(TrainingSession session) throws RemoteException;

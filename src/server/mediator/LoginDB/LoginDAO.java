@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 /**
  * Interface for Database Access Object accessing Accounts
- * @author dianasuzana
+ * @author Group 7
  * @version 1.0
  */
 public interface LoginDAO

@@ -3,7 +3,7 @@ package shared.sharedObjects;
 import java.util.ArrayList;
 
 /** A class handling the arraylist methods for the Account Class.
- * @author
+ * @author Group 7
  */
 public class AccountList {
     private ArrayList<Account> accounts;
@@ -18,7 +18,7 @@ public class AccountList {
 
     /**
      * Adds the account to the AccountList.
-     * @param a
+     * @param a the account
      */
     public void addAccount(Account a){
         accounts.add(a);
@@ -26,7 +26,7 @@ public class AccountList {
 
     /**
      * Removes the account from the AccountList.
-     * @param a
+     * @param a the account
      */
     public void removeAccount(Account a){
         //
@@ -34,8 +34,8 @@ public class AccountList {
 
     /**
      * Returns the account username and password.
-     * @param username
-     * @param password
+     * @param username the account username
+     * @param password the account password
      * @return item
      */
     public Account getAccount(String username, String password)
@@ -52,7 +52,7 @@ public class AccountList {
 
     /**
      * Returns the id value of the account.
-     * @param account
+     * @param account the account id
      * @return account type id
      */
     public int getAccountType(Account account){
@@ -74,7 +74,7 @@ public class AccountList {
 
     /**
      * Returns the account by index.
-     * @param i
+     * @param i the account by index
      * @return i
      */
     public Account getAccount(int i){

@@ -11,19 +11,28 @@ import static java.sql.DriverManager.getConnection;
 /**
  * Implementation of Data Access Object interface handling products.
  * It is created following the Singleton Design Pattern
- * @author dianasuzana
+ * @author Group 7
  * @version 1.0
  */
 
 public class LoginDAOImpl implements LoginDAO
 {
-
+  /**
+   * Login method for the database
+   * @throws SQLException
+   */
   public LoginDAOImpl() throws SQLException
   {
     DriverManager.registerDriver(new org.postgresql.Driver());
   }
 
-
+  /**
+   * Validates the username and password in the database.
+   * @param username The username provided by the user
+   * @param password The password provided by the user
+   * @return null
+   * @throws SQLException
+   */
   @Override public Account login(String username, String password)
       throws SQLException
   {

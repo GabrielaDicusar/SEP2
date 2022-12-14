@@ -20,9 +20,9 @@ public class TrainingSession implements Serializable {
 
     /**
      * Training Session constructor to instantiate title, date and capacity.
-     * @param type
-     * @param time
-     * @param participants
+     * @param type the type
+     * @param time the time
+     * @param participants the participants
      */
     public TrainingSession(String type, String time, int participants, Account trainer, LocalDate date) {
         this.type = type;
@@ -35,7 +35,7 @@ public class TrainingSession implements Serializable {
 
     /**
      * Adds a member to a Training Session
-     * @param account
+     * @param account the account
      */
     public void addMember(Account account)
     {
@@ -84,7 +84,7 @@ public class TrainingSession implements Serializable {
 
     /**
      * Returns the account by index.
-     * @param i
+     * @param i the account by index
      * @return index
      */
     public Account getAccountById(int i)
@@ -101,8 +101,8 @@ public class TrainingSession implements Serializable {
         return type;
     }
     /**
-     * Sets the object of title.
-     * @param type
+     * Sets the object of type.
+     * @param type the type
      */
 
     public void setType(String type) {
@@ -124,7 +124,7 @@ public class TrainingSession implements Serializable {
 
     /**
      * Sets the object of date.
-     * @param time
+     * @param time the time
      */
 
     public void setTime(String time) {
@@ -132,18 +132,17 @@ public class TrainingSession implements Serializable {
     }
 
     /**
-     * Returns an object of capacity.
-     * @return capacity
+     * Returns the number of participants
+     * @return participants
      */
 
     public int getParticipants() {
         return participants;
     }
 
-
     /**
-     * Sets the object of date.
-     * @param participants
+     * Sets th enumber of participants
+     * @param participants the participants
      */
 
     public void setParticipants(int participants) {

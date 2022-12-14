@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Interface BackEndModelManager creates addSession, removeSession, addAccount, removeAccount, and verifyLogin which are implemented
    by BackEndModel. It extends Subject.
- * @author
+ * @author Group 7
  */
 
 public interface BackEndModelManager extends Subject

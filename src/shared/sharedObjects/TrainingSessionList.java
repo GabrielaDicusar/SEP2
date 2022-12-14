@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * A class handling the arraylist methods for the Training Session Class.
- * @author
+ * @author Group 7
  */
 public class TrainingSessionList implements Serializable {
     private List<TrainingSession> sessions;
@@ -29,7 +29,7 @@ public class TrainingSessionList implements Serializable {
 
     /**
      *  Adds a training session to the Training Session Arraylist.
-     * @param trainingSession
+     * @param trainingSession the training session
      */
     public void addSession(TrainingSession trainingSession)
     {
@@ -45,7 +45,7 @@ public class TrainingSessionList implements Serializable {
 
     /**
      * Removes a training session from the Training Session Arraylist.
-     * @param trainingSession
+     * @param trainingSession the training session
      */
     public void removeTrainingSession(TrainingSession trainingSession)
     {
@@ -54,7 +54,7 @@ public class TrainingSessionList implements Serializable {
 
     /**
      * Checks if the training session element exists and returns the specific object is the case is true.
-     * @param trainingSession
+     * @param trainingSession the training session
      * @return null
      */
     public TrainingSession getTrainingSession(TrainingSession trainingSession)
@@ -71,8 +71,8 @@ public class TrainingSessionList implements Serializable {
 
     /**
      * Adds the member to the specific training session.
-     * @param account
-     * @param trainingSession
+     * @param account the member account
+     * @param trainingSession the training session
      * @return item
      */
     public TrainingSession addParticipant(Account account, TrainingSession trainingSession)
@@ -96,8 +96,8 @@ public class TrainingSessionList implements Serializable {
 
     /**
      * Returns training session be index.
-     * @param i
-     * @return
+     * @param i the training session by index
+     * @return index
      */
     public TrainingSession getTrainingSessionByIndex(int i){
         return sessions.get(i);
@@ -113,7 +113,7 @@ public class TrainingSessionList implements Serializable {
 
     /**
      * Removes the specific training session.
-     * @param session
+     * @param session the training session
      */
     public void remove(TrainingSession session){
         sessions.remove(session);
@@ -121,7 +121,7 @@ public class TrainingSessionList implements Serializable {
 
     /**
      * Returns a boolean if the session is contained in the ArrayList.
-     * @param session
+     * @param session the training session
      * @return boolean
      */
     public boolean contain(TrainingSession session){

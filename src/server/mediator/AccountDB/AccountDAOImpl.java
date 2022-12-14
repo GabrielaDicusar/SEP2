@@ -7,14 +7,15 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /**
- * @author dianasuzana
+ * A class handling the methods for the account connection in the database.
+ * @author Group 7
  * @version 1.0
  */
 public class AccountDAOImpl implements AccountDAO
 {
 
   /**
-   * A constructor that will initialize the with the db driver
+   * A constructor that will initialize the with the database driver
    */
   public AccountDAOImpl()
   {
@@ -25,6 +26,10 @@ public class AccountDAOImpl implements AccountDAO
     }
   }
 
+  /**
+   * Adds the account to the database.
+   * @param account the account
+   */
   @Override public void addAccount(Account account)
   {
     try (Connection connection = ConnectionDB.getConnection()) {
