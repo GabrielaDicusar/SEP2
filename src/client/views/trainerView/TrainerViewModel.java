@@ -18,6 +18,10 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A Listener Class implementing the methods for the TrainerViewModel.
+ * @author Group 7
+ */
 public class TrainerViewModel implements PropertyChangeListener
 {
   private FrontEndModelManager modelManager;
@@ -25,6 +29,10 @@ public class TrainerViewModel implements PropertyChangeListener
   private DateTimeFormatter dateTimeFormatter;
   private StringProperty date;
 
+  /**
+   * A constructor instantiating the frontEndModelManager, dateTimeFormatter, addListener and date.
+   * @param frontEndModelManager the frontEndModelManager
+   */
   public TrainerViewModel (FrontEndModel frontEndModelManager) {
     modelManager = frontEndModelManager;
     dateTimeFormatter = DateTimeFormatter.ofPattern("M/d/yyyy");
@@ -35,6 +43,9 @@ public class TrainerViewModel implements PropertyChangeListener
     date = new SimpleStringProperty();
   }
 
+  /**
+   * Returns an observable list of training sessions.
+   */
   public void loadSessions() {
     TrainingSessionList logList = null;
     try {
@@ -48,10 +59,17 @@ public class TrainerViewModel implements PropertyChangeListener
     }
   }
 
+  /**
+   * Returns the training sessions.
+   * @return sessions
+   */
   public ObservableList<TrainingSession> getSessions() {
     return sessions;
   }
-
+/**
+ * A listener method that reacts to the events from frontEndModel
+ * @param evt the event
+ */
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
     if (evt.getPropertyName().equals("ParticipantAdded")) {
@@ -103,10 +121,18 @@ public class TrainerViewModel implements PropertyChangeListener
     }
   }
 
+  /**
+   * Unassigns a trainer from the training session.
+   * @param session the session
+   */
   public void unassignTrainer(TrainingSession session) {
     modelManager.unassignTrainer(session);
   }
 
+  /**
+   * Returns the date.
+   * @return date
+   */
   public Property<String> getDate() {
     return date;
   }

@@ -10,10 +10,18 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 
+/**
+ * A Class implementing the methods for the bookedSessionsViewModel.
+ * @author Group 7
+ */
 public class BookedSessionsViewModel implements PropertyChangeListener {
     private FrontEndModelManager modelManager;
     private ObservableList<TrainingSession> sessions;
 
+    /**
+     * A constructor instantiating the variables.
+     * @param frontEndModelManager the frontEndModelManager
+     */
     public BookedSessionsViewModel(FrontEndModelManager frontEndModelManager)
     {
         modelManager = frontEndModelManager;
@@ -22,6 +30,9 @@ public class BookedSessionsViewModel implements PropertyChangeListener {
         modelManager.addListener("UnassignedTrainer", this);
     }
 
+    /**
+     * A method that loads the sessions booked by the member.
+     */
     public void loadSessions() {
         TrainingSessionList logList = null;
         try {
@@ -32,15 +43,26 @@ public class BookedSessionsViewModel implements PropertyChangeListener {
         }
     }
 
+    /**
+     * Returns the sessions
+     * @return sessions
+     */
     public ObservableList<TrainingSession> getSessions() {
         return sessions;
     }
 
+    /**
+     * Returns the modelManger
+     * @return modelManager
+     */
     public FrontEndModelManager getModelManager() {
         return modelManager;
     }
 
-
+    /**
+     * A listener method that reacts to changes in the frontEndModel.
+     * @param evt the event
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("ParticipantAdded")) {
@@ -72,6 +94,10 @@ public class BookedSessionsViewModel implements PropertyChangeListener {
         }
     }
 
+    /**
+     * Removes the training session.
+     * @param trainingSession the training session
+     */
     public void removeSession(TrainingSession trainingSession) {
         modelManager.removeSession(trainingSession);
     }

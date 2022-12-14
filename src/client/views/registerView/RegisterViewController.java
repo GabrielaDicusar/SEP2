@@ -9,7 +9,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 
-
+/**
+ * A controller class for the trainerViewModel.
+ * @author Group 7
+ */
 public class RegisterViewController implements ViewController
 {
   @FXML public TextField firstName;
@@ -24,16 +27,22 @@ public class RegisterViewController implements ViewController
   private ViewHandler viewHandler;
   private RegisterViewModel registerViewModel;
 
-
+  /**
+   * An init method for the viewHandler and viewModelFactory
+   * @param viewHandler the viewHandler
+   * @param viewModelFactory the viewModelFactory
+   */
   @Override public void init(ViewHandler viewHandler,
       ViewModelFactory viewModelFactory)
   {
-
     this.viewHandler = viewHandler;
     registerViewModel = viewModelFactory.getRegisterViewModel();
     bind();
   }
 
+  /**
+   * An action when the create button is pressed.
+   */
   @FXML private void onbtnCreate()
   {
    registerViewModel.createAccount();
@@ -41,6 +50,9 @@ public class RegisterViewController implements ViewController
    viewHandler.openLoginView();
   }
 
+  /**
+   * A binding method for the text properties.
+   */
   private void bind() {
     firstName.textProperty().bindBidirectional(
         registerViewModel.getFirstNameProperty());

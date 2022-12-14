@@ -15,7 +15,10 @@ import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
+/**
+ * A Class implementing the methods for the EditViewModel.
+ * @author Group 7
+ */
 public class EditViewModel implements PropertyChangeListener
 {
 
@@ -28,7 +31,10 @@ public class EditViewModel implements PropertyChangeListener
   private DateTimeFormatter dateTimeFormatter;
   private ObservableList<String> timeList;
 
-
+  /**
+   * A constructor for the initialisation of the variables.
+   * @param frontEndModelManager the frontEndModelManager
+   */
   public EditViewModel(FrontEndModelManager frontEndModelManager) {
     this.frontEndModelManager = frontEndModelManager;
     frontEndModelManager.addListener("SendToEdit", this);
@@ -39,21 +45,41 @@ public class EditViewModel implements PropertyChangeListener
     dateTimeFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
   }
 
+  /**
+   * Returns the frontEndModelManager
+   * @return frontEndModelManager
+   */
   public FrontEndModelManager getFrontEndModelManager() {
     return frontEndModelManager;
   }
 
+  /**
+   * Returns the capacity
+   * @return capacity
+   */
   public StringProperty getCapacity() {
     return capacity;
   }
 
+  /**
+   * Returns the time
+   * @return time
+   */
   public StringProperty getTime() {
     return time;
   }
 
+  /**
+   * Returns the date
+   * @return date
+   */
   public StringProperty getDate() {
     return date;
   }
+
+  /**
+   * loads the list of trainers.
+   */
   public void loadListOfTrainers(){
     try {
       ArrayList trainersList = frontEndModelManager.getTrainers();
@@ -63,13 +89,25 @@ public class EditViewModel implements PropertyChangeListener
     }
   }
 
+  /**
+   * Returns the trainers
+   * @return trainers
+   */
   public ObservableList<Account> getTrainers() {
     return trainers;
   }
 
+  /**
+   * Returns the type
+   * @return type
+   */
   public StringProperty getType() {
     return type;
   }
+
+  /**
+   * loads the times of the sessions
+   */
   public void loadTimeList(){
     ArrayList<String> time = new ArrayList<>();
     time.add("8.00");
@@ -83,10 +121,19 @@ public class EditViewModel implements PropertyChangeListener
     time.add("16.00");
     timeList = FXCollections.observableArrayList(time);
   }
+
+  /**
+   * Returns the time slots.
+   * @return timeList
+   */
   public ObservableList<String> getTimeSlots(){
     return timeList;
   }
 
+  /**
+   * A listener method for the frontEndModel
+   * @param evt the event
+   */
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
     if (evt.getPropertyName().equals("SendToEdit"))

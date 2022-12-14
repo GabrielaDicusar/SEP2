@@ -165,22 +165,43 @@ public class BackEndModel implements BackEndModelManager
         }
         return temp2;
     }
+
+    /**
+     * Checks if the member is already added to the training session.
+     * @param account the account
+     * @param trainingSession the training session
+     * @return boolean
+     */
     @Override
     public boolean isMemberInSession(Account account, TrainingSession trainingSession)
     {
         return trainingSessionDAO.isMemberInSession(account, trainingSession);
     }
 
+    /**
+     * removes the session from the database.
+     * @param account the account
+     * @param trainingSession the training session
+     */
     @Override
     public void removeSession(Account account, TrainingSession trainingSession) {
         trainingSessionDAO.removeSession(account, trainingSession);
     }
 
+    /**
+     * Returns the managers training sessions.
+     * @param parse the parse object
+     * @return training sessions
+     */
     @Override
     public TrainingSessionList getSessionsForManager(LocalDate parse) {
         return trainingSessionDAO.getSessionsForManager(parse);
     }
 
+    /**
+     * Creates a firePropertyChange when a session is updated.
+     * @param session the training sessions
+     */
     @Override
     public void updateSession(TrainingSession session) {
         System.out.println("Back Model update session " + session.toString());
@@ -188,12 +209,20 @@ public class BackEndModel implements BackEndModelManager
         support.firePropertyChange("UpdateSession", null, session);
     }
 
+    /**
+     * Creates a firePropertyChange when a session is deleted.
+     * @param session the session
+     */
     @Override
     public void deleteSession(TrainingSession session) {
         trainingSessionDAO.deleteSession(session);
         support.firePropertyChange("SessionDeleted", null, session);
     }
 
+    /**
+     * Creates a firePropertyChange when a session has a unassigned trainer.
+     * @param session the session
+     */
     @Override
     public void unassignTrainer(TrainingSession session) {
 //        trainingSessionDAO.unassignTrainer(session);
@@ -202,6 +231,11 @@ public class BackEndModel implements BackEndModelManager
         System.out.println("backModel fired event unassigned with new value");
     }
 
+    /**
+     * Returns a list of booked training sessions.
+     * @param account the account
+     * @return temp
+     */
     @Override
     public TrainingSessionList getListOfSessionsBookedByMember(Account account) {
         TrainingSessionList temp = trainingSessionDAO.getListOfSessionsBookedByMember(account);
@@ -212,6 +246,12 @@ public class BackEndModel implements BackEndModelManager
         return temp;
     }
 
+    /**
+     * Returns the trainers training sessions.
+     * @param account the account
+     * @param date the date
+     * @return temp2
+     */
     @Override
     public TrainingSessionList getTrainingSessionsForTrainer(Account account, LocalDate date) {
             TrainingSessionList temp2 = new TrainingSessionList();
@@ -225,12 +265,21 @@ public class BackEndModel implements BackEndModelManager
             return temp2;
     }
 
-
+    /**
+     * Creates a listener
+     * @param eventName the eventName
+     * @param listener the listener
+     */
     @Override public void addListener(String eventName, PropertyChangeListener listener)
     {
         support.addPropertyChangeListener(eventName, listener);
     }
 
+    /**
+     * Removes a listener
+     * @param eventName the evenName
+     * @param listener the listener
+     */
     @Override public void removeListener(String eventName, PropertyChangeListener listener)
     {
         support.removePropertyChangeListener(eventName, listener);

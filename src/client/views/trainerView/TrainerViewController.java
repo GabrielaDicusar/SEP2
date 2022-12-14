@@ -15,6 +15,10 @@ import shared.sharedObjects.TrainingSession;
 
 import java.awt.event.ActionEvent;
 
+/**
+ * A controller class for the trainerViewModel.
+ * @author Group 7
+ */
 public class TrainerViewController implements ViewController
 
 {
@@ -29,6 +33,11 @@ public class TrainerViewController implements ViewController
   public TableColumn<TrainingSession, String> participantsColumn;
   public TableView<TrainingSession> sessionTableView;
 
+  /**
+   * A constructor instantiating the viewHandler, viewModelFactory, setting the values in the observable list columns, the binded date and training session times.
+   * @param viewHandler the viewHandler
+   * @param viewModelFactory the viewModelFactory
+   */
   @Override
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
@@ -43,8 +52,9 @@ public class TrainerViewController implements ViewController
 
   }
 
-
-
+  /**
+   * A selectable calendar.
+   */
   public void onDatePicker()
   {
     trainerViewModel.loadSessions();
@@ -52,6 +62,9 @@ public class TrainerViewController implements ViewController
     System.out.println("1");
   }
 
+  /**
+   * A cancel button.
+   */
   public void onCancelBtn(){
     TrainingSession session = sessionTableView.getSelectionModel().getSelectedItem();
     trainerViewModel.unassignTrainer(session);

@@ -9,6 +9,10 @@ import shared.sharedObjects.Account;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * A Class implementing the methods for the RegisterViewModel.
+ * @author Group 7
+ */
 public class RegisterViewModel implements PropertyChangeListener
 {
   private FrontEndModelManager frontEndModelManager;
@@ -19,6 +23,11 @@ public class RegisterViewModel implements PropertyChangeListener
     initializeAllProperties();
    this.frontEndModelManager = frontEndModelManager;
   }
+
+  /**
+   * Returns the frontEndModel.
+   * @return frontEndModel
+   */
   public FrontEndModel getFrontEndModel() {
     return getFrontEndModel();
   }
@@ -97,7 +106,9 @@ public class RegisterViewModel implements PropertyChangeListener
     errorLabel = new SimpleStringProperty();
   }
 
-
+  /**
+   * A notification when a text field is left empty.
+   */
   public void createAccount()
   {
     if (username.get() == null || username.get().isEmpty())
@@ -136,6 +147,10 @@ public class RegisterViewModel implements PropertyChangeListener
 
   }
 
+  /**
+   * A property change event
+   * @param evt the event
+   */
   @Override public void propertyChange(PropertyChangeEvent evt)
   {
 

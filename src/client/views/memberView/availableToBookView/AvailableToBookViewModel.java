@@ -14,13 +14,20 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * A Class implementing the methods for the availableToBookViewModel.
+ * @author Group 7
+ */
 public class AvailableToBookViewModel implements PropertyChangeListener {
     private FrontEndModelManager modelManager;
     private ObservableList<TrainingSession> sessions;
     private StringProperty date;
     private DateTimeFormatter dateTimeFormatter;
 
+    /**
+     * A constructor to instantiate the variables.
+     * @param frontEndModelManager the frontEndModelManager
+     */
     public AvailableToBookViewModel(FrontEndModelManager frontEndModelManager) {
         modelManager = frontEndModelManager;
         modelManager.addListener("SessionAdded", this);
@@ -32,24 +39,43 @@ public class AvailableToBookViewModel implements PropertyChangeListener {
         dateTimeFormatter = DateTimeFormatter.ofPattern("M/d/yyyy");
     }
 
+    /**
+     * Returns the date.
+     * @return date
+     */
     public StringProperty getDate() {
         return date;
     }
 
+    /**
+     * Loads the sessions
+     */
     public void loadSessions() {
         System.out.println(date.get());
             TrainingSessionList logList = modelManager.getAvailableSessionsForMember(modelManager.getClient().getLoginCredentials(), LocalDate.parse(date.get(), dateTimeFormatter));
             sessions = FXCollections.observableArrayList(logList.getTrainingSessions());
     }
 
+    /**
+     * Returns the training sessions.
+     * @return sessions
+     */
     public ObservableList<TrainingSession> getSessions() {
         return sessions;
     }
 
+    /**
+     * Returns the modelManager
+     * @return modelManager
+     */
     public FrontEndModelManager getModelManager() {
         return modelManager;
     }
 
+    /**
+     * A listener method that reacts to the events from frontEndModel
+     * @param evt the event
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("ParticipantAdded")) {
@@ -110,6 +136,11 @@ public class AvailableToBookViewModel implements PropertyChangeListener {
         }
     }
 
+    /**
+     * Adds a participant to the session.
+     * @param account the account
+     * @param session the session
+     */
     public void addParticipant(Account account, TrainingSession session) {
         modelManager.addParticipant(account, session);
     }

@@ -11,7 +11,10 @@ import shared.sharedObjects.TrainingSession;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * A controller class for the EditViewModel.
+ * @author Group 7
+ */
 public class EditViewController implements ViewController
 {
   public TextField typeField;
@@ -26,6 +29,11 @@ public class EditViewController implements ViewController
   private EditViewModel editViewModel;
   private DateTimeFormatter dateTimeFormatter;
 
+  /**
+   * An init method for the viewHandler and viewModelFactory.
+   * @param viewHandler the viewHandler
+   * @param viewModelFactory the viewModelFactory
+   */
   @Override public void init(ViewHandler viewHandler,
       ViewModelFactory viewModelFactory)
   {
@@ -41,6 +49,10 @@ public class EditViewController implements ViewController
 
   }
 
+  /**
+   * An action when a button is pressed.
+   * @param actionEvent the action event
+   */
   public void onButtonPressed(ActionEvent actionEvent) {
     if (actionEvent.getSource() == btnCancel)
     {

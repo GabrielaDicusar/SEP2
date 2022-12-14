@@ -13,6 +13,10 @@ import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A Class implementing the methods for the ManagerViewModel.
+ * @author Group 7
+ */
 public class ManagerViewModel implements PropertyChangeListener
 {
   private FrontEndModelManager modelManager;
@@ -31,24 +35,43 @@ public class ManagerViewModel implements PropertyChangeListener
 
   }
 
+  /**
+   * Loads the sessions
+   */
   public void loadSessions() {
     System.out.println(date.get());
     TrainingSessionList logList = modelManager.getSessionsForManager(LocalDate.parse(date.get(), dateTimeFormatter));
     sessions = FXCollections.observableArrayList(logList.getTrainingSessions());
   }
 
+  /**
+   * Returns the sessions
+   * @return sessions
+   */
   public ObservableList<TrainingSession> getSessions() {
     return sessions;
   }
 
+  /**
+   * Returns the date
+   * @return date
+   */
   public StringProperty getDate() {
     return date;
   }
 
+  /**
+   * Returns the modelManager
+   * @return modelManager
+   */
   public FrontEndModelManager getFrontEndModelManager() {
     return modelManager;
   }
 
+  /**
+  *  A listener method that reacts to the events from frontEndModel
+  * @param evt the event
+  */
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
 
@@ -103,6 +126,10 @@ public class ManagerViewModel implements PropertyChangeListener
     }
   }
 
+  /**
+   * A method that sends the selected item to be edited, when a manager edits a training session.
+   * @param selectedItem
+   */
   public void sendToEdit(TrainingSession selectedItem) {
     modelManager.sendToEdit(selectedItem);
   }

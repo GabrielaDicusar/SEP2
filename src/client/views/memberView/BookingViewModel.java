@@ -10,6 +10,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
+/**
+ * A Class implementing the methods for the bookingViewModel.
+ * @author Group 7
+ */
 public class BookingViewModel {
 
     FrontEndModelManager frontEndModelManager;
