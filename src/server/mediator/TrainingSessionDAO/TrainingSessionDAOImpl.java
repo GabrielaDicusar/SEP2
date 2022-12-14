@@ -81,23 +81,18 @@ public class TrainingSessionDAOImpl implements TrainingSessionDAO {
                 PreparedStatement statement2 = connection.prepareStatement("Select * from account where account_id = ?;");
                 statement2.setInt(1, resultSet.getInt("trainer_id"));
                 ResultSet resultSet1 = statement2.executeQuery();
-                if (resultSet1.next())
-                {
+                if (resultSet1.next()) {
                     trainer = new Account(resultSet1.getInt("account_type"), resultSet1.getString("firstname"), resultSet1.getString("lastname"), resultSet1.getString("email"), resultSet1.getString("phonenumber"), resultSet1.getString("username"), resultSet1.getString("password"));
                     temp.addSession(new TrainingSession(type, time, participants, trainer, date));
-                }
-                else
-                {
+                } else {
                     connection.close();
                 }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        for (int i = 0; i < temp.size(); i++)
-        {
-            if (temp.getTrainingSessionByIndex(i).getDate().isBefore(LocalDate.now()))
-            {
+        for (int i = 0; i < temp.size(); i++) {
+            if (temp.getTrainingSessionByIndex(i).getDate().isBefore(LocalDate.now())) {
                 temp.removeTrainingSession(temp.getTrainingSessionByIndex(i));
             }
         }
@@ -117,8 +112,7 @@ public class TrainingSessionDAOImpl implements TrainingSessionDAO {
             Account trainer;
             LocalDate date;
 
-            while (resultSet.next())
-            {
+            while (resultSet.next()) {
                 type = resultSet.getString("type");
                 time = resultSet.getString("time");
                 participants = resultSet.getInt("capacity");
@@ -126,13 +120,10 @@ public class TrainingSessionDAOImpl implements TrainingSessionDAO {
                 PreparedStatement statement2 = connection.prepareStatement("Select * from account where account_id = ?;");
                 statement2.setInt(1, resultSet.getInt("trainer_id"));
                 ResultSet resultSet1 = statement2.executeQuery();
-                if (resultSet1.next())
-                {
+                if (resultSet1.next()) {
                     trainer = new Account(resultSet1.getInt("account_type"), resultSet1.getString("firstname"), resultSet1.getString("lastname"), resultSet1.getString("email"), resultSet1.getString("phonenumber"), resultSet1.getString("username"), resultSet1.getString("password"));
                     temp.addSession(new TrainingSession(type, time, participants, trainer, date));
-                }
-                else
-                {
+                } else {
                     connection.close();
                 }
             }
@@ -142,13 +133,12 @@ public class TrainingSessionDAOImpl implements TrainingSessionDAO {
         }
         return temp;
     }
+
     public TrainingSession addParticipant
-            (Account account, TrainingSession trainingSession)
-    {
+            (Account account, TrainingSession trainingSession) {
         TrainingSession temp = new TrainingSession
                 (null, null, 0, null, null);
-        try (Connection connection = ConnectionDB.getConnection())
-        {
+        try (Connection connection = ConnectionDB.getConnection()) {
             PreparedStatement insert = connection.prepareStatement
                     ("insert into BookedSession (session_id, account_id) values (?, ?);");
             PreparedStatement sessionId = connection.prepareStatement
@@ -167,73 +157,66 @@ public class TrainingSessionDAOImpl implements TrainingSessionDAO {
             PreparedStatement isAccountThere = connection.prepareStatement
                     ("select * from BookedSession where account_id = ? and session_id = ?;");
 
-                if (resultAccountId.next() && resultSessionId.next())
-                {
-                    isAccountThere.setInt(1 ,resultAccountId.getInt(1));
-                    isAccountThere.setInt(2 ,resultSessionId.getInt(1));
-                    ResultSet checkIF = isAccountThere.executeQuery();
-                    if (checkIF.next()) {
-                        connection.close();
-                    }
-                    else
-                    {
-                        insert.setInt(1, resultSessionId.getInt(1));
-                        insert.setInt(2, resultAccountId.getInt(1));
-                    }
+            if (resultAccountId.next() && resultSessionId.next()) {
+                isAccountThere.setInt(1, resultAccountId.getInt(1));
+                isAccountThere.setInt(2, resultSessionId.getInt(1));
+                ResultSet checkIF = isAccountThere.executeQuery();
+                if (checkIF.next()) {
+                    connection.close();
+                } else {
+                    insert.setInt(1, resultSessionId.getInt(1));
+                    insert.setInt(2, resultAccountId.getInt(1));
                 }
-                insert.executeUpdate();
+            }
+            insert.executeUpdate();
 
-                PreparedStatement capacity = connection.prepareStatement
-                        ("update TrainingSession " +
-                        "set capacity = capacity-1 " +
-                        "where session_id in " +
-                        "(select session_id from BookedSession where account_id = ? " +
-                        "and BookedSession.session_id = ?)");
-                capacity.setInt(1, resultAccountId.getInt(1));
-                capacity.setInt(2, resultSessionId.getInt(1));
+            PreparedStatement capacity = connection.prepareStatement
+                    ("update TrainingSession " +
+                            "set capacity = capacity-1 " +
+                            "where session_id in " +
+                            "(select session_id from BookedSession where account_id = ? " +
+                            "and BookedSession.session_id = ?)");
+            capacity.setInt(1, resultAccountId.getInt(1));
+            capacity.setInt(2, resultSessionId.getInt(1));
 
-                capacity.executeUpdate();
+            capacity.executeUpdate();
 
-                PreparedStatement returnTraining = connection.prepareStatement
-                        ("select * from TrainingSession where time = ? and date = ?;");
-                returnTraining.setString(1, trainingSession.getTime());
-                returnTraining.setString(2, trainingSession.getDate().toString());
-                ResultSet resultTraining = returnTraining.executeQuery();
-                if (resultTraining.next())
-                {
-                    String type = resultTraining.getString("type");
-                    String time = resultTraining.getString("time");
-                    int participants = resultTraining.getInt("capacity");
-                    LocalDate date = LocalDate.parse(resultTraining.getString("date"));
-                    Account trainer;
+            PreparedStatement returnTraining = connection.prepareStatement
+                    ("select * from TrainingSession where time = ? and date = ?;");
+            returnTraining.setString(1, trainingSession.getTime());
+            returnTraining.setString(2, trainingSession.getDate().toString());
+            ResultSet resultTraining = returnTraining.executeQuery();
+            if (resultTraining.next()) {
+                String type = resultTraining.getString("type");
+                String time = resultTraining.getString("time");
+                int participants = resultTraining.getInt("capacity");
+                LocalDate date = LocalDate.parse(resultTraining.getString("date"));
+                Account trainer;
 
-                    PreparedStatement getTrainer = connection.prepareStatement
-                            ("Select * from account where account_id = ?;");
-                    getTrainer.setInt(1, resultTraining.getInt("trainer_id"));
-                    ResultSet resultTrainer = getTrainer.executeQuery();
-                    if (resultTrainer.next())
-                    {
-                        trainer = new Account(resultTrainer.getInt("account_type"),
-                                resultTrainer.getString("firstname"),
-                                resultTrainer.getString("lastname"),
-                                resultTrainer.getString("email"),
-                                resultTrainer.getString("phonenumber"),
-                                resultTrainer.getString("username"),
-                                resultTrainer.getString("password"));
-                        temp = new TrainingSession(type, time, participants, trainer, date);
-                    }
-                    else
-                    {
-                        connection.close();
-                    }
+                PreparedStatement getTrainer = connection.prepareStatement
+                        ("Select * from account where account_id = ?;");
+                getTrainer.setInt(1, resultTraining.getInt("trainer_id"));
+                ResultSet resultTrainer = getTrainer.executeQuery();
+                if (resultTrainer.next()) {
+                    trainer = new Account(resultTrainer.getInt("account_type"),
+                            resultTrainer.getString("firstname"),
+                            resultTrainer.getString("lastname"),
+                            resultTrainer.getString("email"),
+                            resultTrainer.getString("phonenumber"),
+                            resultTrainer.getString("username"),
+                            resultTrainer.getString("password"));
+                    temp = new TrainingSession(type, time, participants, trainer, date);
+                } else {
+                    connection.close();
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return temp;
     }
-    public boolean isMemberInSession(Account account, TrainingSession trainingSession)
-    {
+
+    public boolean isMemberInSession(Account account, TrainingSession trainingSession) {
         int account_id = 0;
         int session_id = 0;
         try (Connection connection = ConnectionDB.getConnection()) {
@@ -243,8 +226,7 @@ public class TrainingSessionDAOImpl implements TrainingSessionDAO {
 
             ResultSet resultGetMember = getMember.executeQuery();
 
-            if (resultGetMember.next())
-            {
+            if (resultGetMember.next()) {
                 account_id = resultGetMember.getInt(1);
             }
 
@@ -253,8 +235,7 @@ public class TrainingSessionDAOImpl implements TrainingSessionDAO {
             getSessionId.setString(2, trainingSession.getDate().toString());
 
             ResultSet resultGetSessionId = getSessionId.executeQuery();
-            if(resultGetSessionId.next())
-            {
+            if (resultGetSessionId.next()) {
                 session_id = resultGetSessionId.getInt(1);
             }
 
@@ -264,12 +245,9 @@ public class TrainingSessionDAOImpl implements TrainingSessionDAO {
 
             ResultSet isMember = isMemberInSession.executeQuery();
 
-            if (isMember.next())
-            {
+            if (isMember.next()) {
                 return true;
-            }
-            else
-            {
+            } else {
                 return false;
             }
 
@@ -278,18 +256,15 @@ public class TrainingSessionDAOImpl implements TrainingSessionDAO {
         }
     }
 
-    public TrainingSessionList getSessionsForManager(LocalDate date)
-    {
+    public TrainingSessionList getSessionsForManager(LocalDate date) {
         TrainingSessionList temp = getListOfAllSessions();
         TrainingSessionList removed = getListOfAllSessions();
 
         int size = temp.size();
-        for (TrainingSession item : temp.getTrainingSessions())
-        {
-           if (item.getDate().isBefore(date) || item.getDate().isAfter(date))
-           {
-               removed.removeTrainingSession(item);
-           }
+        for (TrainingSession item : temp.getTrainingSessions()) {
+            if (item.getDate().isBefore(date) || item.getDate().isAfter(date)) {
+                removed.removeTrainingSession(item);
+            }
         }
         return removed;
     }
@@ -306,21 +281,70 @@ public class TrainingSessionDAOImpl implements TrainingSessionDAO {
             getTrainer.setString(1, session.getTrainerAccount().getUsername());
             getTrainer.setString(2, session.getTrainerAccount().getPassword());
             ResultSet trainer = getTrainer.executeQuery();
-            if (trainer.next())
-            {
+
+            if (trainer.next()) {
                 updateSession.setInt(2, trainer.getInt(1));
-            }
-            else
-            {
+            } else {
                 connection.close();
             }
             updateSession.setInt(3, session.getParticipants());
-            updateSession.setString(4, session.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-d")));
+            updateSession.setString(4, session.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             updateSession.setString(5, session.getTime());
             updateSession.executeUpdate();
-        } catch (SQLException e) {
+
+            } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("Session Updated");
+    }
+
+    @Override
+    public TrainingSession unassignTrainer(TrainingSession session) {
+        TrainingSession temp = new TrainingSession
+                (null, null, 0, null, null);
+        try (Connection connection = ConnectionDB.getConnection()) {
+            PreparedStatement unassignTrainer = connection.prepareStatement("update TrainingSession\n" +
+                    "set trainer_id =(select account_id from account where firstname = 'Unassigned')\n" +
+                    "where time = ? and date = ?");
+            unassignTrainer.setString(1, session.getTime());
+            unassignTrainer.setString(2, String.valueOf(session.getDate()));
+            unassignTrainer.executeUpdate();
+
+            PreparedStatement returnTraining = connection.prepareStatement
+                    ("select * from TrainingSession where time = ? and date = ?;");
+            returnTraining.setString(1, session.getTime());
+            returnTraining.setString(2, session.getDate().toString());
+            ResultSet resultTraining = returnTraining.executeQuery();
+            if (resultTraining.next()) {
+                String type = resultTraining.getString("type");
+                String time = resultTraining.getString("time");
+                int participants = resultTraining.getInt("capacity");
+                LocalDate date = LocalDate.parse(resultTraining.getString("date"));
+                Account trainer;
+
+                PreparedStatement getTrainer = connection.prepareStatement
+                        ("Select * from account where account_id = ?;");
+                getTrainer.setInt(1, resultTraining.getInt("trainer_id"));
+                ResultSet resultTrainer = getTrainer.executeQuery();
+                if (resultTrainer.next())
+                {
+                    trainer = new Account(resultTrainer.getInt("account_type"),
+                            resultTrainer.getString("firstname"),
+                            resultTrainer.getString("lastname"),
+                            resultTrainer.getString("email"),
+                            resultTrainer.getString("phonenumber"),
+                            resultTrainer.getString("username"),
+                            resultTrainer.getString("password"));
+                    temp = new TrainingSession(type, time, participants, trainer, date);
+
+                } else {
+                    connection.close();
+                }
+            }
+        }catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+        return temp;
     }
 
     @Override
@@ -330,12 +354,16 @@ public class TrainingSessionDAOImpl implements TrainingSessionDAO {
             updateSession.setString(1, session.getTime());
             updateSession.setString(2, session.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-d")));
             updateSession.executeUpdate();
+
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-        @Override
+
+
+    @Override
     public void removeSession(Account account, TrainingSession trainingSession) {
         try (Connection connection = ConnectionDB.getConnection()) {
 

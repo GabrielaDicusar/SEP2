@@ -16,8 +16,7 @@ public interface TrainingSessionDAO
   boolean isMemberInSession(Account account, TrainingSession trainingSession);
   void removeSession(Account account, TrainingSession trainingSession);
   TrainingSessionList getSessionsForManager(LocalDate date);
-
   void updateSession(TrainingSession session);
-
-    void deleteSession(TrainingSession session);
+  void deleteSession(TrainingSession session);
+  TrainingSession unassignTrainer(TrainingSession session);
 }

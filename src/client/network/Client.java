@@ -31,7 +31,7 @@ public class Client implements RMIClient, ClientCallBack {
         Registry registry = null;
         try{
             UnicastRemoteObject.exportObject(this,0);
-            registry = LocateRegistry.getRegistry("localhost",1234);
+            registry = LocateRegistry.getRegistry("localhost",1099);
             server = (RMIServer) registry.lookup("Server");
             server.registerCallback(this);
             System.out.println("Client started");
@@ -65,12 +65,19 @@ public class Client implements RMIClient, ClientCallBack {
 
     @Override
     public void updateSession(TrainingSession session) throws RemoteException {
+        System.out.println("Client update session " + session.toString());
         server.updateSession(session);
     }
 
     @Override
     public void deleteSession(TrainingSession session) throws RemoteException {
         server.deleteSession(session);
+    }
+
+    @Override
+    public void unassignTrainer(TrainingSession session) throws RemoteException{
+        System.out.println(session.toString());
+        server.unassignTrainer(session);
     }
 
 
@@ -127,6 +134,11 @@ public class Client implements RMIClient, ClientCallBack {
     }
 
     @Override
+    public TrainingSessionList getSessionsForTrainer(Account account, LocalDate date) throws RemoteException{
+        return server.getSessionsForTrainer(account, date);
+    }
+
+    @Override
     public Account login(Account account) {
         try {
             System.out.println("4 Member got loginCredentials from front model, using server to verify " + account.toString());
@@ -169,4 +181,16 @@ public class Client implements RMIClient, ClientCallBack {
     public void updateDeleteSession(TrainingSession session) throws RemoteException {
         support.firePropertyChange("SessionDeleted", null, session);
     }
+
+    @Override
+    public void updateUnassignedTrainer(TrainingSession session) throws RemoteException {
+        support.firePropertyChange("UnassignedTrainer", null, session);
+        System.out.println("client fired event unassigned trainer");
+    }
+
+    @Override
+    public void updateUpdateSession(TrainingSession session) throws RemoteException {
+        support.firePropertyChange("UpdateSession", null, session);
+    }
+
 }

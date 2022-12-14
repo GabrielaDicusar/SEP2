@@ -28,6 +28,9 @@ public interface RMIServer extends Remote {
 
     void addParticipant(Account account, TrainingSession session) throws RemoteException;
     TrainingSessionList getAvailableSessionsForMember(Account account, LocalDate date) throws RemoteException;
+
+    TrainingSessionList getSessionsForTrainer(Account account, LocalDate date) throws RemoteException;
+
     TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException;
 
     boolean isMemberInSession(Account account, TrainingSession trainingSession) throws RemoteException;
@@ -39,4 +42,6 @@ public interface RMIServer extends Remote {
     void updateSession(TrainingSession session) throws RemoteException;
 
     void deleteSession(TrainingSession session) throws RemoteException;
+
+    void unassignTrainer(TrainingSession session) throws RemoteException;
 }

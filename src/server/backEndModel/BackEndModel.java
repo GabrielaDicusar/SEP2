@@ -149,13 +149,23 @@ public class BackEndModel implements BackEndModelManager
 
     @Override
     public void updateSession(TrainingSession session) {
+        System.out.println("Back Model update session " + session.toString());
         trainingSessionDAO.updateSession(session);
+        support.firePropertyChange("UpdateSession", null, session);
     }
 
     @Override
     public void deleteSession(TrainingSession session) {
         trainingSessionDAO.deleteSession(session);
         support.firePropertyChange("SessionDeleted", null, session);
+    }
+
+    @Override
+    public void unassignTrainer(TrainingSession session) {
+//        trainingSessionDAO.unassignTrainer(session);
+        support.firePropertyChange("UnassignedTrainer", null,trainingSessionDAO.unassignTrainer(session));
+        System.out.println(trainingSessionDAO.unassignTrainer(session));
+        System.out.println("backModel fired event unassigned with new value");
     }
 
     @Override
@@ -167,6 +177,20 @@ public class BackEndModel implements BackEndModelManager
         }
         return temp;
     }
+
+    @Override
+    public TrainingSessionList getTrainingSessionsForTrainer(Account account, LocalDate date) {
+            TrainingSessionList temp2 = new TrainingSessionList();
+            for (int i = 0; i < trainingSessionDAO.getListOfAllSessions().size(); i++) {
+                if(trainingSessionDAO.getListOfAllSessions().getTrainingSessionByIndex(i).getDate().equals(date) &&
+                        !trainingSessionDAO.getListOfAllSessions().getTrainingSessionByIndex(i).getDate().isBefore(LocalDate.now()) &&
+                        trainingSessionDAO.getListOfAllSessions().getTrainingSessionByIndex(i).getTrainerAccount().equals(account)){
+                    temp2.addSession(trainingSessionDAO.getListOfAllSessions().getTrainingSessionByIndex(i));
+                }
+            }
+            return temp2;
+    }
+
 
     @Override public void addListener(String eventName, PropertyChangeListener listener)
     {

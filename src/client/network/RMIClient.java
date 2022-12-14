@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface RMIClient extends Subject {
+    TrainingSessionList getSessionsForTrainer(Account account, LocalDate date) throws RemoteException;
+
     Account login(Account account);
 
     Account getLoginCredentials();
@@ -35,4 +37,6 @@ public interface RMIClient extends Subject {
     void updateSession(TrainingSession session) throws RemoteException;
 
     void deleteSession(TrainingSession session) throws RemoteException;
+
+    void unassignTrainer(TrainingSession session) throws RemoteException;
 }

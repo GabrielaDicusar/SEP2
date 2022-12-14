@@ -101,7 +101,9 @@ public class EditViewModel implements PropertyChangeListener
   }
 
   public void updateSession(TrainingSession session) {
+    System.out.println("Edit VM update session" + session.toString());
     frontEndModelManager.updateSession(session);
+
   }
 
   public void deleteSession(TrainingSession session) {

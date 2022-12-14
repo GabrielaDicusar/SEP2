@@ -60,6 +60,7 @@ public class TrainingSession implements Serializable {
     public List<Account> getAssignedMembers() {
         return assignedMembers;
     }
+
     public Account getAccount(Account account)
     {
         for (Account temp : assignedMembers)
@@ -71,6 +72,8 @@ public class TrainingSession implements Serializable {
         }
         return null;
     }
+
+
     public Account getAccountById(int i)
     {
         return assignedMembers.get(i);
@@ -137,6 +140,7 @@ public class TrainingSession implements Serializable {
     public String getTrainerUsername() {
         return trainer.getUsername();
     }
+
     public String getTrainerPassword() {
         return trainer.getPassword();
     }
@@ -144,6 +148,7 @@ public class TrainingSession implements Serializable {
     public String getTrainer() {
         return trainer.getFName() + " " + trainer.getLName();
     }
+
     public Account getTrainerAccount()
     {
         return trainer;
@@ -152,6 +157,7 @@ public class TrainingSession implements Serializable {
     public void setTrainer(Account trainer) {
         this.trainer = trainer;
     }
+
     public boolean equals(Object obj)
     {
         if (!(obj instanceof TrainingSession))

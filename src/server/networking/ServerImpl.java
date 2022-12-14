@@ -33,8 +33,8 @@ public class ServerImpl implements RMIServer {
   public void startServer() {
     Registry registry = null;
     try {
-      registry = LocateRegistry.createRegistry(1234);
-      //System.setProperty("java.rmi.server.hostname","192.168.1.2");
+      registry = LocateRegistry.createRegistry(1099);
+//      System.setProperty("java.rmi.server.hostname","192.168.1.2");
       registry.bind("Server", this);
       System.out.println("The server has started.");
     } catch (RemoteException | AlreadyBoundException e) {
@@ -85,6 +85,22 @@ public class ServerImpl implements RMIServer {
         throw new RuntimeException(e);
       }
     });
+    modelManager.addListener("UnassignedTrainer", evt -> {
+      try {
+        ccb.updateUnassignedTrainer((TrainingSession) evt.getNewValue());
+      } catch (RemoteException e)
+      {
+        throw new RuntimeException(e);
+      }
+    });
+    modelManager.addListener("UpdateSession", evt -> {
+      try {
+        ccb.updateUpdateSession((TrainingSession) evt.getNewValue());
+      } catch (RemoteException e)
+      {
+        throw new RuntimeException(e);
+      }
+    });
   }
 
   @Override
@@ -111,9 +127,16 @@ public class ServerImpl implements RMIServer {
   public void addParticipant(Account account, TrainingSession session) throws RemoteException {
     modelManager.addParticipant(account, session);
   }
+
   public TrainingSessionList getAvailableSessionsForMember(Account account, LocalDate date) throws RemoteException {
     return modelManager.getListOfSessionsAvailableForMember(account, date);
   }
+
+  @Override
+  public TrainingSessionList getSessionsForTrainer(Account account, LocalDate date) throws RemoteException {
+    return modelManager.getTrainingSessionsForTrainer(account, date);
+  }
+
   @Override
   public TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException {
     return modelManager.getListOfSessionsBookedByMember(account);
@@ -136,6 +159,7 @@ public class ServerImpl implements RMIServer {
 
   @Override
   public void updateSession(TrainingSession session) throws RemoteException {
+    System.out.println("Server update session " + session.toString());
     modelManager.updateSession(session);
   }
 
@@ -143,5 +167,11 @@ public class ServerImpl implements RMIServer {
   public void deleteSession(TrainingSession session) throws RemoteException {
     modelManager.deleteSession(session);
   }
+
+  @Override
+  public void unassignTrainer(TrainingSession session) throws RemoteException {
+    modelManager.unassignTrainer(session);
+  }
+
 
 }

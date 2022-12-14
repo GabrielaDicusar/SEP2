@@ -24,6 +24,8 @@ public class FrontEndModel implements FrontEndModelManager
         client.addListener("SessionAdded", this);
         client.addListener("ParticipantAdded", this);
         client.addListener("SessionDeleted", this);
+        client.addListener("UnassignedTrainer", this);
+        client.addListener("UpdateSession", this);
         support = new PropertyChangeSupport(this);
     }
 
@@ -81,6 +83,11 @@ public class FrontEndModel implements FrontEndModelManager
     }
 
     @Override
+    public TrainingSessionList getSessionsForTrainer(Account account, LocalDate date) throws RemoteException{
+        return client.getSessionsForTrainer(account, date);
+    }
+
+    @Override
     public void removeSession(TrainingSession trainingSession) {
         try {
             client.removeSession(trainingSession);
@@ -106,8 +113,8 @@ public class FrontEndModel implements FrontEndModelManager
     @Override
     public void updateSession(TrainingSession session) {
         try {
+            System.out.println("Front Model update session " + session.toString());
             client.updateSession(session);
-            support.firePropertyChange("SessionChanged", null, session);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
@@ -117,9 +124,19 @@ public class FrontEndModel implements FrontEndModelManager
     public void deleteSession(TrainingSession session) {
         try {
             client.deleteSession(session);
-            support.firePropertyChange("SessionDeleted", null, session);
+//            support.firePropertyChange("SessionDeleted", null, session);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void unassignTrainer(TrainingSession session) {
+        try {
+            client.unassignTrainer(session);
+//            support.firePropertyChange("UnassignedTrainer", null, session);
+        } catch (RemoteException e) {
+            e.printStackTrace();
         }
     }
 
@@ -130,7 +147,7 @@ public class FrontEndModel implements FrontEndModelManager
     @Override
     public void addSession(TrainingSession session) {
         client.addSession(session);
-        support.firePropertyChange("SessionAdded", null, session);
+//        support.firePropertyChange("SessionAdded", null, session);
     }
 
     @Override
@@ -156,6 +173,17 @@ public class FrontEndModel implements FrontEndModelManager
         else if (evt.getPropertyName().equals("SessionDeleted"))
         {
             support.firePropertyChange("SessionDeleted", null, evt.getNewValue());
+        }  else if (evt.getPropertyName().equals("SessionDeleted"))
+        {
+            support.firePropertyChange("SessionDeleted", null, evt.getNewValue());
+        }
+        else if (evt.getPropertyName().equals("UnassignedTrainer"))
+        {
+            support.firePropertyChange("UnassignedTrainer", null, evt.getNewValue());
+        }
+        else if (evt.getPropertyName().equals("UpdateSession"))
+        {
+            support.firePropertyChange("UpdateSession", null, evt.getNewValue());
         }
     }
 }

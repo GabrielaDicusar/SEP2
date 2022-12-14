@@ -54,7 +54,7 @@ public class EditViewController implements ViewController
           typeField.clear();
           capacityField.clear();
           Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                  "You have successfully created a training session");
+                  "You have successfully updated a training session");
           alert.setHeaderText(null);
           alert.showAndWait();
           viewHandler.openManagerView();

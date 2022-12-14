@@ -10,18 +10,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: beige;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.managerView.ManagerViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: beige;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.trainerView.TrainerViewController">
     <effect>
         <DropShadow />
     </effect>
     <ListView layoutX="189.0" layoutY="83.0" prefHeight="270.0" prefWidth="384.0" />
-    <DatePicker fx:id="datePicker" layoutX="14.0" layoutY="83.0" prefHeight="26.0" prefWidth="151.0" promptText="Pick a date" />
-    <TableView fx:id="Timetable" layoutX="189.0" layoutY="83.0" prefHeight="270.0" prefWidth="384.0">
+    <DatePicker fx:id="datePicker" layoutX="14.0" layoutY="83.0" onAction="#onDatePicker" prefHeight="26.0" prefWidth="151.0" promptText="Pick a date" />
+    <TableView fx:id="sessionTableView" layoutX="189.0" layoutY="83.0" prefHeight="270.0" prefWidth="384.0">
       <columns>
-          <TableColumn prefWidth="75.0" text="Time" />
-          <TableColumn prefWidth="100.0" text="Session Type" />
-          <TableColumn prefWidth="75.0" text="Trainer" />
-          <TableColumn prefWidth="133.0" text="No. of Participants" />
+          <TableColumn fx:id="timeColumn" prefWidth="75.0" text="Time" />
+          <TableColumn fx:id="typeColumn" prefWidth="100.0" text="Session Type" />
+          <TableColumn fx:id="trainerColumn" prefWidth="75.0" text="Trainer" />
+          <TableColumn fx:id="participantsColumn" prefWidth="133.0" text="No. of Participants" />
       </columns>
     </TableView>
     <Label layoutX="181.0" layoutY="27.0" text="Session Timetable">
@@ -29,5 +29,5 @@
           <Font size="36.0" />
         </font>
     </Label>
-   <Button fx:id="btnCancelSession" layoutX="14.0" layoutY="129.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="Cancel Session" />
+   <Button fx:id="btnCancelSession" layoutX="14.0" layoutY="129.0" mnemonicParsing="false" onAction="#onCancelBtn" prefHeight="26.0" prefWidth="108.0" text="Cancel Session" />
 </AnchorPane>

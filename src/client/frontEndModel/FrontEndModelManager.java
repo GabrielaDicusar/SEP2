@@ -25,6 +25,8 @@ public interface FrontEndModelManager extends Subject, PropertyChangeListener {
     TrainingSessionList getListOfSessionsBookedByMember(Account account) throws RemoteException;
 
 
+    TrainingSessionList getSessionsForTrainer(Account account, LocalDate date) throws RemoteException;
+
     void removeSession(TrainingSession trainingSession);
 
     TrainingSessionList getSessionsForManager(LocalDate parse);
@@ -34,4 +36,6 @@ public interface FrontEndModelManager extends Subject, PropertyChangeListener {
     void updateSession(TrainingSession session);
 
     void deleteSession(TrainingSession session);
+
+    void unassignTrainer(TrainingSession session);
 }

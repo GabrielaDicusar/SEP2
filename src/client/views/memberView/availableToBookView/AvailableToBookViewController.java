@@ -26,7 +26,6 @@ public class AvailableToBookViewController implements ViewController {
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) {
         this.viewHandler = viewHandler;
         availableToBookViewModel = viewModelFactory.getAvailableToBookViewModel();
-
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("time"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         trainerColumn.setCellValueFactory(new PropertyValueFactory<>("trainer"));
@@ -35,7 +34,7 @@ public class AvailableToBookViewController implements ViewController {
     }
     public void reset()
     {
-        availableToBookViewModel.loadSessions();
+        availableToBookViewModel. loadSessions();
         sessionTableView.setItems(availableToBookViewModel.getSessions());
     }
 

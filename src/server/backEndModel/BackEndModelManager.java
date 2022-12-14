@@ -24,6 +24,9 @@ public interface BackEndModelManager extends Subject
 
     TrainingSessionList getListOfSessionsAvailableForMember(Account account, LocalDate date);
     TrainingSessionList getListOfSessionsBookedByMember(Account account);
+
+    TrainingSessionList getTrainingSessionsForTrainer(Account account, LocalDate date);
+
     boolean isMemberInSession(Account account, TrainingSession trainingSession);
 
     void removeSession(Account account, TrainingSession trainingSession);
@@ -33,4 +36,6 @@ public interface BackEndModelManager extends Subject
     void updateSession(TrainingSession session);
 
     void deleteSession(TrainingSession session);
+
+    void unassignTrainer(TrainingSession session);
 }

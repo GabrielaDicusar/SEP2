@@ -19,7 +19,9 @@ public class BookedSessionsViewModel implements PropertyChangeListener {
         modelManager = frontEndModelManager;
         modelManager.addListener("ParticipantAdded", this);
         modelManager.addListener("SessionDeleted", this);
+        modelManager.addListener("UnassignedTrainer", this);
     }
+
     public void loadSessions() {
         TrainingSessionList logList = null;
         try {
@@ -55,6 +57,18 @@ public class BookedSessionsViewModel implements PropertyChangeListener {
         else if(evt.getPropertyName().equals("SessionDeleted"))
         {
             sessions.remove((TrainingSession) evt.getNewValue());
+        } else if(evt.getPropertyName().equals("UnassignedTrainer"))
+        {
+            TrainingSession newValue = (TrainingSession) evt.getNewValue();
+            System.out.println("available vm heard the event of unassign trainer");
+            for (int i = 0; i < sessions.size(); i++) {
+                if(sessions.get(i).getTime().equals(newValue.getDate()) && sessions.get(i).getDate().equals(newValue.getDate())){
+                    sessions.remove(sessions.get(i));
+
+                }
+            }
+            sessions.add((TrainingSession) evt.getNewValue());
+            System.out.println("!!!!! booked session vm heard the event of unassign trainer " + evt.getNewValue().toString());
         }
     }
 
