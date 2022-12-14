@@ -21,7 +21,7 @@
           <TableColumn fx:id="timeColumn" prefWidth="75.0" text="Time" />
           <TableColumn fx:id="typeColumn" prefWidth="100.0" text="Session Type" />
           <TableColumn fx:id="trainerColumn" prefWidth="75.0" text="Trainer" />
-          <TableColumn fx:id="participantsColumn" prefWidth="133.0" text="No. of Participants" />
+          <TableColumn fx:id="participantsColumn" prefWidth="133.0" text="Available Spots" />
       </columns>
     </TableView>
     <Label layoutX="181.0" layoutY="27.0" text="Session Timetable">
