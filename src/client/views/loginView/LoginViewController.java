@@ -9,7 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import shared.sharedObjects.Account;
-
+/**
+ * A controller class for the loginViewModel.
+ * @author Group 7
+ */
 public class LoginViewController implements ViewController {
 
     @FXML
@@ -27,13 +30,20 @@ public class LoginViewController implements ViewController {
     private ViewHandler viewHandler;
     private LoginViewModel loginViewModel;
 
-
+    /**
+     * An init method to instantiate the viewHandler and viewModelFactory.
+     * @param viewHandler the viewHandler
+     * @param viewModelFactory
+     */
     public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) {
         this.viewHandler = viewHandler;
         loginViewModel = viewModelFactory.getLoginViewModel();
 
     }
 
+    /**
+     * An action when a button is pressed.
+     */
     public void onbtnLogin() {
         Account account = new Account(txtUsername.getText(), txtPassword.getText());
         System.out.println("1 Login controller created loginCredentials to pass to login view model " + account);
@@ -59,6 +69,10 @@ public class LoginViewController implements ViewController {
         }
     }
 
+    /**
+     * An event when the button is pressed.
+     * @param event the event
+     */
     public void onBtnRegister(ActionEvent event) {
      viewHandler.openRegisterMemberView();
     }

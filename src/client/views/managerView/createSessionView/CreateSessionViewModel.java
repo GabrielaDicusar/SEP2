@@ -12,17 +12,27 @@ import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 import java.time.LocalTime;
 import java.util.ArrayList;
-
+/**
+ * A Class implementing the methods for the createSessionViewModel.
+ * @author Group 7
+ */
 public class CreateSessionViewModel implements PropertyChangeListener
 {
   private FrontEndModelManager frontEndModelManager;
   private ObservableList<Account> trainers;
   private ObservableList<String> timeList;
 
+  /**
+   * A constructor instantiating the frontEndModelManager.
+   * @param frontEndModelManager the frontEndModelManager
+   */
   public CreateSessionViewModel(FrontEndModelManager frontEndModelManager) {
     this.frontEndModelManager = frontEndModelManager;
   }
 
+  /**
+   * loads the list of trainers
+   */
   public void loadListOfTrainers(){
     try {
       ArrayList trainersList = frontEndModelManager.getTrainers();
@@ -32,10 +42,17 @@ public class CreateSessionViewModel implements PropertyChangeListener
     }
   }
 
+  /**
+   * Returns the trainers
+   * @return trainers
+   */
   public ObservableList<Account> getTrainers(){
     return trainers;
   }
 
+  /**
+   * loads a list of time slots.
+   */
   public void loadTimeList(){
     ArrayList<String> time = new ArrayList<>();
     time.add("8.00");
@@ -50,20 +67,36 @@ public class CreateSessionViewModel implements PropertyChangeListener
     timeList = FXCollections.observableArrayList(time);
   }
 
+  /**
+   * Returns the time list
+   * @return timeList
+   */
   public ObservableList<String> getTimeSlots(){
     return timeList;
   }
 
+  /**
+   * Returns the frontEndModelManager
+   * @return frontEndModelManager
+   */
   public FrontEndModelManager getFrontEndModelManager() {
     return frontEndModelManager;
   }
 
-
+  /**
+   * A property change event
+   * @param evt the event
+   */
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
 
   }
 
+  /**
+   * Verifies the availability of the session.
+   * @param session the session
+   * @return boolean
+   */
   public boolean verifyAvailabilityOfSession(TrainingSession session) {
     try {
       return frontEndModelManager.verifyAvailabilityOfSession(session);
@@ -72,6 +105,10 @@ public class CreateSessionViewModel implements PropertyChangeListener
     }
   }
 
+  /**
+   * Adds the training session.
+   * @param session the session
+   */
   public void addSession(TrainingSession session) {
     frontEndModelManager.addSession(session);
   }

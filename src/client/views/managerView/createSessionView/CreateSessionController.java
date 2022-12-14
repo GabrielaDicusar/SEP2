@@ -8,7 +8,10 @@ import shared.sharedObjects.Account;
 import shared.sharedObjects.TrainingSession;
 
 import java.time.LocalTime;
-
+/**
+ * A controller class for the createSessionViewModel.
+ * @author Group 7
+ */
 public class CreateSessionController implements ViewController
 {
  public TextField textTypeField;
@@ -20,7 +23,11 @@ public class CreateSessionController implements ViewController
  private ViewHandler viewHandler;
  private CreateSessionViewModel viewModel;
 
-
+ /**
+  * An init method for th eviewHandler and viewModelFactory.
+  * @param viewHandler the viewHandler
+  * @param viewModelFactory the viewModelFactory
+  */
   @Override
   public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory) {
    this.viewHandler = viewHandler;
@@ -31,7 +38,10 @@ public class CreateSessionController implements ViewController
    comboTime.setItems(viewModel.getTimeSlots());
   }
 
-  public void onSaveButton(){
+ /**
+  * An action when a button is pressed.
+  */
+ public void onSaveButton(){
    if(textTypeField.getText() != null && datePicker1.getValue() != null && btnCapacityField.getText() != null && comboTrainer.getSelectionModel().getSelectedItem() != null && comboTime.getSelectionModel().getSelectedItem() != null) {
     System.out.println("fields are not empty");
     TrainingSession session = new TrainingSession(textTypeField.getText(), (String) comboTime.getSelectionModel().getSelectedItem(), (Integer) Integer.valueOf(btnCapacityField.getText()), (Account) comboTrainer.getSelectionModel().getSelectedItem(), datePicker1.getValue());

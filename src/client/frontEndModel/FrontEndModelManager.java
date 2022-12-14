@@ -11,6 +11,10 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * An interface implementing the methods for the frontEndModel.
+ * @author Group 7
+ */
 public interface FrontEndModelManager extends Subject, PropertyChangeListener {
     void addSession(TrainingSession session);
     Account verifyLogin(Account account);

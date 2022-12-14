@@ -10,6 +10,10 @@ import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * An interface for the client network.
+ * @author Group 7
+ */
 public interface RMIClient extends Subject {
     TrainingSessionList getSessionsForTrainer(Account account, LocalDate date) throws RemoteException;
 

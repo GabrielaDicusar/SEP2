@@ -8,17 +8,23 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+/**
+ * A test class for the Training Session ArrayList.
+ */
 public class TrainingSessionListTest {
 
+    //New Arraylist
     private TrainingSessionList testList;
 
     @Before
     public void setUp() throws Exception {
+        //Instantiate a new testlist
         testList = new TrainingSessionList();
     }
 
     @Test
     public void constructor() {
+        //Constructor test
         TrainingSessionList obj = new TrainingSessionList();
         assertNotNull(obj);
     }
